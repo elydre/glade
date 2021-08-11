@@ -6,14 +6,11 @@ def addtest():
     num = 0
     debut = time.time()
     while stop == 0:
-        for x in range(0,10000):
-            num = num + 1
+        for x in range(0,10000): num = num + 1
         y = y + 1
         fin = time.time()
         temps = fin - debut
-        if temps > 10:
-            y = y / 100
-            stop = 1
+        if temps > 10: y = y / 100; stop = 1
     return(y)
 
 def rdtest():
@@ -22,8 +19,7 @@ def rdtest():
     y = 0
     debut = time.time()
     while stop == 0:
-        for x in range(0,10000):
-            num = random.randint(0, 1000000000)
+        for x in range(0,10000): num = random.randint(0, 1000000000)
         y = y + 1
         fin = time.time()
         temps = fin - debut
@@ -35,15 +31,13 @@ def rdtest():
 def bctest():
     y = 0
     debut = time.time()
-    while y < 10000000:
-        y = y + 1
+    while y < 10000000: y = y + 1
     bcwhile = round(time.time() - debut,3)
 
     print("while: ", bcwhile, "s. les 10G boucles")
 
     debut = time.time()
-    for y in range(10000000):
-        pass
+    for y in range(10000000): pass
     bcfor = round(time.time() - debut,3)
 
     print("for:   ", bcfor, "s. les 10G boucles")
@@ -58,15 +52,12 @@ def thstart():
         thn -= 1
 
     def thlauncher():
-        for x in range(10000):
-            start_new_thread(thtest,(x,))
+        for x in range(10000): start_new_thread(thtest,(x,))
 
     start_new_thread(thlauncher,())
 
     pt = 100
-    while thn != 0:
-        time.sleep(0.05)
-        pt -= 1
+    while thn != 0: time.sleep(0.05); pt -= 1
     return(pt)
 
 def start():
