@@ -1,5 +1,13 @@
 import time, random
 from _thread import start_new_thread
+
+def iptest():
+    iptest_sc = 0
+    iptest_debut = time.time()
+    while time.time() - iptest_debut < 2: iptest_sc = iptest_sc + 1
+    iptest_s = round(iptest_sc / 500000,1)
+    return(iptest_s)
+
 def addtest():
     stop = 0
     y = 0
@@ -68,6 +76,9 @@ def start():
 
     print(" ~~~~ rd test ~~~~ ")
     print("->", rdtest(),"pts")
+
+    print(" ~~~~ ip test ~~~~ ")
+    print("->", iptest(),"pts")
 
     print(" ~~~~ th test ~~~~ ")
     print("->", thstart(),"pts")
