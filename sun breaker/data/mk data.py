@@ -6,7 +6,7 @@ global sort, car, tp
 name = input("nom de la basse de donné a créé: ")
 max_long = int(input("longeur max des mots: "))
 
-car = list("-abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ,;:!?./§ù*$%µ£&é'(è_çà)=+<> ")
+car = list("-abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ,;:!?./*$%&'(_)=+<> ")
 cy_mkfil("/",name,"")
 sort = [""]
 tp = ""
