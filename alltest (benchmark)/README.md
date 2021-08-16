@@ -44,6 +44,16 @@ mp test 1 core:  24.463 s. <br>
 mp test 48 core:  1.377 s. <br>
 bc test while:  0.571 s. les 10G boucles <br>
 bc test for:    0.220 s. les 10G boucles <br>
+## <b>LORIS'S PC: </b>ryzen 7 2700 (16@3.3GHz)
+### <b>WINDOWS 10</b>
+ad test: 254.59 pts <br>
+rd test: 11.68 pts <br>
+ip test: 32.3 pts <br>
+th test: 82 pts <br>
+mp test 1 core:  24.370 s. <br>
+mp test 48 core:  3.145 s. <br>
+bc test while:  0.397 s. les 10G boucles <br>
+bc test for:    0.173 s. les 10G boucles <br>
 ## <b>RPI4: </b>arm cortex a72 (4@1.5GHz)
 ### <b>UBUNTU aarch64</b>
 ad test: 69.45 pts <br>
