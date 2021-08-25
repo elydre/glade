@@ -39,14 +39,12 @@ serveur = ""
 msg = ""
 
 def clear(a,b,c,d):
-    menu_draw.rectangle((a, b , c ,d), fill = 255)
-    epd.displayPartial(epd.getbuffer(menu_image))
-    time.sleep(0.2)
     menu_draw.rectangle((a, b , c ,d), fill = 0)
     epd.displayPartial(epd.getbuffer(menu_image))
     time.sleep(0.2)
     menu_draw.rectangle((a, b , c ,d), fill = 255)
     epd.displayPartial(epd.getbuffer(menu_image))
+    time.sleep(0.5)
 
 def aff(quoi):
     
