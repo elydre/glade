@@ -53,4 +53,4 @@ async def on_ready():
     sys.exit()
 
 
-client.run("ODY4MTg2NTAwOTgwOTU3MjM1.YPr_rw.WKRq1tM4Bw_4a4F5qszDd5XAq74")
+client.run("token")
