@@ -41,7 +41,8 @@ async def on_ready():
             else:
                 drmsgn += drmsg[x]
             if x == 20 or x == 39:
-                drmsgn += "\n| "
+                if len(drmsg) != 21 and len(drmsg) != 40:
+                    drmsgn += "\n| "
             
 
 
