@@ -20,11 +20,9 @@ from utils import *
 from page import *
 import time, sys
 from os import system
-from _thread import start_new_thread
 
 # init
 run_command("sudo resize2fs /dev/mmcblk0p2")
-system("python3 /home/pi/nas-kit-master/actu.py")
 
 background_color_config = 255
 page = Page(background_color_config)
@@ -78,6 +76,7 @@ aff("h")
 while True:
     for x in range(20):
         for x in range(3):
+            system("python3 /home/pi/nas-kit-master/actu.py")
             temp = open("/home/pi/nas-kit-master/data.txt", "r").read()
             tpS = temp.split("nvifgudhihgifukdh")[0]
             tpM = temp.split("nvifgudhihgifukdh")[1]
@@ -91,9 +90,8 @@ while True:
                 if msg == "pf4: §sd":
                     sys.exit()
                 aff("m")
-                
             time.sleep(5)
-            system("python3 /home/pi/nas-kit-master/actu.py")
+
         aff("h")
     epd.init(epd.FULL_UPDATE)
     epd.displayPartBaseImage(epd.getbuffer(menu_image)) 
