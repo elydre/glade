@@ -43,9 +43,9 @@
           x="0.5"
           y="0.5"
           rx="4.5"
-          height="100%"
+          height="80%"
           stroke="#e4e2e2"
-          width="190"
+          width="300"
           fill="#141321"
           stroke-opacity="1"
         />
@@ -85,17 +85,24 @@
       </text>
     </g>
   
-    <g transform="translate(0, 35)">
+    <g transform="translate(150, 10)">
       <circle cx="5" cy="6" r="5" fill="#89e051" />
       <text data-testid="lang-name" x="15" y="10" class='lang-name'>
         pink berry
       </text>
     </g>
   
-    <g transform="translate(0, 60)">
+    <g transform="translate(0, 35)">
       <circle cx="5" cy="6" r="5" fill="#89e051" />
       <text data-testid="lang-name" x="15" y="10" class='lang-name'>
         pi-hole
+      </text>
+    </g>
+
+    <g transform="translate(150, 35)">
+      <circle cx="5" cy="6" r="5" fill="#89e051" />
+      <text data-testid="lang-name" x="15" y="10" class='lang-name'>
+        the first
       </text>
     </g>
   
