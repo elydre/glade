@@ -25,6 +25,8 @@ class init:
 
 class converter:
     def main():
-        cy.rfil_rela()
-
+        fichier = cy.rfil_rela("/conteneur",todo)
+        ligues = fichier.split("\n")
+        
 init.main()
+converter.main()
