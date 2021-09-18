@@ -27,6 +27,9 @@ class converter:
     def main():
         fichier = cy.rfil_rela("/conteneur",todo)
         ligues = fichier.split("\n")
+
+        for l in ligues:
+            
         
 init.main()
 converter.main()
