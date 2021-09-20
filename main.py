@@ -26,11 +26,7 @@ class init:
 class maker:
     def main():
         name = str(todo.split(".")[len(todo.split("."))-1]) + ".cpp"
-        
-        text = ""
-        for l in EXIT: text += l
-        
-        cy.mkfil()
+        cy.mkfil("/conteneur",name,"".join((l) for l in EXIT))
 
 class converter:
     def edit_l(l):
