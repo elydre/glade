@@ -10,7 +10,7 @@
 ██
 .codé en : UTF-8
 .langage : python 3
-.v       : 0.0.8
+.v       : 0.0.9
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -52,10 +52,20 @@ class maker:
         name = str(todo.split(".")[len(todo.split("."))-2]) + ".cpp"
         cy.mkfil("/container",name,"".join((l+"\n") for l in EXIT))
 
-class converter:
+class compiler:
+
+    def tab_c(l):
+        t = 0
+        nb = 4 #number of spaces in a tablature
+        while l.startswith(" "*t): t += nb
+        return(int((t - nb)/nb))
+
     def edit_l(l):
 
         l = str(l)
+
+        print(compiler.tab_c(l))
+
         if l.startswith("if "):
             cont = l.split("if ")[1] #we remove the 'if '
             cont = cont.split(":")[len(cont.split(":"))-2] #we remove the ':'
@@ -72,13 +82,13 @@ class converter:
         COMP = [] # list of structure
 
         for l in ligues:
-            converter.edit_l(l)
+            compiler.edit_l(l)
         
 
 
 init.main()
 sys.info("initialization")
-converter.main()
+compiler.main()
 sys.info("compilation")
 maker.main()
 sys.info("writing")
