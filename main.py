@@ -10,7 +10,7 @@
 ██
 .codé en : UTF-8
 .langage : python 3
-.v       : 0.0.9
+.v       : 0.0.10
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -56,33 +56,54 @@ class compiler:
 
     def tab_c(l):
         t = 0
-        nb = 4 #number of spaces in a tablature
-        while l.startswith(" "*t): t += nb
-        return(int((t - nb)/nb))
+        nb_tab = 4 #number of spaces in a tablature
+        while l.startswith(" "*t): t += nb_tab
+        return(int((t - nb_tab)/nb_tab))
 
-    def edit_l(l):
+    def del_tab(l):
+        sortie = ""
+        for x in range(len(list(l))):
+            if list(l)[x] != " ": break
+        for y in range(x,len(list(l))): sortie += list(l)[y]
+        return(sortie)
+        
+    def add_tab(nb):
+        return(" "*TAB[nb]*4)
+
+    def edit_l(l,nb):
 
         l = str(l)
 
-        print(compiler.tab_c(l))
+        TAB.append(compiler.tab_c(l))
+
+        l = compiler.del_tab(l)
+
+        for loop in range(TAB[nb-1]-TAB[nb]): EXIT.append(compiler.add_tab(nb) + "}")
 
         if l.startswith("if "):
             cont = l.split("if ")[1] #we remove the 'if '
             cont = cont.split(":")[len(cont.split(":"))-2] #we remove the ':'
-            EXIT.append("if (" + cont + ")")
-            EXIT.append("{")
+            EXIT.append(compiler.add_tab(nb) + "if (" + cont + ")")
+            EXIT.append(compiler.add_tab(nb) + "{")
+
+        else:
+            EXIT.append(compiler.add_tab(nb) + l)
+
+        
 
 
     def main():
         fichier = cy.rfil_rela("/container",todo)
         ligues = fichier.split("\n")
 
-        global EXIT, COMP
+        global EXIT, TAB
         EXIT = [] # list of 'compiled' code
-        COMP = [] # list of structure
+        TAB = [] # list of TAB
 
-        for l in ligues:
-            compiler.edit_l(l)
+        for nb in range(len(ligues)):
+            l = ligues[nb]
+            compiler.edit_l(l,nb)
+
         
 
 
