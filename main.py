@@ -10,7 +10,7 @@
 ██
 .codé en : UTF-8
 .langage : python 3
-.v       : 0.0.10
+.v       : 0.0.11
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -81,15 +81,25 @@ class compiler:
         for loop in range(TAB[nb-1]-TAB[nb]): EXIT.append(compiler.add_tab(nb) + "}")
 
         if l.startswith("if "):
-            cont = l.split("if ")[1] #we remove the 'if '
-            cont = cont.split(":")[len(cont.split(":"))-2] #we remove the ':'
+            cont = l.split("if ")[1]                        #we remove the 'if '
+            cont = cont.split(":")[len(cont.split(":"))-2]  #we remove the ':'
             EXIT.append(compiler.add_tab(nb) + "if (" + cont + ")")
             EXIT.append(compiler.add_tab(nb) + "{")
 
-        else:
-            EXIT.append(compiler.add_tab(nb) + l)
+        elif l.startswith("while "):
+            cont = l.split("while ")[1]                     #we remove the 'while '
+            cont = cont.split(":")[len(cont.split(":"))-2]  #we remove the ':'
+            EXIT.append(compiler.add_tab(nb) + "while (" + cont + ")")
+            EXIT.append(compiler.add_tab(nb) + "{")
 
-        
+        elif l.startswith("def "):
+            cont = l.split("def ")[1]                       #we remove the 'while '
+            cont = cont.split(":")[len(cont.split(":"))-2]  #we remove the ':'
+            EXIT.append(compiler.add_tab(nb) + "int " + cont)
+            EXIT.append(compiler.add_tab(nb) + "{")
+
+        else:
+            EXIT.append(compiler.add_tab(nb) + l + ";")
 
 
     def main():
@@ -98,7 +108,7 @@ class compiler:
 
         global EXIT, TAB
         EXIT = [] # list of 'compiled' code
-        TAB = [] # list of TAB
+        TAB = []  # list of TAB
 
         for nb in range(len(ligues)):
             l = ligues[nb]
