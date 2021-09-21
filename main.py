@@ -95,8 +95,17 @@ class compiler:
         elif l.startswith("def "):
             cont = l.split("def ")[1]                       #we remove the 'while '
             cont = cont.split(":")[len(cont.split(":"))-2]  #we remove the ':'
+            #if cont.endswith("()"): cont = cont[:-2]
             EXIT.append(compiler.add_tab(nb) + "int " + cont)
             EXIT.append(compiler.add_tab(nb) + "{")
+
+        elif l.startswith("print("):
+            cont = l.split("print(")[1]
+            if cont.endswith(")"): cont = cont[:-1]
+            EXIT.append(compiler.add_tab(nb) + "cout << " + cont + " << endl;" )
+
+        elif l.startswith("#include"):
+            EXIT.append(compiler.add_tab(nb) + l)
 
         else:
             EXIT.append(compiler.add_tab(nb) + l + ";")
