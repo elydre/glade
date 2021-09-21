@@ -10,7 +10,7 @@
 ██
 .codé en : UTF-8
 .langage : python 3
-.v       : 0.0.11
+.v       : 0.0.12
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -62,13 +62,15 @@ class compiler:
 
     def del_tab(l):
         sortie = ""
+        x = 0       #if the line is empty
         for x in range(len(list(l))):
             if list(l)[x] != " ": break
         for y in range(x,len(list(l))): sortie += list(l)[y]
         return(sortie)
-        
-    def add_tab(nb):
-        return(" "*TAB[nb]*4)
+    
+    def start_C(nb): EXIT.append(compiler.add_tab(nb) + "{")
+
+    def add_tab(nb): return(" "*TAB[nb]*4)
 
     def edit_l(l,nb):
 
@@ -84,20 +86,20 @@ class compiler:
             cont = l.split("if ")[1]                        #we remove the 'if '
             cont = cont.split(":")[len(cont.split(":"))-2]  #we remove the ':'
             EXIT.append(compiler.add_tab(nb) + "if (" + cont + ")")
-            EXIT.append(compiler.add_tab(nb) + "{")
+            compiler.start_C(nb)
 
         elif l.startswith("while "):
             cont = l.split("while ")[1]                     #we remove the 'while '
             cont = cont.split(":")[len(cont.split(":"))-2]  #we remove the ':'
             EXIT.append(compiler.add_tab(nb) + "while (" + cont + ")")
-            EXIT.append(compiler.add_tab(nb) + "{")
+            compiler.start_C(nb)
 
         elif l.startswith("def "):
             cont = l.split("def ")[1]                       #we remove the 'while '
             cont = cont.split(":")[len(cont.split(":"))-2]  #we remove the ':'
             #if cont.endswith("()"): cont = cont[:-2]
             EXIT.append(compiler.add_tab(nb) + "int " + cont)
-            EXIT.append(compiler.add_tab(nb) + "{")
+            compiler.start_C(nb)
 
         elif l.startswith("print("):
             cont = l.split("print(")[1]
@@ -107,14 +109,14 @@ class compiler:
         elif l.startswith("#include"):
             EXIT.append(compiler.add_tab(nb) + l)
 
-        else:
+        elif l != "":
             EXIT.append(compiler.add_tab(nb) + l + ";")
 
 
     def main():
         fichier = cy.rfil_rela("/container",todo)
         ligues = fichier.split("\n")
-
+        ligues.append("")
         global EXIT, TAB
         EXIT = [] # list of 'compiled' code
         TAB = []  # list of TAB
