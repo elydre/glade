@@ -10,7 +10,7 @@
 ██
 .codé en : UTF-8
 .langage : python 3
-.v       : 0.0.12
+.v       : 0.1.02
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -18,7 +18,7 @@ import mod.ColorPrint as cprint
 
 class sys:
     def info(msg):
-        cprint.colorprint("|end| ",color=cprint.Colors.cyan,end=False)
+        cprint.colorprint("|sys| ",color=cprint.Colors.cyan,end=False)
         cprint.colorprint(msg,color=cprint.Colors.blanc)
 
     def gen_err(msg):
@@ -52,85 +52,127 @@ class maker:
         name = str(todo.split(".")[len(todo.split("."))-2]) + ".cpp"
         cy.mkfil("/container",name,"".join((l+"\n") for l in EXIT))
 
-class compiler:
+class teyes:
 
     def tab_c(l):
         t = 0
-        nb_tab = 4 #number of spaces in a tablature
+        nb_tab = 4 #nombre d'espace dans une TAB
         while l.startswith(" "*t): t += nb_tab
         return(int((t - nb_tab)/nb_tab))
 
     def del_tab(l):
         sortie = ""
-        x = 0       #if the line is empty
+        x = 0       #si la ligne est vide
         for x in range(len(list(l))):
             if list(l)[x] != " ": break
         for y in range(x,len(list(l))): sortie += list(l)[y]
         return(sortie)
-    
-    def start_C(nb): EXIT.append(compiler.add_tab(nb) + "{")
 
-    def add_tab(nb): return(" "*TAB[nb]*4)
+    def del_end(cont,to_del):
+        cont , to_del = str(cont) , str(to_del)
+        return(cont.split(to_del)[len(cont.split(to_del))-2])
 
     def edit_l(l,nb):
 
         l = str(l)
 
-        TAB.append(compiler.tab_c(l))
+        TAB.append(teyes.tab_c(l))
 
-        l = compiler.del_tab(l)
+        l = teyes.del_tab(l)
 
-        for loop in range(TAB[nb-1]-TAB[nb]): EXIT.append(compiler.add_tab(nb) + "}")
+        for loop in range(TAB[nb-1]-TAB[nb]): EYES.append([TAB[nb],"}"])
 
         if l.startswith("if "):
-            cont = l.split("if ")[1]                        #we remove the 'if '
-            cont = cont.split(":")[len(cont.split(":"))-2]  #we remove the ':'
-            EXIT.append(compiler.add_tab(nb) + "if (" + cont + ")")
-            compiler.start_C(nb)
+            cont = l.split("if ")[1]
+            cont = teyes.del_end(cont,":")
+            EYES.append([TAB[nb],"if",cont])
+            EYES.append([TAB[nb],"{"])
 
         elif l.startswith("while "):
-            cont = l.split("while ")[1]                     #we remove the 'while '
-            cont = cont.split(":")[len(cont.split(":"))-2]  #we remove the ':'
-            EXIT.append(compiler.add_tab(nb) + "while (" + cont + ")")
-            compiler.start_C(nb)
+            cont = l.split("while ")[1]
+            cont = teyes.del_end(cont,":")
+            EYES.append([TAB[nb],"while",cont])
+            EYES.append([TAB[nb],"{"])
 
         elif l.startswith("def "):
-            cont = l.split("def ")[1]                       #we remove the 'while '
-            cont = cont.split(":")[len(cont.split(":"))-2]  #we remove the ':'
-            #if cont.endswith("()"): cont = cont[:-2]
-            EXIT.append(compiler.add_tab(nb) + "int " + cont)
-            compiler.start_C(nb)
+            cont = l.split("def ")[1]
+            cont = teyes.del_end(cont,":")
+            EYES.append([TAB[nb],"def",cont])
+            EYES.append([TAB[nb],"{"])
 
         elif l.startswith("print("):
             cont = l.split("print(")[1]
-            if cont.endswith(")"): cont = cont[:-1]
-            EXIT.append(compiler.add_tab(nb) + "cout << " + cont + " << endl;" )
+            cont = teyes.del_end(cont,")")
+            EYES.append([TAB[nb],"print",cont])
 
-        elif l.startswith("#include"):
-            EXIT.append(compiler.add_tab(nb) + l)
+        elif l.startswith("#include "):
+            cont = l.split("#include ")[1]
+            EYES.append([TAB[nb],"include",cont])
 
         elif l != "":
-            EXIT.append(compiler.add_tab(nb) + l + ";")
-
+            EYES.append([TAB[nb],"unknown",l])
 
     def main():
         fichier = cy.rfil_rela("/container",todo)
         ligues = fichier.split("\n")
         ligues.append("")
-        global EXIT, TAB
-        EXIT = [] # list of 'compiled' code
-        TAB = []  # list of TAB
+        global EYES, TAB
+        EYES = [] # liste de code token eyes
+        TAB = []  # liste des TAB
 
         for nb in range(len(ligues)):
             l = ligues[nb]
-            compiler.edit_l(l,nb)
+            teyes.edit_l(l,nb)
 
+class compiler:
+    def edit_e(e):
+        def add_tab(tab): return(" "*tab*4)
         
+        de = e[1]  #element detecte
+        tab = e[0] #nb de tab
+        try: arg = e[2] #arg
+        except: arg = None
 
+        if de == "def":
+            EXIT.append(add_tab(tab) + "int " + arg)
 
-init.main()
+        elif de == "while":
+            EXIT.append(add_tab(tab) + "while (" + arg + ")")
+
+        elif de == "if":
+            EXIT.append(add_tab(tab) + "if (" + arg + ")")
+
+        elif de == "print":
+            EXIT.append(add_tab(tab) + "cout << " + arg + " << endl;" )
+
+        elif de == "include":
+            EXIT.append(add_tab(tab) + "#include " + arg)
+
+        elif de == "unknown":
+            EXIT.append(add_tab(tab) + arg + ";")
+
+        elif de == "{":
+            EXIT.append(add_tab(tab) + "{")
+
+        elif de == "}":
+            EXIT.append(add_tab(tab) + "}")
+
+    def main():
+        global EXIT
+        EXIT = []
+
+        for e in EYES:
+            compiler.edit_e(e)
+
 sys.info("initialization")
-compiler.main()
+init.main()
+
+sys.info("token eyes")
+teyes.main()
+
+
 sys.info("compilation")
-maker.main()
+compiler.main()
+
 sys.info("writing")
+maker.main()
