@@ -8,9 +8,9 @@
 ██             ██       █████████
 ██             ██             ██
 ██
-.codé en : UTF-8
-.langage : python 3
-.v       : 0.1.02
+ - codé en : UTF-8
+ - langage : python 3
+ - v       : 0.1.03
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -47,11 +47,6 @@ class init:
             if cy.rfil_rela("/container",todo) != None: no_done = False
             else: sys.gen_err("non-existent or unreadable file")
 
-class maker:
-    def main():
-        name = str(todo.split(".")[len(todo.split("."))-2]) + ".cpp"
-        cy.mkfil("/container",name,"".join((l+"\n") for l in EXIT))
-
 class teyes:
 
     def tab_c(l):
@@ -81,6 +76,9 @@ class teyes:
         l = teyes.del_tab(l)
 
         for loop in range(TAB[nb-1]-TAB[nb]): EYES.append([TAB[nb],"}"])
+        
+        if nb == 0:
+            EYES.append([TAB[nb],"comm","interpreted and compiled by GLADE"])
 
         if l.startswith("if "):
             cont = l.split("if ")[1]
@@ -148,6 +146,9 @@ class compiler:
         elif de == "include":
             EXIT.append(add_tab(tab) + "#include " + arg)
 
+        elif de == "comm":
+            EXIT.append(add_tab(tab) + "// " + arg)
+
         elif de == "unknown":
             EXIT.append(add_tab(tab) + arg + ";")
 
@@ -157,6 +158,9 @@ class compiler:
         elif de == "}":
             EXIT.append(add_tab(tab) + "}")
 
+        else:
+            sys.gen_err("élément retourné inconnu par le compilateur: " + de)
+
     def main():
         global EXIT
         EXIT = []
@@ -164,12 +168,16 @@ class compiler:
         for e in EYES:
             compiler.edit_e(e)
 
+class maker:
+    def main():
+        name = str(todo.split(".")[len(todo.split("."))-2]) + ".cpp"
+        cy.mkfil("/container",name,"".join((l+"\n") for l in EXIT))
+
 sys.info("initialization")
 init.main()
 
 sys.info("token eyes")
 teyes.main()
-
 
 sys.info("compilation")
 compiler.main()
