@@ -10,7 +10,7 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.1.03
+ - v       : 0.1.04
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -98,6 +98,23 @@ class teyes:
             EYES.append([TAB[nb],"def",cont])
             EYES.append([TAB[nb],"{"])
 
+        elif l.startswith("for "):
+            cont = l.split("for ")[1]
+            cont = teyes.del_end(cont,"):")
+            var_name = cont.split(" in range(")[0]
+            arg = cont = cont.split(" in range(")[1].split(",")
+            pas , min , max = "1", "0", "0"
+            if len(arg) == 1:
+                max = arg[0]
+            elif len(arg) >= 2:
+                min = arg[0]
+                max = arg[1]
+            elif len(arg) == 3:
+                pas = arg[2]
+
+            EYES.append([TAB[nb],"for",[var_name,min,max,pas]])
+            EYES.append([TAB[nb],"{"])
+
         elif l.startswith("print("):
             cont = l.split("print(")[1]
             cont = teyes.del_end(cont,")")
@@ -121,6 +138,8 @@ class teyes:
         for nb in range(len(ligues)):
             l = ligues[nb]
             teyes.edit_l(l,nb)
+        for e in EYES:
+            print(e)
 
 class compiler:
     def edit_e(e):
@@ -136,6 +155,11 @@ class compiler:
 
         elif de == "while":
             EXIT.append(add_tab(tab) + "while (" + arg + ")")
+
+        elif de == "for":
+            larg = arg
+            arg = "long int " + larg[0] + " = " + larg[1] + "; " + larg[0] + " <= " + larg[2] + "; " + larg[0] + " = " + larg[0] + " + " + larg[3]
+            EXIT.append(add_tab(tab) + "for (" + arg + ")")
 
         elif de == "if":
             EXIT.append(add_tab(tab) + "if (" + arg + ")")
