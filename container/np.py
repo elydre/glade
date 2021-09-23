@@ -1,7 +1,3 @@
-#include <iostream>
-#include <cmath>
-using namespace std
-
 def main():
     print("runing")
         long long int max = 0
