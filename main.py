@@ -49,31 +49,34 @@ class init:
 
 class teyes:
 
-    def tab_c(l):
-        t = 0
-        nb_tab = 4 #nombre d'espace dans une TAB
-        while l.startswith(" "*t): t += nb_tab
-        return(int((t - nb_tab)/nb_tab))
+    def var_type(nom,cont):
+        type(cont)
 
-    def del_tab(l):
-        sortie = ""
-        x = 0       #si la ligne est vide
-        for x in range(len(list(l))):
-            if list(l)[x] != " ": break
-        for y in range(x,len(list(l))): sortie += list(l)[y]
-        return(sortie)
-
-    def del_end(cont,to_del):
-        cont , to_del = str(cont) , str(to_del)
-        return(cont.split(to_del)[len(cont.split(to_del))-2])
 
     def edit_l(l,nb):
+        def tab_c(l):
+            t = 0
+            nb_tab = 4 #nombre d'espace dans une TAB
+            while l.startswith(" "*t): t += nb_tab
+            return(int((t - nb_tab)/nb_tab))
+
+        def del_tab(l):
+            sortie = ""
+            x = 0       #si la ligne est vide
+            for x in range(len(list(l))):
+                if list(l)[x] != " ": break
+            for y in range(x,len(list(l))): sortie += list(l)[y]
+            return(sortie)
+
+        def del_end(cont,to_del):
+            cont , to_del = str(cont) , str(to_del)
+            return(cont.split(to_del)[len(cont.split(to_del))-2])
 
         l = str(l)
 
-        TAB.append(teyes.tab_c(l))
+        TAB.append(tab_c(l))
 
-        l = teyes.del_tab(l)
+        l = del_tab(l)
 
         for loop in range(TAB[nb-1]-TAB[nb]): EYES.append([TAB[nb],"}"])
         
@@ -82,25 +85,25 @@ class teyes:
 
         if l.startswith("if "):
             cont = l.split("if ")[1]
-            cont = teyes.del_end(cont,":")
+            cont = del_end(cont,":")
             EYES.append([TAB[nb],"if",cont])
             EYES.append([TAB[nb],"{"])
 
         elif l.startswith("while "):
             cont = l.split("while ")[1]
-            cont = teyes.del_end(cont,":")
+            cont = del_end(cont,":")
             EYES.append([TAB[nb],"while",cont])
             EYES.append([TAB[nb],"{"])
 
         elif l.startswith("def "):
             cont = l.split("def ")[1]
-            cont = teyes.del_end(cont,":")
+            cont = del_end(cont,":")
             EYES.append([TAB[nb],"def",cont])
             EYES.append([TAB[nb],"{"])
 
         elif l.startswith("for "):
             cont = l.split("for ")[1]
-            cont = teyes.del_end(cont,"):")
+            cont = del_end(cont,"):")
             var_name = cont.split(" in range(")[0]
             arg = cont = cont.split(" in range(")[1].split(",")
             pas , min , max = "1", "0", "0"
@@ -117,7 +120,7 @@ class teyes:
 
         elif l.startswith("print("):
             cont = l.split("print(")[1]
-            cont = teyes.del_end(cont,")")
+            cont = del_end(cont,")")
             EYES.append([TAB[nb],"print",cont])
 
         elif l.startswith("#include "):
