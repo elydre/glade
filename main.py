@@ -10,7 +10,7 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.1.04
+ - v       : 0.1.5
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -19,6 +19,14 @@ import mod.ColorPrint as cprint
 class sys:
     def info(msg):
         cprint.colorprint("|sys| ",color=cprint.Colors.cyan,end=False)
+        cprint.colorprint(msg,color=cprint.Colors.blanc)
+
+    def dev(msg):
+        cprint.colorprint("|dev| ",color=cprint.Colors.vert,end=False)
+        cprint.colorprint(msg,color=cprint.Colors.blanc)
+
+    def app(msg):
+        cprint.colorprint("|app| ",color=cprint.Colors.jaune,end=False)
         cprint.colorprint(msg,color=cprint.Colors.blanc)
 
     def gen_err(msg):
@@ -49,8 +57,8 @@ class init:
 
 class teyes:
 
-    def var_type(nom,cont):
-        type(cont)
+    def var_type(cont):
+        return(type(cont))
 
 
     def edit_l(l,nb):
@@ -123,6 +131,11 @@ class teyes:
             cont = del_end(cont,")")
             EYES.append([TAB[nb],"print",cont])
 
+        elif l.startswith("return("):
+            cont = l.split("return(")[1]
+            cont = del_end(cont,")")
+            EYES.append([TAB[nb],"return",cont])
+
         elif l.startswith("#include "):
             cont = l.split("#include ")[1]
             EYES.append([TAB[nb],"include",cont])
@@ -131,6 +144,7 @@ class teyes:
             EYES.append([TAB[nb],"unknown",l])
 
     def main():
+        pprint = False
         fichier = cy.rfil_rela("/container",todo)
         ligues = fichier.split("\n")
         ligues.append("")
@@ -141,8 +155,19 @@ class teyes:
         for nb in range(len(ligues)):
             l = ligues[nb]
             teyes.edit_l(l,nb)
+        
+        # relecture
         for e in EYES:
-            print(e)
+            if e[1] == "print" and pprint == False:
+                sys.dev("importation de print automatique")
+                EYES.insert(1,[0, "include", "<iostream>"])
+                EYES.insert(2,[0, 'unknown', 'using namespace std'])
+                pprint = True
+
+    
+        # print (dev)
+        for e in EYES:
+            sys.app(str(e))
 
 class compiler:
     def edit_e(e):
@@ -172,6 +197,9 @@ class compiler:
 
         elif de == "include":
             EXIT.append(add_tab(tab) + "#include " + arg)
+
+        elif de == "return":
+            EXIT.append(add_tab(tab) + "return " + arg + ";")
 
         elif de == "comm":
             EXIT.append(add_tab(tab) + "// " + arg)
