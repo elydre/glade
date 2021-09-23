@@ -20,8 +20,8 @@ int main()
                     if (x == max)
                     {
                         cout << i << endl;
-}
-}
-}
-}
+                }
+            }
+        }
+    }
 }
