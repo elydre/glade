@@ -10,7 +10,7 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.1.6
+ - v       : 0.1.7
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -95,6 +95,18 @@ class teyes:
             cont = l.split("if ")[1]
             cont = del_end(cont,":")
             EYES.append([TAB[nb],"if",cont])
+            EYES.append([TAB[nb],"{"])
+
+        if l.startswith("elif "):
+            cont = l.split("elif ")[1]
+            cont = del_end(cont,":")
+            EYES.append([TAB[nb],"elif",cont])
+            EYES.append([TAB[nb],"{"])
+
+        if l.startswith("else "):
+            cont = l.split("else ")[1]
+            cont = del_end(cont,":")
+            EYES.append([TAB[nb],"else",cont])
             EYES.append([TAB[nb],"{"])
 
         elif l.startswith("while "):
@@ -191,6 +203,12 @@ class compiler:
 
         elif de == "if":
             EXIT.append(add_tab(tab) + "if (" + arg + ")")
+        
+        elif de == "elif":
+            EXIT.append(add_tab(tab) + "else if (" + arg + ")")
+
+        elif de == "else":
+            EXIT.append(add_tab(tab) + "else (" + arg + ")")
 
         elif de == "print":
             EXIT.append(add_tab(tab) + "cout << " + arg + " << endl;" )
