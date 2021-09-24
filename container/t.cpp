@@ -7,6 +7,5 @@ int main()
     if (a == 1)
     {
         cout << "yguhjy" << endl;
-    }
-    return 0;
+}
 }
