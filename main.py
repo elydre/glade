@@ -125,7 +125,7 @@ class teyes:
             cont = l.split("for ")[1]
             cont = del_end(cont,"):")
             var_name = cont.split(" in range(")[0]
-            arg = cont = cont.split(" in range(")[1].split(",")
+            arg = cont.split(" in range(")[1].split(",")
             pas , min , max = "1", "0", "0"
             if len(arg) == 1:
                 max = arg[0]
