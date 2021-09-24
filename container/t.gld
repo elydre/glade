@@ -1,4 +1,4 @@
 def main():
     int a = 1
     if a == 1:
-        print("yguhjy")
+        print("1 = 1 XD")

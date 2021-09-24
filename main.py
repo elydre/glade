@@ -10,7 +10,7 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.1.5
+ - v       : 0.1.6
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -86,7 +86,7 @@ class teyes:
 
         l = del_tab(l)
 
-        for loop in range(TAB[nb-1]-TAB[nb]): EYES.append([TAB[nb],"}"])
+        for loop in range(1,TAB[nb-1]-TAB[nb]+1): EYES.append([TAB[nb-1]-1*loop,"}"])
         
         if nb == 0:
             EYES.append([TAB[nb],"comm","interpreted and compiled by GLADE"])

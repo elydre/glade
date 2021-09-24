@@ -6,6 +6,6 @@ int main()
     int a = 1;
     if (a == 1)
     {
-        cout << "yguhjy" << endl;
-}
+        cout << "1 = 1 XD" << endl;
+    }
 }
