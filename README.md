@@ -6,8 +6,7 @@ GLADE est un compilateur python vers c++ pour accéléré grandement l
  - print
  - fonction
  - return
- - boucle while
- - boucle for
+ - boucle while / for
  - if / elif / else
 
 ## Élément en dévlopement
