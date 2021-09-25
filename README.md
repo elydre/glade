@@ -11,9 +11,9 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
  - boucle while / for
  - if / elif / else
 
-## Élément en dévlopement
+## Éléments en développement
 
- - commantaire *(de **#** à **//**)*
+ - commentaires *(de **#** à **//**)*
  - type de variable
  - auto main
  - liste
