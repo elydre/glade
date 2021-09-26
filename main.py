@@ -10,7 +10,7 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.1.7b
+ - v       : 0.1.8
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -61,7 +61,7 @@ class teyes:
         return(type(cont))
 
 
-    def edit_l(l,nb):
+    def edit_l(l,nb,len_tot):
         def tab_c(l):
             t = 0
             nb_tab = 4 #nombre d'espace dans une TAB
@@ -69,11 +69,12 @@ class teyes:
             return(int((t - nb_tab)/nb_tab))
 
         def del_tab(l):
-            sortie = ""
-            x = 0       #si la ligne est vide
+            x , sortie = 0 , ""
             for x in range(len(list(l))):
                 if list(l)[x] != " ": break
-            for y in range(x,len(list(l))): sortie += list(l)[y]
+            for y in range(x,len(list(l))):
+                if not(y == len(list(l)) - 1 and list(l)[y] == " "):
+                    sortie += list(l)[y]
             return(sortie)
 
         def del_end(cont,to_del):
@@ -86,7 +87,8 @@ class teyes:
 
         l = del_tab(l)
 
-        for loop in range(1,TAB[nb-1]-TAB[nb]+1): EYES.append([TAB[nb-1]-1*loop,"}"])
+        if l != "" or nb == len_tot-1:
+            for loop in range(1,TAB[nb-1]-TAB[nb]+1): EYES.append([TAB[nb-1]-1*loop,"}"])
         
         if nb == 0:
             EYES.append([TAB[nb],"comm","interpreted and compiled by GLADE"])
@@ -148,11 +150,18 @@ class teyes:
             cont = del_end(cont,")")
             EYES.append([TAB[nb],"return",cont])
 
-        elif l.startswith("#include "):
-            cont = l.split("#include ")[1]
-            EYES.append([TAB[nb],"include",cont])
+        elif l.startswith("#"):
+            lb = del_tab(l.split("#")[1])
+            if lb.startswith("include "):
+                cont = lb.split("include ")[1]
+                EYES.append([TAB[nb],"include",cont])
+            elif lb.startswith("!"):
+                cont = del_tab(lb.split("!")[1])
+                EYES.append([TAB[nb],"lnb",cont])
+            else:
+                EYES.append([TAB[nb],"comm",lb])
 
-        elif l != "":
+        elif del_tab(l) != "":
             EYES.append([TAB[nb],"unknown",l])
 
     def main():
@@ -166,7 +175,7 @@ class teyes:
 
         for nb in range(len(ligues)):
             l = ligues[nb]
-            teyes.edit_l(l,nb)
+            teyes.edit_l(l,nb,len(ligues))
         
         # relecture
         for e in EYES:
@@ -210,14 +219,17 @@ class compiler:
         elif de == "else":
             EXIT.append(add_tab(tab) + "else (" + arg + ")")
 
+        elif de == "return":
+            EXIT.append(add_tab(tab) + "return " + arg + ";")
+
         elif de == "print":
             EXIT.append(add_tab(tab) + "cout << " + arg + " << endl;" )
 
         elif de == "include":
             EXIT.append(add_tab(tab) + "#include " + arg)
 
-        elif de == "return":
-            EXIT.append(add_tab(tab) + "return " + arg + ";")
+        elif de == "lnb":
+            EXIT.append(add_tab(tab) + arg)
 
         elif de == "comm":
             EXIT.append(add_tab(tab) + "// " + arg)
