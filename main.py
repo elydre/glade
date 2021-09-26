@@ -10,7 +10,7 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.1.7
+ - v       : 0.1.7b
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 import mod.cytron as cy
@@ -97,13 +97,13 @@ class teyes:
             EYES.append([TAB[nb],"if",cont])
             EYES.append([TAB[nb],"{"])
 
-        if l.startswith("elif "):
+        elif l.startswith("elif "):
             cont = l.split("elif ")[1]
             cont = del_end(cont,":")
             EYES.append([TAB[nb],"elif",cont])
             EYES.append([TAB[nb],"{"])
 
-        if l.startswith("else "):
+        elif l.startswith("else "):
             cont = l.split("else ")[1]
             cont = del_end(cont,":")
             EYES.append([TAB[nb],"else",cont])
