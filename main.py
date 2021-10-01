@@ -10,7 +10,7 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.1.8
+ - v       : 0.1.9
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 from posixpath import split
