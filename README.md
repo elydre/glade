@@ -4,23 +4,23 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 
 ## Élément pris en charge
 
- - importation `include`
- - `print()`
- - fonction
- - `return()`
- - boucle `while` / `for`
- - `if` / `elif` / `else`
- - commentaires *(de # à //)*
- - code brut
- - auto initialisation avec type de variable
+- importation `include`
+- `print()`
+- fonction
+- `return()`
+- boucle `while` / `for`
+- `if` / `elif` / `else`
+- commentaires *(de # à //)*
+- code brut
+- auto initialisation avec type de variable
 
 ## Éléments en développement
 
- - traitement des variables `True` -> `true`...
- - auto main
- - liste
- - classe
- - str *?*
+- traitement des variables `True` -> `true`...
+- auto main
+- liste
+- classe
+- str *?*
 
 ## Syntaxe particulière
--  ***`#!`* ligne brute:** le texte de cette ligne a la suite de cette marque ne serra par interprété et serra laissé brut
+- ***`#!`* ligne brute:** le texte de cette ligne a la suite de cette marque ne serra par interprété et serra laissé brut
