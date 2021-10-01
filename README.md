@@ -5,9 +5,9 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 ## Élément pris en charge
 
  - importation `include`
- - `print`
+ - `print()`
  - fonction
- - `return`
+ - `return()`
  - boucle `while` / `for`
  - `if` / `elif` / `else`
  - commentaires *(de # à //)*
