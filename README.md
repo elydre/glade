@@ -12,7 +12,7 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
  - `if` / `elif` / `else`
  - commentaires *(de # à //)*
  - code brut
- - type de variable
+ - auto initialisation avec type de variable
 
 ## Éléments en développement
 
