@@ -10,10 +10,10 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.1.9
+ - v       : 0.2.0
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
-from posixpath import split
+
 import mod.cytron as cy
 import mod.ColorPrint as cprint
 
@@ -57,10 +57,28 @@ class init:
             else: sys.gen_err("non-existent or unreadable file")
 
 class teyes:
-    
-    def var_type(cont):
-        return(type(cont))
 
+    def varitype(var,cont):
+        if len(cont.split('"')) > 1 or len(cont.split("'")) > 1:
+            typ = "string"
+            int_val = '""'
+        elif cont == "True" or cont == "False":
+            typ = "bool"
+            int_val = "false"
+        else:
+            try:
+                int(cont)
+                typ = "long int"
+                int_val = 0
+            except:
+                try:
+                    float(cont)
+                    typ = "float"
+                    int_val = 0.0
+                except:
+                    typ = "long int"
+                    int_val = 0
+        return([var,typ,int_val])
 
     def edit_l(l,nb,len_tot):
         global ATOC
@@ -69,15 +87,6 @@ class teyes:
             nb_tab = 4 #nombre d'espace dans une TAB
             while l.startswith(" "*t): t += nb_tab
             return(int((t - nb_tab)/nb_tab))
-
-        def del_tab(l):
-            x , sortie = 0 , ""
-            for x in range(len(list(l))):
-                if list(l)[x] != " ": break
-            for y in range(x,len(list(l))):
-                if not(y == len(list(l)) - 1 and list(l)[y] == " "):
-                    sortie += list(l)[y]
-            return(sortie)
 
         def del_end(cont,to_del):
             cont , to_del = str(cont) , str(to_del)
@@ -91,7 +100,7 @@ class teyes:
 
         TAB.append(tab_c(l))
 
-        l = del_tab(l)
+        l = l.strip()
 
         if l != "" or nb == len_tot-1:
             for loop in range(1,TAB[nb-1]-TAB[nb]+1):
@@ -170,23 +179,23 @@ class teyes:
             EYES.append([ATOC,TAB[nb],"return",cont])
 
         elif l.startswith("#"):
-            lb = del_tab(l.split("#")[1])
+            lb = l.split("#")[1].strip()
             if lb.startswith("include "):
                 cont = lb.split("include ")[1]
                 EYES.append([ATOC,TAB[nb],"include",cont])
             elif lb.startswith("!"):
-                cont = del_tab(lb.split("!")[1])
+                cont = lb.split("!")[1].strip()
                 EYES.append([ATOC,TAB[nb],"lnb",cont])
             else:
                 EYES.append([ATOC,TAB[nb],"comm",lb])
 
         elif contient(l,"=") == 1:
-            nom = l.split("=")[0]
-            cont = del_tab(l.split("=")[1])
+            nom = l.split("=")[0].strip()
+            cont = l.split("=")[1].strip()
             EYES.append([ATOC,TAB[nb],"vare",[nom,cont]])
-            VAR.append([nom,cont])
+            VAR.append([("" if len(ATOC.split("/")) == 0 else "/" + ATOC.split("/")[1]),nom,cont])
 
-        elif del_tab(l) != "":
+        elif l.strip() != "":
             EYES.append([ATOC,TAB[nb],"unknown",l])
 
     def main():
@@ -204,7 +213,16 @@ class teyes:
             l = ligues[nb]
             teyes.edit_l(l,nb,len(ligues))
 
-        # relecture
+        # relecture pour auto créé les variables
+        for iv in range(len(VAR)):
+            v = VAR[iv]
+            for ie in range(len(EYES)):
+                e = EYES[ie]
+                if e[0] == v[0]:
+                    EYES.insert(ie+iv,[str(e[0]),1, "vari", teyes.varitype(v[1],v[2])])
+                    break
+        
+        # relecture pour l'importation des modules
         for e in EYES:
             if e[2] == "print" and pprint == False:
                 sys.app("importation de print automatique")
@@ -262,7 +280,10 @@ class compiler:
             EXIT.append(add_tab(tab) + "// " + arg)
 
         elif de == "vare":
-            EXIT.append(add_tab(tab) + arg[0] + "= " + arg[1] + ";")
+            EXIT.append(add_tab(tab) + arg[0] + " = " + arg[1] + ";")
+
+        elif de == "vari":
+            EXIT.append(add_tab(tab) + arg[1] + " " + arg[0] + " = " + str(arg[2]) + ";  // auto var")
 
         elif de == "unknown":
             EXIT.append(add_tab(tab) + arg + ";")
@@ -274,7 +295,7 @@ class compiler:
             EXIT.append(add_tab(tab) + "}")
 
         else:
-            sys.gen_err("élément retourné inconnu par le compilateur: " + de)
+            sys.gen_err("élément retourné inconnu par le compilateur: '" + de + "'\n      ici -> " + str(e))
 
     def main():
         global EXIT
