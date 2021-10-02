@@ -16,11 +16,19 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 
 ## Éléments en développement
 
-- traitement des variables `True` -> `true`...
+- traitement des variables: [`True` -> `true`]
 - auto main
 - liste
-- classe
+
+## Éléments a venir
+
+
+- interpretation une ligne:<br>
+    [`print('non' if test = False else "oui")`]
+- traitement des operation: [`**` -> `pow()`]
 - str *?*
+- classe & programmation acces objet
+
 
 ## Syntaxe particulière
 - ***`#!`* ligne brute:** le texte de cette ligne a la suite de cette marque ne serra par interprété et serra laissé brut
