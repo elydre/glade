@@ -10,12 +10,25 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.2.0
+ - v       : 0.2.1
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
 import mod.cytron as cy
 import mod.ColorPrint as cprint
+
+class init:
+    #### parametres ####
+    global todo
+
+    # fichier a compiler par defaut (None)
+    todo = None
+
+    # print de debug (True)
+    debug_print = True
+
+    # espace dans une tablature python (4)
+    space_in_tabs = 4
 
 class sys:
     def info(msg):
@@ -34,8 +47,8 @@ class sys:
         cprint.colorprint("|err| ",color=cprint.Colors.rouge,end=False)
         cprint.colorprint(msg,color=cprint.Colors.blanc)
 
-class init:
-    def lsprog():
+class inter:
+    def lsprog(defaut):
         cprint.colorprint("\nWhich program to convert: ",color=cprint.Colors.blanc)
         ls_liste = cy.ls("/container")
         for element in ls_liste:
@@ -46,13 +59,21 @@ class init:
             elif ext == "gld": cprint.colorprint(element,color=cprint.Colors.vert)
             elif ext == "cpp": cprint.colorprint(element,color=cprint.Colors.magenta)
             else: cprint.colorprint(element,color=cprint.Colors.blanc)
-        return(input("~} "))
+        if defaut == None or defaut == "":
+            return(input("~} "))
+        else:
+            cprint.colorprint("(",color=cprint.Colors.blanc, end=False)
+            cprint.colorprint(defaut,color=cprint.Colors.cyan, end=False)
+            cprint.colorprint(")",color=cprint.Colors.blanc, end=False)
+            ipt = input(" ~} ")
+            return(defaut if ipt == "" else ipt)
+             
 
     def main():
         global todo
         no_done = True
         while no_done:
-            todo = init.lsprog()
+            todo = inter.lsprog(todo)
             if cy.rfil_rela("/container",todo) != None: no_done = False
             else: sys.gen_err("non-existent or unreadable file")
 
@@ -84,9 +105,8 @@ class teyes:
         global ATOC
         def tab_c(l):
             t = 0
-            nb_tab = 4 #nombre d'espace dans une TAB
-            while l.startswith(" "*t): t += nb_tab
-            return(int((t - nb_tab)/nb_tab))
+            while l.startswith(" "*t): t += init.space_in_tabs
+            return(int((t - init.space_in_tabs)/init.space_in_tabs))
 
         def del_end(cont,to_del):
             cont , to_del = str(cont) , str(to_del)
@@ -231,13 +251,14 @@ class teyes:
                 pprint = True
     
         # print (dev)
-        sys.app("liste des variables: " + str(VAR))
-        for e in EYES:
-            sys.dev(str(e))
+        if init.debug_print:
+            sys.app("liste des variables: " + str(VAR))
+            for e in EYES:
+                sys.dev(str(e))
 
 class compiler:
     def edit_e(e):
-        def add_tab(tab): return(" "*tab*4)
+        def add_tab(tab): return(" "*tab*init.space_in_tabs)
         
         de = e[2]  #element detecte
         tab = e[1] #nb de tab
@@ -310,13 +331,13 @@ class maker:
         cy.mkfil("/container",name,"".join((l+"\n") for l in EXIT))
 
 sys.info("initialization")
-init.main()
+init()
 
-sys.info("token eyes")
-teyes.main()
-
-sys.info("compilation")
-compiler.main()
-
-sys.info("writing")
-maker.main()
+while True:
+    inter.main()
+    sys.info("token eyes")
+    teyes.main()
+    sys.info("compilation")
+    compiler.main()
+    sys.info("writing")
+    maker.main()
