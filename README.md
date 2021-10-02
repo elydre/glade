@@ -16,8 +16,9 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 
 ## Éléments en développement
 
-- traitement des variables: [`True` -> `true`]
+- try
 - auto main
+- traitement des variables: [`True` -> `true`]
 - liste
 
 ## Éléments a venir
