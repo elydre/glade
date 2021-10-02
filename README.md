@@ -4,12 +4,12 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 
 ## Élément pris en charge
 
-- importation `include`
-- `print()`
+- importation *`include`*
+- *`print()`*
 - fonction
-- `return()`
-- boucle `while` / `for`
-- `if` / `elif` / `else`
+- *`return()`*
+- boucle *`while`* / *`for`*
+- *`if`* / *`elif`* / *`else`*
 - commentaires *(de # à //)*
 - code brut
 - auto initialisation avec type de variable
@@ -18,15 +18,15 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 
 - try
 - auto main
-- traitement des variables: `True` -> `true`
+- traitement des variables: *`True`* -> *`true`*
 - liste
 
 ## Éléments a venir
 
 
 - interpretation une ligne:<br>
-    `print('non' if test = False else "oui")`
-- traitement des operation: `**` -> `pow()`
+    *`print('non' if test = False else "oui")`*
+- traitement des operation: *`**`* -> *`pow()`*
 - str *?*
 - classe & programmation acces objet
 
