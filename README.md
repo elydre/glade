@@ -18,15 +18,15 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 
 - try
 - auto main
-- traitement des variables: [`True` -> `true`]
+- traitement des variables: `True` -> `true`
 - liste
 
 ## Éléments a venir
 
 
 - interpretation une ligne:<br>
-    [`print('non' if test = False else "oui")`]
-- traitement des operation: [`**` -> `pow()`]
+    `print('non' if test = False else "oui")`
+- traitement des operation: `**` -> `pow()`
 - str *?*
 - classe & programmation acces objet
 
