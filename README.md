@@ -28,11 +28,11 @@ les paramètres sont éditable depuis le fichier ***system/settings.txt***
 - commentaires *(de # à //)*
 - code brut
 - auto initialisation avec type de variable
+- auto main
 
 ## Éléments en développement
 
 - try
-- auto main
 - traitement des variables: *`True`* -> *`true`*
 - liste
 
