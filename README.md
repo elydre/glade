@@ -1,6 +1,6 @@
 # GLADE
 
-![test](http://pf4.ddns.net/glade/all.png)
+![](https://zupimages.net/up/21/39/i59m.png)
 
 GLADE est un compilateur python vers c++ pour accéléré grandement la vitesse du python tout en gardant sa syntaxe\
 fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](https://github.com/pf4-DEV/Color-Printer).
