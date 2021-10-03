@@ -1,3 +1,7 @@
-todo = t.py
-debug print = True
+todo          = t.py
 space in tabs = 4
+
+debug print   = True
+auto main     = True
+init var      = True
+auto include  = True

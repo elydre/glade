@@ -10,7 +10,8 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.2.3b
+ - GitHub  : github.com/pf4-DEV/glade
+ - v       : 0.2.4 pre
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -43,12 +44,15 @@ class init:
         # valleur par defaut
         todo = None
         debug_print = True
+        auto_main = True
+        init_var = True
+        auto_include = True
         space_in_tabs = 4
         #lecture du fichier de paramètres
         if cy.rfil_rela("/system","settings.txt") == None: psys.war("fichier de paramètres non trouvé")
         else:
             for p in cy.rfil_rela("/system","settings.txt").split("\n"):
-                if p.startswith != "#":
+                if not(p.startswith("#")) and p.strip != "":
                     var = p.split("=")[0].strip()
                     atr = p.split("=")[1].strip()
 
@@ -57,9 +61,24 @@ class init:
                         else: todo = atr
 
                     elif var == "debug print":
+                        if atr == "False" or atr == "false": auto_main = False
+                        elif atr == "True" or atr == "true": auto_main = True
+                        else: psys.war("valleur non bool pour auto main (True par defaut)\n      ici -> " + str(atr))
+
+                    elif var == "init var":
+                        if atr == "False" or atr == "false": init_var = False
+                        elif atr == "True" or atr == "true": init_var = True
+                        else: psys.war("valleur non bool pour init var (True par defaut)\n      ici -> " + str(atr))
+
+                    elif var == "auto main":
                         if atr == "False" or atr == "false": debug_print = False
                         elif atr == "True" or atr == "true": debug_print = True
                         else: psys.war("valleur non bool pour debug print (True par defaut)\n      ici -> " + str(atr))
+
+                    elif var == "auto include":
+                        if atr == "False" or atr == "false": auto_include = False
+                        elif atr == "True" or atr == "true": auto_include = True
+                        else: psys.war("valleur non bool pour auto include (True par defaut)\n      ici -> " + str(atr))
                     
                     elif var == "space in tabs":
                         try: space_in_tabs = int(atr)
@@ -68,6 +87,9 @@ class init:
         self.todo = todo
         self.debug_print = debug_print
         self.space_in_tabs = space_in_tabs
+        self.auto_main = auto_main
+        self.init_var = init_var
+        self.auto_include = auto_include
 
 class inter:
     def lsprog(defaut):
@@ -100,25 +122,45 @@ class inter:
 
 class teyes:
 
-    def varitype(var,cont):
-        if len(cont.split('"')) > 1 or len(cont.split("'")) > 1:
-            typ = "string"
-        elif cont == "True" or cont == "False":
-            typ = "bool"
-        else:
-            try:
-                int(cont)
-                typ = "long int"
-            except:
+    def auto_main():
+        pass
+
+    def auto_include():
+        for e in EYES:
+            if e[2] == "print":
+                psys.app("importation de print automatique")
+                EYES.insert(1,['',0, "include", "<iostream>"])
+                EYES.insert(2,['',0, 'unknown', 'using namespace std'])
+                break
+
+    def init_var():
+        def varitype(var,cont):
+            if len(cont.split('"')) > 1 or len(cont.split("'")) > 1:
+                typ = "string"
+            elif cont == "True" or cont == "False":
+                typ = "bool"
+            else:
                 try:
-                    float(cont)
-                    typ = "float"
-                except:
+                    int(cont)
                     typ = "long int"
-        return([var,typ])
+                except:
+                    try:
+                        float(cont)
+                        typ = "float"
+                    except:
+                        typ = "long int"
+            return([var,typ])
+
+        for iv in range(len(VAR)):
+            v = VAR[iv]
+            for ie in range(len(EYES)):
+                e = EYES[ie]
+                if e[0] == v[0]:
+                    EYES.insert(ie+iv,[str(e[0]),1, "vari", varitype(v[1],v[2])])
+                    break
 
     def edit_l(l,nb,len_tot):
-        global ATOC
+        global ATOC, aim
         def tab_c(l):
             t = 0
             while l.startswith(" "*t): t += settings.space_in_tabs
@@ -145,9 +187,7 @@ class teyes:
                     if a != 0: temp += "/" + ATOC.split("/")[a]
                 ATOC = temp
                 EYES.append([ATOC,TAB[nb-1]-1*loop,"}"])
-                
-                
-        
+
         if nb == 0:
             EYES.append([ATOC,TAB[nb],"comm","interpreted and compiled by GLADE"])
 
@@ -235,36 +275,30 @@ class teyes:
             EYES.append([ATOC,TAB[nb],"unknown",l])
 
     def main():
-        pprint = False
         fichier = cy.rfil_rela("/container",settings.todo)
         ligues = fichier.split("\n")
         ligues.append("")
-        global EYES, TAB, VAR, ATOC
+        global EYES, TAB, VAR, ATOC, aim
         EYES = [] # liste de code token eyes
         VAR = []  # liste des variables
         TAB = []  # liste des TAB
         ATOC = ""
+        aim = False
 
+        # interpretation
         for nb in range(len(ligues)):
-            l = ligues[nb]
-            teyes.edit_l(l,nb,len(ligues))
+            teyes.edit_l(ligues[nb],nb,len(ligues))
 
-        # relecture pour auto créé les variables
-        for iv in range(len(VAR)):
-            v = VAR[iv]
-            for ie in range(len(EYES)):
-                e = EYES[ie]
-                if e[0] == v[0]:
-                    EYES.insert(ie+iv,[str(e[0]),1, "vari", teyes.varitype(v[1],v[2])])
-                    break
+        #auto-création des variables
+        if settings.init_var:
+            teyes.init_var()
         
-        # relecture pour l'importation des modules
-        for e in EYES:
-            if e[2] == "print" and pprint == False:
-                psys.app("importation de print automatique")
-                EYES.insert(1,['',0, "include", "<iostream>"])
-                EYES.insert(2,['',0, 'unknown', 'using namespace std'])
-                pprint = True
+        # auto-importation des modules
+        if settings.auto_include:
+            teyes.auto_include()
+
+        if settings.auto_main:
+            teyes.auto_main()
     
         # print (dev)
         if settings.debug_print:
