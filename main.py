@@ -10,27 +10,14 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.2.1b
+ - v       : 0.2.2
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
-import sys.mod.cytron as cy
-import sys.mod.ColorPrint as cprint
+import system.mod.cytron as cy
+import system.mod.ColorPrint as cprint
 
-class init:
-    #### parametres ####
-    global todo
-
-    # fichier a compiler par defaut (None)
-    todo = None
-
-    # print de debug (True)
-    debug_print = True
-
-    # espace dans une tablature python (4)
-    space_in_tabs = 4
-
-class sys:
+class psys:
     def info(msg):
         cprint.colorprint("|sys| ",color=cprint.Colors.cyan,end=False)
         cprint.colorprint(msg,color=cprint.Colors.blanc)
@@ -46,6 +33,43 @@ class sys:
     def gen_err(msg):
         cprint.colorprint("|err| ",color=cprint.Colors.rouge,end=False)
         cprint.colorprint(msg,color=cprint.Colors.blanc)
+
+    def war(msg):
+        cprint.colorprint("|war| ",color=cprint.Colors.magenta,end=False)
+        cprint.colorprint(msg,color=cprint.Colors.blanc)
+
+class init:
+    def __init__(self):
+        # valleur par defaut
+        todo = None
+        debug_print = True
+        space_in_tabs = 4
+        #lecture du fichier de paramètres
+        if cy.rfil_rela("/system","settings.txt") == None: psys.war("fichier de paramètres non trouvé")
+        else:
+            for p in cy.rfil_rela("/system","settings.txt").split("\n"):
+                print(p)
+                if p.startswith != "#":
+                    var = p.split("=")[0].strip()
+                    atr = p.split("=")[1].strip()
+
+                    if var == "todo":
+                        if atr == "None": todo = None
+                        else: todo = atr
+
+                    elif var == "debug print":
+                        print("debug")
+                        if atr == "False" or atr == "false": debug_print = False
+                        elif atr == "True" or atr == "true": debug_print = True
+                        else: psys.war("valleur non bool pour debug print (True par defaut)\n      ici -> " + str(atr))
+                    
+                    elif var == "space in tabs":
+                        try: space_in_tabs = int(atr)
+                        except: psys.war("valleur non int pour debug print (4 par defaut)\n      ici -> " + str(atr))
+                    else: psys.gen_err("paramètres inconnu\n      ici -> " + str(p))
+        self.todo = todo
+        self.debug_print = debug_print
+        self.space_in_tabs = space_in_tabs
 
 class inter:
     def lsprog(defaut):
@@ -70,12 +94,11 @@ class inter:
              
 
     def main():
-        global todo
         no_done = True
         while no_done:
-            todo = inter.lsprog(todo)
-            if cy.rfil_rela("/container",todo) != None: no_done = False
-            else: sys.gen_err("non-existent or unreadable file")
+            settings.todo = inter.lsprog(settings.todo)
+            if cy.rfil_rela("/container",settings.todo) != None: no_done = False
+            else: psys.gen_err("non-existent or unreadable file")
 
 class teyes:
 
@@ -105,8 +128,8 @@ class teyes:
         global ATOC
         def tab_c(l):
             t = 0
-            while l.startswith(" "*t): t += init.space_in_tabs
-            return(int((t - init.space_in_tabs)/init.space_in_tabs))
+            while l.startswith(" "*t): t += settings.space_in_tabs
+            return(int((t - settings.space_in_tabs)/settings.space_in_tabs))
 
         def del_end(cont,to_del):
             cont , to_del = str(cont) , str(to_del)
@@ -220,7 +243,7 @@ class teyes:
 
     def main():
         pprint = False
-        fichier = cy.rfil_rela("/container",todo)
+        fichier = cy.rfil_rela("/container",settings.todo)
         ligues = fichier.split("\n")
         ligues.append("")
         global EYES, TAB, VAR, ATOC
@@ -245,20 +268,20 @@ class teyes:
         # relecture pour l'importation des modules
         for e in EYES:
             if e[2] == "print" and pprint == False:
-                sys.app("importation de print automatique")
+                psys.app("importation de print automatique")
                 EYES.insert(1,['',0, "include", "<iostream>"])
                 EYES.insert(2,['',0, 'unknown', 'using namespace std'])
                 pprint = True
     
         # print (dev)
-        if init.debug_print:
-            sys.app("liste des variables: " + str(VAR))
+        if settings.debug_print:
+            psys.app("liste des variables: " + str(VAR))
             for e in EYES:
-                sys.dev(str(e))
+                psys.dev(str(e))
 
 class compiler:
     def edit_e(e):
-        def add_tab(tab): return(" "*tab*init.space_in_tabs)
+        def add_tab(tab): return(" "*tab*settings.space_in_tabs)
         
         de = e[2]  #element detecte
         tab = e[1] #nb de tab
@@ -316,7 +339,7 @@ class compiler:
             EXIT.append(add_tab(tab) + "}")
 
         else:
-            sys.gen_err("élément retourné inconnu par le compilateur: '" + de + "'\n      ici -> " + str(e))
+            psys.gen_err("élément retourné inconnu par le compilateur: '" + de + "'\n      ici -> " + str(e))
 
     def main():
         global EXIT
@@ -327,17 +350,18 @@ class compiler:
 
 class maker:
     def main():
-        name = str(todo.split(".")[len(todo.split("."))-2]) + ".cpp"
+        name = str(settings.todo.split(".")[len(settings.todo.split("."))-2]) + ".cpp"
         cy.mkfil("/container",name,"".join((l+"\n") for l in EXIT))
 
-sys.info("initialization")
-init()
+
+psys.info("initialization")
+settings = init()
 
 while True:
     inter.main()
-    sys.info("token eyes")
+    psys.info("token eyes")
     teyes.main()
-    sys.info("compilation")
+    psys.info("compilation")
     compiler.main()
-    sys.info("writing")
+    psys.info("writing")
     maker.main()

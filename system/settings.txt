@@ -1,0 +1,3 @@
+todo = t.py
+debug print = False
+space in tabs = 4
