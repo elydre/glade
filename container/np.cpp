@@ -4,7 +4,7 @@ using namespace std;
 #include <cmath>
 int main()
 {
-    long int max = 0;  // auto var
+    long int max;  // auto var
     cout << "runing" << endl;
     for (long int i = 0; i <= 4000; i = i + 1)
     {

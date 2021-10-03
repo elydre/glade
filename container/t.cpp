@@ -3,7 +3,7 @@
 using namespace std;
 int main()
 {
-    long int a = 0;  // auto var
+    long int a;  // auto var
     a = 1;
     if (a == 1)
     {

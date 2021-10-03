@@ -10,7 +10,7 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.2.2
+ - v       : 0.2.3
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -105,24 +105,19 @@ class teyes:
     def varitype(var,cont):
         if len(cont.split('"')) > 1 or len(cont.split("'")) > 1:
             typ = "string"
-            int_val = '""'
         elif cont == "True" or cont == "False":
             typ = "bool"
-            int_val = "false"
         else:
             try:
                 int(cont)
                 typ = "long int"
-                int_val = 0
             except:
                 try:
                     float(cont)
                     typ = "float"
-                    int_val = 0.0
                 except:
                     typ = "long int"
-                    int_val = 0
-        return([var,typ,int_val])
+        return([var,typ])
 
     def edit_l(l,nb,len_tot):
         global ATOC
@@ -327,7 +322,7 @@ class compiler:
             EXIT.append(add_tab(tab) + arg[0] + " = " + arg[1] + ";")
 
         elif de == "vari":
-            EXIT.append(add_tab(tab) + arg[1] + " " + arg[0] + " = " + str(arg[2]) + ";  // auto var")
+            EXIT.append(add_tab(tab) + arg[1] + " " + arg[0] + ";  // auto var")
 
         elif de == "unknown":
             EXIT.append(add_tab(tab) + arg + ";")
@@ -352,7 +347,6 @@ class maker:
     def main():
         name = str(settings.todo.split(".")[len(settings.todo.split("."))-2]) + ".cpp"
         cy.mkfil("/container",name,"".join((l+"\n") for l in EXIT))
-
 
 psys.info("initialization")
 settings = init()
