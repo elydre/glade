@@ -36,3 +36,9 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 
 ## Syntaxe particulière
 - ***`#!`* ligne brute:** le texte de cette ligne a la suite de cette marque ne serra par interprété et serra laissé brut
+
+## Paramètres
+les paramètres sont éditable depuis le fichier ***system/settings.txt***
+- todo: fichier compilé par défaut *None* pour auqun ou nom du fichier
+- debug print: *True* pour les print de debug *False* pour désactiver
+- space in tabs = nombre d'espace dans une tablature, par défaut 4
