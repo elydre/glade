@@ -10,7 +10,7 @@
 ██
  - codé en : UTF-8
  - langage : python 3
- - v       : 0.2.3
+ - v       : 0.2.3b
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -48,7 +48,6 @@ class init:
         if cy.rfil_rela("/system","settings.txt") == None: psys.war("fichier de paramètres non trouvé")
         else:
             for p in cy.rfil_rela("/system","settings.txt").split("\n"):
-                print(p)
                 if p.startswith != "#":
                     var = p.split("=")[0].strip()
                     atr = p.split("=")[1].strip()
@@ -58,7 +57,6 @@ class init:
                         else: todo = atr
 
                     elif var == "debug print":
-                        print("debug")
                         if atr == "False" or atr == "false": debug_print = False
                         elif atr == "True" or atr == "true": debug_print = True
                         else: psys.war("valleur non bool pour debug print (True par defaut)\n      ici -> " + str(atr))
