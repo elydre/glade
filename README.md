@@ -39,6 +39,6 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 
 ## Paramètres
 les paramètres sont éditable depuis le fichier ***system/settings.txt***
-- todo: fichier compilé par défaut *None* pour auqun ou nom du fichier
-- debug print: *True* pour les print de debug *False* pour désactiver
-- space in tabs = nombre d'espace dans une tablature, par défaut 4
+- **todo**: fichier compilé par défaut *None* pour auqun ou nom du fichier
+- **debug print**: *True* pour les print de debug *False* pour désactiver
+- **space in tabs**: nombre d'espace dans une tablature, par défaut 4
