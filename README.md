@@ -5,6 +5,15 @@
 GLADE est un compilateur python vers c++ pour accéléré grandement la vitesse du python tout en gardant sa syntaxe.\
 fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](https://github.com/pf4-DEV/Color-Printer).
 
+## Syntaxe particulière
+- ***`#!`* ligne brute:** le texte de cette ligne a la suite de cette marque ne serra par interprété et serra laissé brut
+
+## Paramètres
+les paramètres sont éditable depuis le fichier ***system/settings.txt***
+- **todo**: fichier compilé par défaut *None* pour auqun ou nom du fichier
+- **debug print**: *True* pour les print de debug *False* pour désactiver
+- **space in tabs**: nombre d'espace dans une tablature, par défaut 4
+
 ## Élément pris en charge
 
 - importation *`include`*
@@ -32,13 +41,3 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 - traitement des operation: *`**`* -> *`pow()`*
 - str *?*
 - classe & programmation acces objet
-
-
-## Syntaxe particulière
-- ***`#!`* ligne brute:** le texte de cette ligne a la suite de cette marque ne serra par interprété et serra laissé brut
-
-## Paramètres
-les paramètres sont éditable depuis le fichier ***system/settings.txt***
-- **todo**: fichier compilé par défaut *None* pour auqun ou nom du fichier
-- **debug print**: *True* pour les print de debug *False* pour désactiver
-- **space in tabs**: nombre d'espace dans une tablature, par défaut 4
