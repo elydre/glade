@@ -14,8 +14,8 @@
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
-import mod.cytron as cy
-import mod.ColorPrint as cprint
+import sys.mod.cytron as cy
+import sys.mod.ColorPrint as cprint
 
 class init:
     #### parametres ####
