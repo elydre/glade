@@ -11,8 +11,11 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 ## Paramètres
 les paramètres sont éditable depuis le fichier ***system/settings.txt***
 - **todo**: fichier compilé par défaut *None* pour auqun ou nom du fichier
-- **debug print**: *True* pour les print de debug *False* pour désactiver
 - **space in tabs**: nombre d'espace dans une tablature, par défaut 4
+- **debug print**: *True* pour les print de debug *False* pour désactiver
+- **auto main**: *True* pour la création de la fonction main automatique *False* pour désactiver
+- **init var**: *True* pour l'initialisation des variables' *False* pour désactiver
+- **auto include**: *True* pour les include automatiques *False* pour désactiver
 
 ## Élément pris en charge
 

@@ -11,7 +11,7 @@
  - codé en : UTF-8
  - langage : python 3
  - GitHub  : github.com/pf4-DEV/glade
- - v       : 0.2.4 pre
+ - v       : 0.2.4
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -48,11 +48,14 @@ class init:
         init_var = True
         auto_include = True
         space_in_tabs = 4
+
+        para_edit = 0
         #lecture du fichier de paramètres
         if cy.rfil_rela("/system","settings.txt") == None: psys.war("fichier de paramètres non trouvé")
         else:
             for p in cy.rfil_rela("/system","settings.txt").split("\n"):
-                if not(p.startswith("#")) and p.strip != "":
+                if not(p.startswith("#")) and len(p.split("=")) > 1:
+                    para_edit += 1
                     var = p.split("=")[0].strip()
                     atr = p.split("=")[1].strip()
 
@@ -83,7 +86,13 @@ class init:
                     elif var == "space in tabs":
                         try: space_in_tabs = int(atr)
                         except: psys.war("valleur non int pour debug print (4 par defaut)\n      ici -> " + str(atr))
-                    else: psys.gen_err("paramètres inconnu\n      ici -> " + str(p))
+                    
+                    else:
+                        para_edit -= 1
+                        psys.gen_err("paramètres inconnu\n      ici -> " + str(p))
+
+            psys.info(str(para_edit)+" paramètres édités")
+            
         self.todo = todo
         self.debug_print = debug_print
         self.space_in_tabs = space_in_tabs
@@ -121,10 +130,22 @@ class inter:
             else: psys.gen_err("non-existent or unreadable file")
 
 class teyes:
-
-    def auto_main():
-        pass
-
+    def auto_main(liste):
+        for ei in range(len(EYES)):
+            e = EYES[ei]
+            if e[1] == 0 and not(e[2] in liste):
+                EYES.insert(ei,['', 0, 'def', 'main()'])
+                EYES.insert(ei+1,['', 0, '{'])
+                for ei2 in range(ei+2,len(EYES)):
+                    e2 = EYES[ei2]
+                    e2[0] = "/main" + e2[0]
+                    e2[1] += 1
+                EYES.append(['', 0, '}'])
+                for v in VAR:
+                    if v[0] == "":
+                        v[0] = "/main"
+                break
+                
     def auto_include():
         for e in EYES:
             if e[2] == "print":
@@ -160,7 +181,7 @@ class teyes:
                     break
 
     def edit_l(l,nb,len_tot):
-        global ATOC, aim
+        global ATOC, AFON, aim
         def tab_c(l):
             t = 0
             while l.startswith(" "*t): t += settings.space_in_tabs
@@ -186,6 +207,8 @@ class teyes:
                 for a in range(len(ATOC.split("/"))-1):
                     if a != 0: temp += "/" + ATOC.split("/")[a]
                 ATOC = temp
+                if not(ATOC.startswith(AFON)):
+                    AFON = ""
                 EYES.append([ATOC,TAB[nb-1]-1*loop,"}"])
 
         if nb == 0:
@@ -225,6 +248,7 @@ class teyes:
             EYES.append([ATOC,TAB[nb],"def",cont])
             EYES.append([ATOC,TAB[nb],"{"])
             ATOC += "/" + cont.split("(")[0]
+            AFON = "/" + cont.split("(")[0]
 
         elif l.startswith("for "):
             cont = l.split("for ")[1]
@@ -269,7 +293,7 @@ class teyes:
             nom = l.split("=")[0].strip()
             cont = l.split("=")[1].strip()
             EYES.append([ATOC,TAB[nb],"vare",[nom,cont]])
-            VAR.append([("" if len(ATOC.split("/")) == 0 else "/" + ATOC.split("/")[1]),nom,cont])
+            VAR.append([AFON,nom,cont])
 
         elif l.strip() != "":
             EYES.append([ATOC,TAB[nb],"unknown",l])
@@ -278,16 +302,21 @@ class teyes:
         fichier = cy.rfil_rela("/container",settings.todo)
         ligues = fichier.split("\n")
         ligues.append("")
-        global EYES, TAB, VAR, ATOC, aim
+        global EYES, TAB, VAR, ATOC, AFON, aim
         EYES = [] # liste de code token eyes
         VAR = []  # liste des variables
         TAB = []  # liste des TAB
         ATOC = ""
+        AFON = ""
         aim = False
 
         # interpretation
         for nb in range(len(ligues)):
             teyes.edit_l(ligues[nb],nb,len(ligues))
+
+        #auto-création du main
+        if settings.auto_main:
+            teyes.auto_main(["comm","include","unknown","def","{","}"])
 
         #auto-création des variables
         if settings.init_var:
@@ -297,12 +326,10 @@ class teyes:
         if settings.auto_include:
             teyes.auto_include()
 
-        if settings.auto_main:
-            teyes.auto_main()
+        
     
         # print (dev)
         if settings.debug_print:
-            psys.app("liste des variables: " + str(VAR))
             for e in EYES:
                 psys.dev(str(e))
 
