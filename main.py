@@ -11,7 +11,7 @@
  - codé en : UTF-8
  - langage : python 3
  - GitHub  : github.com/pf4-DEV/glade
- - v       : 0.2.5
+ - v       : 0.2.6
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -48,6 +48,7 @@ class init:
         init_var = True
         auto_include = True
         space_in_tabs = 4
+        int_var_type = "long int"
 
         para_edit = 0
         #lecture du fichier de paramètres
@@ -62,6 +63,9 @@ class init:
                     if var == "todo":
                         if atr == "None": todo = None
                         else: todo = atr
+
+                    elif var == "int var type":
+                        int_var_type = atr
 
                     elif var == "debug print":
                         if atr == "False" or atr == "false": auto_main = False
@@ -99,6 +103,7 @@ class init:
         self.auto_main = auto_main
         self.init_var = init_var
         self.auto_include = auto_include
+        self.int_var_type = int_var_type
 
 class inter:
     def lsprog(defaut):
@@ -163,13 +168,13 @@ class teyes:
             else:
                 try:
                     int(cont)
-                    typ = "long int"
+                    typ = settings.int_var_type
                 except:
                     try:
                         float(cont)
                         typ = "float"
                     except:
-                        typ = "long int"
+                        typ = settings.int_var_type
             return([var,typ])
 
         for iv in range(len(VAR)):
@@ -356,7 +361,7 @@ class compiler:
 
         elif de == "for":
             larg = arg
-            arg = "long int " + larg[0] + " = " + larg[1] + "; " + larg[0] + " <= " + larg[2] + "; " + larg[0] + " = " + larg[0] + " + " + larg[3]
+            arg = settings.int_var_type + " " + larg[0] + " = " + larg[1] + "; " + larg[0] + " <= " + larg[2] + "; " + larg[0] + " = " + larg[0] + " + " + larg[3]
             EXIT.append(add_tab(tab) + "for (" + arg + ")")
 
         elif de == "if":

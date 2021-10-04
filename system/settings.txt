@@ -1,5 +1,6 @@
 todo          = t.py
 space in tabs = 4
+int var type  = long int
 
 debug print   = True
 auto main     = True
