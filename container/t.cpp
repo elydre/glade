@@ -3,13 +3,11 @@
 using namespace std;
 int main()
 {
-    long int a;  // auto var
-    long int b;  // auto var
-    a = 1;
-    if (a == 1)
+    for (long int a = 0; a <= 100; a = a + 1)
     {
-        b = 45;
-        cout << "1 = 1 XD" << endl;
+        for (long int b = 0; b <= a; b = b + 1)
+        {
+            cout << b+a << endl;
+        }
     }
-    cout << b << endl;
 }
