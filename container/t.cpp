@@ -3,11 +3,11 @@
 using namespace std;
 int main()
 {
-    for (long int a = 0; a <= 100; a = a + 1)
+    long int a;  // auto var
+    a = 1;
+    for (long int x = 0; x <= 40; x = x + 1)
     {
-        for (long int b = 0; b <= a; b = b + 1)
-        {
-            cout << b+a << endl;
-        }
+        a = a * 2;
+        cout << a << endl;
     }
 }
