@@ -11,7 +11,7 @@
  - codé en : UTF-8
  - langage : python 3
  - GitHub  : github.com/pf4-DEV/glade
- - v       : 0.2.4
+ - v       : 0.2.5
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -195,6 +195,11 @@ class teyes:
             cont, var = str(cont), str(var)
             return(len(var.split(cont))-1)
 
+        def iic(liste, e, p):
+            atr = []
+            for v in liste: atr.append(v[p])
+            return(True if e in atr else False)
+
         l = str(l)
 
         TAB.append(tab_c(l))
@@ -293,7 +298,8 @@ class teyes:
             nom = l.split("=")[0].strip()
             cont = l.split("=")[1].strip()
             EYES.append([ATOC,TAB[nb],"vare",[nom,cont]])
-            VAR.append([AFON,nom,cont])
+            if not(iic(VAR, nom, 1)):
+                VAR.append([AFON,nom,cont])
 
         elif l.strip() != "":
             EYES.append([ATOC,TAB[nb],"unknown",l])
