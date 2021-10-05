@@ -9,13 +9,16 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 - ***`#!`* ligne brute:** le texte de cette ligne a la suite de cette marque ne serra par interprété et serra laissé brut
 
 ## Paramètres
-les paramètres sont éditable depuis le fichier ***system/settings.txt***
-- **todo**: fichier compilé par défaut *None* pour auqun ou nom du fichier
-- **space in tabs**: nombre d'espace dans une tablature, par défaut 4
-- **debug print**: *True* pour les print de debug *False* pour désactiver
-- **auto main**: *True* pour la création de la fonction main automatique *False* pour désactiver
-- **init var**: *True* pour l'initialisation des variables' *False* pour désactiver
-- **auto include**: *True* pour les include automatiques *False* pour désactiver
+les paramètres sont éditable depuis le fichier ***system/settings.txt***<br>
+les valeur entre parenthèse a la fin de chaque description correspond au valeur par défaut.
+
+- **todo**: fichier compilé par défaut *None* pour auqun ou nom du fichier. (*t.py*)
+- **space in tabs**: nombre d'espace dans une tablature. (*4*)
+- **debug print**: *True* pour les print de debug *False* pour désactiver. (*True*)
+- **auto main**: *True* pour la création de la fonction main automatique *False* pour désactiver. (*True*)
+- **init var**: *True* pour l'initialisation des variables *False* pour désactiver. (*True*)
+- **auto include**: *True* pour les include automatiques *False* pour désactiver. (*True*)
+- **int var type**: Type de variable pour les entier. *int* (8bit) pour un programme légé vers *long long int* (64bit) pour des variables gigantesques. [en savoir plus](https://fr.wikipedia.org/wiki/Types_de_donnée_du_langage_C)
 
 ## Élément pris en charge
 
