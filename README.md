@@ -35,6 +35,7 @@ les valeur entre parenthèse a la fin de chaque description correspond au valeur
 
 ## Éléments en développement
 
+- input
 - try
 - traitement des variables: *`True`* -> *`true`*
 - liste
