@@ -32,10 +32,10 @@ les valeur entre parenthèse a la fin de chaque description correspond au valeur
 - code brut
 - auto initialisation avec type de variable
 - auto main
+- input avec type de variable auto
 
 ## Éléments en développement
 
-- input
 - try
 - traitement des variables: *`True`* -> *`true`*
 - liste
