@@ -4,10 +4,11 @@ using namespace std;
 int main()
 {
     long int a;  // auto var
-    a = 1;
-    for (long int x = 0; x <= 40; x = x + 1)
+    cout << "entrez un nombre:";
+    cin >> a;
+    cin.ignore();
+    for (long int x = 0; x < a; x = x + 1)
     {
-        a = a * 2;
-        cout << a << endl;
+        cout << "Boujour!" << endl;
     }
 }

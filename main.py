@@ -11,7 +11,7 @@
  - codé en : UTF-8
  - langage : python 3
  - GitHub  : github.com/pf4-DEV/glade
- - v       : 0.2.6
+ - v       : 0.2.7
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -161,20 +161,19 @@ class teyes:
 
     def init_var():
         def varitype(var,cont):
-            if len(cont.split('"')) > 1 or len(cont.split("'")) > 1:
-                typ = "string"
-            elif cont == "True" or cont == "False":
-                typ = "bool"
+            if cont.startswith("#"):
+                if cont == "#int": typ = settings.int_var_type
+                elif cont == "#bool": typ = "bool"
+                elif cont == "#float": typ = "float"
+                else: typ = "string"
             else:
-                try:
-                    int(cont)
-                    typ = settings.int_var_type
-                except:
-                    try:
-                        float(cont)
-                        typ = "float"
+                if len(cont.split('"')) > 1 or len(cont.split("'")) > 1: typ = "string"
+                elif cont == "True" or cont == "False": typ = "bool"
+                else:
+                    try: int(cont) ; typ = settings.int_var_type
                     except:
-                        typ = settings.int_var_type
+                        try: float(cont) ; typ = "float"
+                        except: typ = settings.int_var_type
             return([var,typ])
 
         for iv in range(len(VAR)):
@@ -302,7 +301,18 @@ class teyes:
         elif contient(l,"=") == 1:
             nom = l.split("=")[0].strip()
             cont = l.split("=")[1].strip()
-            EYES.append([ATOC,TAB[nb],"vare",[nom,cont]])
+            if "input(" in cont:
+                txt = cont.split("input(")[1].split(")")[0]
+                if txt.strip() != "":
+                    EYES.append([ATOC,TAB[nb],"print end",txt])
+                EYES.append([ATOC,TAB[nb],"input",nom])
+                EYES.append([ATOC,TAB[nb],"ignore input"])
+                if cont.startswith("int("): cont = "#int"
+                elif cont.startswith("float("): cont = "#float"
+                elif cont.startswith("bool("): cont = "#bool"
+                else: cont = "#str"
+            else:
+                EYES.append([ATOC,TAB[nb],"vare",[nom,cont]])
             if not(iic(VAR, nom, 1)): VAR.append([AFON,nom,cont])
 
         elif l.strip() != "":
@@ -360,7 +370,7 @@ class compiler:
 
         elif de == "for":
             larg = arg
-            arg = settings.int_var_type + " " + larg[0] + " = " + larg[1] + "; " + larg[0] + " <= " + larg[2] + "; " + larg[0] + " = " + larg[0] + " + " + larg[3]
+            arg = settings.int_var_type + " " + larg[0] + " = " + larg[1] + "; " + larg[0] + " < " + larg[2] + "; " + larg[0] + " = " + larg[0] + " + " + larg[3]
             EXIT.append(add_tab(tab) + "for (" + arg + ")")
 
         elif de == "if":
@@ -375,8 +385,17 @@ class compiler:
         elif de == "return":
             EXIT.append(add_tab(tab) + "return " + arg + ";")
 
+        elif de == "print end":
+            EXIT.append(add_tab(tab) + "cout << " + arg + ";" )
+
         elif de == "print":
             EXIT.append(add_tab(tab) + "cout << " + arg + " << endl;" )
+
+        elif de == "input":
+            EXIT.append(add_tab(tab) + "cin >> " + arg + ";" )
+
+        elif de == "ignore input":
+            EXIT.append(add_tab(tab) + "cin.ignore();" )
 
         elif de == "include":
             EXIT.append(add_tab(tab) + "#include " + arg)
