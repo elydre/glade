@@ -303,8 +303,7 @@ class teyes:
             nom = l.split("=")[0].strip()
             cont = l.split("=")[1].strip()
             EYES.append([ATOC,TAB[nb],"vare",[nom,cont]])
-            if not(iic(VAR, nom, 1)):
-                VAR.append([AFON,nom,cont])
+            if not(iic(VAR, nom, 1)): VAR.append([AFON,nom,cont])
 
         elif l.strip() != "":
             EYES.append([ATOC,TAB[nb],"unknown",l])
