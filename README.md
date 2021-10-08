@@ -42,7 +42,6 @@ les valeur entre parenthèse a la fin de chaque description correspond au valeur
 
 ## Éléments a venir
 
-
 - interpretation une ligne:<br>
     *`print('non' if test = False else "oui")`*
 - traitement des operation: *`**`* -> *`pow()`*
