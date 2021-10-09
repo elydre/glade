@@ -11,7 +11,7 @@
  - codé en : UTF-8
  - langage : python 3
  - GitHub  : github.com/pf4-DEV/glade
- - v       : 0.2.7
+ - v       : 0.2.8
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -237,10 +237,8 @@ class teyes:
             EYES.append([ATOC,TAB[nb],"{"])
             ATOC += "/elif"
 
-        elif l.startswith("else "):
-            cont = l.split("else ")[1]
-            cont = del_end(cont,":")
-            EYES.append([ATOC,TAB[nb],"else",cont])
+        elif l.startswith("else"):
+            EYES.append([ATOC,TAB[nb],"else"])
             EYES.append([ATOC,TAB[nb],"{"])
             ATOC += "/else"
 
@@ -288,7 +286,7 @@ class teyes:
             EYES.append([ATOC,TAB[nb],"return",cont])
 
         elif l.startswith("#"):
-            lb = l.split("#")[1].strip()
+            lb = l.replace("#", "")
             if lb.startswith("include "):
                 cont = lb.split("include ")[1]
                 EYES.append([ATOC,TAB[nb],"include",cont])
@@ -380,7 +378,7 @@ class compiler:
             EXIT.append(add_tab(tab) + "else if (" + arg + ")")
 
         elif de == "else":
-            EXIT.append(add_tab(tab) + "else (" + arg + ")")
+            EXIT.append(add_tab(tab) + "else")
 
         elif de == "return":
             EXIT.append(add_tab(tab) + "return " + arg + ";")
