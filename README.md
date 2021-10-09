@@ -56,20 +56,20 @@ les valeur entre parenthèse a la fin de chaque description correspond au valeur
 - auto initialisation avec type de variable
 - auto main
 - input avec type de variable auto
+- traitement des variables: *`True`* -> *`true`*
+- str
 
 ## Éléments en développement
 
 - try
-- traitement des variables: *`True`* -> *`true`*
 - liste
+- traitement des operation: *`**`* -> *`pow()`*
 
 ## Éléments a venir
 
 - interpretation une ligne:<br>
     *`print('non' if test = False else "oui")`*
-- traitement des operation: *`**`* -> *`pow()`*
 - module
-- str *?*
 - classe & programmation acces objet
 - typage dynamique
 
