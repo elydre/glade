@@ -5,10 +5,32 @@
 GLADE est un compilateur python vers c++ pour accéléré grandement la vitesse du python tout en gardant sa syntaxe.\
 fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](https://github.com/pf4-DEV/Color-Printer).
 
+
+
+# Compilation
+
 ## Syntaxe particulière
 - ***`#!`* ligne brute:** le texte de cette ligne a la suite de cette marque ne serra par interprété et serra laissé brut
 
-## Paramètres
+## Limitation
+
+Glade ne supporte que les versions python3:
+```py
+print("coucou") # bien
+print "coucou"  # mauvais
+```
+Il ne supporte pas le typage dynamique (Un variable int doit rester int par exemple):
+```py
+a = 1
+a = 4          # bien
+a = "texte"    # mauvais
+```
+Il ne supporte pas les librairies python:
+```py
+import math    # mauvais
+```
+
+# Paramètres
 les paramètres sont éditable depuis le fichier ***system/settings.txt***<br>
 les valeur entre parenthèse a la fin de chaque description correspond au valeur par défaut.
 
@@ -20,6 +42,7 @@ les valeur entre parenthèse a la fin de chaque description correspond au valeur
 - **auto include**: *True* pour les include automatiques *False* pour désactiver. (*True*)
 - **int var type**: Type de variable pour les entier. *int* (8bit) pour un programme légé vers *long long int* (64bit) pour des variables gigantesques. [en savoir plus](https://fr.wikipedia.org/wiki/Types_de_donnée_du_langage_C)
 
+# Avancement du compilateur
 ## Élément pris en charge
 
 - importation *`include`*
@@ -36,6 +59,7 @@ les valeur entre parenthèse a la fin de chaque description correspond au valeur
 
 ## Éléments en développement
 
+- log
 - try
 - traitement des variables: *`True`* -> *`true`*
 - liste
@@ -45,5 +69,7 @@ les valeur entre parenthèse a la fin de chaque description correspond au valeur
 - interpretation une ligne:<br>
     *`print('non' if test = False else "oui")`*
 - traitement des operation: *`**`* -> *`pow()`*
+- module
 - str *?*
 - classe & programmation acces objet
+- typage dynamique
