@@ -8,7 +8,7 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 # Compilation
 
 ## Syntaxe particulière
-- ***`#!`* ligne brute:** le texte de cette ligne a la suite de cette marque ne serra par interprété et serra laissé brut
+- ***`#!`* ligne brute:** le texte à la suite de cette marque ne serra par interprété et serra laissé brut jusqu'a la fin de la ligne
 
 ## Limitation
 
