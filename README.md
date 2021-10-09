@@ -36,7 +36,9 @@ les valeur entre parenthèse a la fin de chaque description correspond au valeur
 
 - **todo**: fichier compilé par défaut *None* pour auqun ou nom du fichier. (*t.py*)
 - **space in tabs**: nombre d'espace dans une tablature. (*4*)
-- **debug print**: *True* pour les print de debug *False* pour désactiver. (*True*)
+- **debug print**: *True* pour les print de debug *False* pour désactiver. (*False*)
+- **make log**: *True* pour les logs automatiques *False* pour désactiver. (*True*)
+- **loop compil**: *True* pour les compiler en boucle *False* pour désactiver. (*False*)
 - **auto main**: *True* pour la création de la fonction main automatique *False* pour désactiver. (*True*)
 - **init var**: *True* pour l'initialisation des variables *False* pour désactiver. (*True*)
 - **auto include**: *True* pour les include automatiques *False* pour désactiver. (*True*)
@@ -59,7 +61,6 @@ les valeur entre parenthèse a la fin de chaque description correspond au valeur
 
 ## Éléments en développement
 
-- log
 - try
 - traitement des variables: *`True`* -> *`true`*
 - liste

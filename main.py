@@ -11,7 +11,7 @@
  - codé en : UTF-8
  - langage : python 3
  - GitHub  : github.com/pf4-DEV/glade
- - v       : 0.2.8
+ - v       : 0.2.9
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -47,6 +47,8 @@ class init:
         auto_main = True
         init_var = True
         auto_include = True
+        make_log = True
+        loop_compil = True
         space_in_tabs = 4
         int_var_type = "long int"
 
@@ -68,9 +70,14 @@ class init:
                         int_var_type = atr
 
                     elif var == "debug print":
-                        if atr == "False" or atr == "false": auto_main = False
-                        elif atr == "True" or atr == "true": auto_main = True
-                        else: psys.war("valleur non bool pour auto main (True par defaut)\n      ici -> " + str(atr))
+                        if atr == "False" or atr == "false": debug_print = False
+                        elif atr == "True" or atr == "true": debug_print = True
+                        else: psys.war("valleur non bool pour debug print (False par defaut)\n      ici -> " + str(atr))
+
+                    elif var == "make log":
+                        if atr == "False" or atr == "false": make_log = False
+                        elif atr == "True" or atr == "true": make_log = True
+                        else: psys.war("valleur non bool pour make log (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "init var":
                         if atr == "False" or atr == "false": init_var = False
@@ -78,9 +85,14 @@ class init:
                         else: psys.war("valleur non bool pour init var (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "auto main":
-                        if atr == "False" or atr == "false": debug_print = False
-                        elif atr == "True" or atr == "true": debug_print = True
-                        else: psys.war("valleur non bool pour debug print (True par defaut)\n      ici -> " + str(atr))
+                        if atr == "False" or atr == "false": auto_main = False
+                        elif atr == "True" or atr == "true": auto_main = True
+                        else: psys.war("valleur non bool pour auto main (True par defaut)\n      ici -> " + str(atr))
+
+                    elif var == "loop compil":
+                        if atr == "False" or atr == "false": loop_compil = False
+                        elif atr == "True" or atr == "true": loop_compil = True
+                        else: psys.war("valleur non bool pour loop compil (False par defaut)\n      ici -> " + str(atr))
 
                     elif var == "auto include":
                         if atr == "False" or atr == "false": auto_include = False
@@ -89,7 +101,7 @@ class init:
                     
                     elif var == "space in tabs":
                         try: space_in_tabs = int(atr)
-                        except: psys.war("valleur non int pour debug print (4 par defaut)\n      ici -> " + str(atr))
+                        except: psys.war("valleur non int pour space in tabs (4 par defaut)\n      ici -> " + str(atr))
                     
                     else:
                         para_edit -= 1
@@ -104,10 +116,12 @@ class init:
         self.init_var = init_var
         self.auto_include = auto_include
         self.int_var_type = int_var_type
+        self.make_log = make_log
+        self.loop_compil = loop_compil
 
 class inter:
     def lsprog(defaut):
-        cprint.colorprint("\nWhich program to convert: ",color=cprint.Colors.blanc)
+        cprint.colorprint("\nQuel programme voulez vous compiler: ",color=cprint.Colors.blanc)
         ls_liste = cy.ls("/container")
         for element in ls_liste:
             ext = element.split(".")[len(element.split("."))-1]
@@ -117,6 +131,7 @@ class inter:
             elif ext == "gld": cprint.colorprint(element,color=cprint.Colors.vert)
             elif ext == "cpp": cprint.colorprint(element,color=cprint.Colors.magenta)
             else: cprint.colorprint(element,color=cprint.Colors.blanc)
+        print()
         if defaut == None or defaut == "":
             return(input("~} "))
         else:
@@ -132,9 +147,14 @@ class inter:
         while no_done:
             settings.todo = inter.lsprog(settings.todo)
             if cy.rfil_rela("/container",settings.todo) != None: no_done = False
-            else: psys.gen_err("non-existent or unreadable file")
+            else: psys.gen_err("fichier non existent oui illisible")
 
 class teyes:
+    
+    def add_to_include(element):
+            if not(element in to_include):
+                to_include.append(element)
+    
     def auto_main(liste):
         for ei in range(len(EYES)):
             e = EYES[ei]
@@ -150,14 +170,16 @@ class teyes:
                     if v[0] == "":
                         v[0] = "/main"
                 break
-                
+
     def auto_include():
-        for e in EYES:
-            if e[2] == "print":
+        for ti in to_include:
+            if ti == "print":
                 psys.app("importation de print automatique")
                 EYES.insert(1,['',0, "include", "<iostream>"])
-                EYES.insert(2,['',0, 'unknown', 'using namespace std'])
-                break
+            elif ti == "std":
+                EYES.insert(1,['',0, "using", "namespace std;"])
+            else:
+                psys.gen_err(f"element a auto importer inconnu, ici -> {ti}")
 
     def init_var():
         def varitype(var,cont):
@@ -174,6 +196,9 @@ class teyes:
                     except:
                         try: float(cont) ; typ = "float"
                         except: typ = settings.int_var_type
+            if typ == "string":
+                teyes.add_to_include("std")
+                teyes.add_to_include("print")
             return([var,typ])
 
         for iv in range(len(VAR)):
@@ -185,7 +210,7 @@ class teyes:
                     break
 
     def edit_l(l,nb,len_tot):
-        global ATOC, AFON, aim
+        global ATOC, AFON
         def tab_c(l):
             t = 0
             while l.startswith(" "*t): t += settings.space_in_tabs
@@ -205,9 +230,7 @@ class teyes:
             return(True if e in atr else False)
 
         l = str(l)
-
         TAB.append(tab_c(l))
-
         l = l.strip()
 
         if l != "" or nb == len_tot-1:
@@ -279,6 +302,8 @@ class teyes:
             cont = l.split("print(")[1]
             cont = del_end(cont,")")
             EYES.append([ATOC,TAB[nb],"print",cont])
+            teyes.add_to_include("std")
+            teyes.add_to_include("print")
 
         elif l.startswith("return("):
             cont = l.split("return(")[1]
@@ -320,36 +345,41 @@ class teyes:
         fichier = cy.rfil_rela("/container",settings.todo)
         ligues = fichier.split("\n")
         ligues.append("")
-        global EYES, TAB, VAR, ATOC, AFON, aim
+        global EYES, TAB, VAR, ATOC, AFON, to_include
         EYES = [] # liste de code token eyes
         VAR = []  # liste des variables
         TAB = []  # liste des TAB
         ATOC = ""
         AFON = ""
-        aim = False
+        to_include = []
+
 
         # interpretation
         for nb in range(len(ligues)):
             teyes.edit_l(ligues[nb],nb,len(ligues))
 
-        #auto-création du main
+        # auto-création du main
         if settings.auto_main:
-            teyes.auto_main(["comm","include","unknown","def","{","}"])
+            teyes.auto_main(["comm","include","using","def","{","}"])
 
-        #auto-création des variables
+        # auto-création des variables
         if settings.init_var:
             teyes.init_var()
         
         # auto-importation des modules
         if settings.auto_include:
             teyes.auto_include()
-
-        
     
         # print (dev)
-        if settings.debug_print:
-            for e in EYES:
+        log = ""
+        for e in EYES:
+            log += str(e) + "\n"
+            if settings.debug_print:
                 psys.dev(str(e))
+            if e[2] == "unknown":
+                psys.gen_err(f"ligne inconnu laissé brut ici -> {e[3]}")
+        if settings.make_log:
+            cy.cy_mkfil("/system","latest.log",log)
 
 class compiler:
     def edit_e(e):
@@ -398,6 +428,9 @@ class compiler:
         elif de == "include":
             EXIT.append(add_tab(tab) + "#include " + arg)
 
+        elif de == "using":
+            EXIT.append(add_tab(tab) + "using " + arg)
+
         elif de == "lnb":
             EXIT.append(add_tab(tab) + arg)
 
@@ -434,14 +467,16 @@ class maker:
         name = str(settings.todo.split(".")[len(settings.todo.split("."))-2]) + ".cpp"
         cy.mkfil("/container",name,"".join((l+"\n") for l in EXIT))
 
-psys.info("initialization")
+psys.info("initialisation")
 settings = init()
+inter.main()
 
 while True:
-    inter.main()
     psys.info("token eyes")
     teyes.main()
     psys.info("compilation")
     compiler.main()
-    psys.info("writing")
+    psys.info("écriture")
     maker.main()
+    psys.info("la compilation c'est deroulée avec succès")
+    if not settings.loop_compil: inter.main()
