@@ -11,7 +11,7 @@
  - codé en : UTF-8
  - langage : python 3
  - GitHub  : github.com/pf4-DEV/glade
- - v       : 0.2.9
+ - v       : 0.3.0
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -190,12 +190,14 @@ class teyes:
                 else: typ = "string"
             else:
                 if len(cont.split('"')) > 1 or len(cont.split("'")) > 1: typ = "string"
-                elif cont == "True" or cont == "False": typ = "bool"
+                elif cont == "true" or cont == "false": typ = "bool"
                 else:
                     try: int(cont) ; typ = settings.int_var_type
                     except:
                         try: float(cont) ; typ = "float"
-                        except: typ = settings.int_var_type
+                        except:
+                            typ = settings.int_var_type
+                            psys.war(f"type inconnu ici -> {cont}")
             if typ == "string":
                 teyes.add_to_include("std")
                 teyes.add_to_include("print")
@@ -232,6 +234,7 @@ class teyes:
         l = str(l)
         TAB.append(tab_c(l))
         l = l.strip()
+        l = (l.replace("True", "true")).replace("False","false")
 
         if l != "" or nb == len_tot-1:
             for loop in range(1,TAB[nb-1]-TAB[nb]+1):
@@ -377,7 +380,7 @@ class teyes:
             if settings.debug_print:
                 psys.dev(str(e))
             if e[2] == "unknown":
-                psys.gen_err(f"ligne inconnu laissé brut ici -> {e[3]}")
+                psys.war(f"ligne inconnu laissé brut ici -> {e[3]}")
         if settings.make_log:
             cy.cy_mkfil("/system","latest.log",log)
 

@@ -1,3 +1,5 @@
-t = 4
-for x in range(t):
-    print(t+x)
+test = input()
+if test == "coucou":
+    print("input == coucou")
+else:
+    print("input != coucou")
