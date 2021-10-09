@@ -1,7 +1,7 @@
 todo          = t.py
 space in tabs = 4
 int var type  = long int
-loop compil   = False
+loop compil   = True
 
 debug print   = False
 auto main     = True

@@ -3,6 +3,10 @@
 using namespace std;
 int main()
 {
-    string a;  // auto var
-    a = "cc";
+    long int t;  // auto var
+    t = 4;
+    for (long int x = 0; x < t; x = x + 1)
+    {
+        cout << t+x << endl;
+    }
 }
