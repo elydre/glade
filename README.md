@@ -14,12 +14,12 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 
 ## Limitation
 
-Glade ne supporte que les versions python3:
+Glade ne supporte que python3:
 ```py
 print("coucou") # bien
 print "coucou"  # mauvais
 ```
-Il ne supporte pas le typage dynamique (Un variable int doit rester int par exemple):
+Il ne supporte pas le typage dynamique (une variable int doit rester int par exemple):
 ```py
 a = 1
 a = 4          # bien
@@ -74,3 +74,8 @@ les valeur entre parenthèse a la fin de chaque description correspond au valeur
 - str *?*
 - classe & programmation acces objet
 - typage dynamique
+
+# auteur
+
+- pf4 ([@pf4-DEV](https://github.com/pf4-DEV))
+- Loris ([@Lorisredstone](https://github.com/Lorisredstone))
