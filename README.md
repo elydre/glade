@@ -29,7 +29,7 @@ import math    # mauvais
 ```
 
 # Paramètres
-les paramètres sont éditables depuis le fichier ***system/settings.txt***\
+Les paramètres sont éditables depuis le fichier ***system/settings.txt***\
 les valeurs entre parenthèse à la fin de chaque description correspond au valeur par défaut.
 
 - **todo**: fichier compilé par défaut *None* pour auqun ou nom du fichier. (*t.py*)
