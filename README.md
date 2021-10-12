@@ -67,6 +67,7 @@ les valeurs entre parenthèse à la fin de chaque description correspond au vale
 
 ## Éléments a venir
 
+- lambda
 - interpretation une ligne:<br>
     *`print('non' if test = False else "oui")`*
 - module
