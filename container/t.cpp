@@ -3,15 +3,8 @@
 using namespace std;
 int main()
 {
-    string test;  // auto var
-    cin >> test;
-    cin.ignore();
-    if (test == "coucou")
+    for (long int x = 1; x < 11; x = x + 1)
     {
-        cout << "input == coucou" << endl;
-    }
-    else
-    {
-        cout << "input != coucou" << endl;
+        cout << x << endl;
     }
 }

@@ -1,5 +1,2 @@
-test = input()
-if test == "coucou":
-    print("input == coucou")
-else:
-    print("input != coucou")
+for x in range(1,11):
+    print(x)
