@@ -9,7 +9,7 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 
 ## Syntaxe particulière
 ### *`#1!`* ligne blanche:
-le texte après cette marque ne serra pas interprété comme un commentaire par python mais normalement par glade\
+le texte après cette marque ne serra pas interprété comme un commentaire par python mais normalement par glade
 ```py
 #1! if i%2 != 0:
 ->
