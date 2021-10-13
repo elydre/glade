@@ -8,21 +8,21 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 # Compilation
 
 ## Syntaxe particulière
-### *`#1!`* ligne blanche:
+#### *`#1!`* ligne blanche:
 le texte après cette marque ne serra pas interprété comme un commentaire par python mais normalement par glade
 ```py
 #1! if i%2 != 0:
 ->
 if (i%2 != 0)
 ```
-### *`#2!`* ligne noire:
+#### *`#2!`* ligne noire:
 le texte avant de cette marque ne serra par interprété et apparaîtra pas dans le fichier sortie
 ```py
 max = int(i ** 0.5 + 1) #2!
 ->
 
 ```
-### *`#3!`* ligne brute:
+#### *`#3!`* ligne brute:
 le texte après cette marque ne serra par interprété et serra laissé brut jusqu'a la fin de la ligne
 ```py
 #3! int myints[] = {16,2,77,29};
