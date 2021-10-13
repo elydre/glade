@@ -10,31 +10,22 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 ## Syntaxe particulière
 ### ***`#1!`* ligne blanche:**
 le texte après cette marque ne serra pas interprété comme un commentaire par python mais normalement par glade\
-*py:*
 ```py
 #1! if i%2 != 0:
-```
-*cpp:*
-```cpp
+->
 if (i%2 != 0)
 ```
 ### ***`#2!`* ligne noire:**
 le texte avant de cette marque ne serra par interprété et apparaîtra pas dans le fichier sortie
-*py:*
 ```py
 max = int(i ** 0.5 + 1) #2!
-```
-*cpp:*
-```cpp
- 
+->
+
 ```
 ### ***`#3!`* ligne brute:** le texte après cette marque ne serra par interprété et serra laissé brut jusqu'a la fin de la ligne
-*py:*
 ```py
 #3! int myints[] = {16,2,77,29};
-```
-*cpp:*
-```cpp
+->
 int myints[] = {16,2,77,29};
 ```
 ## Limitation
