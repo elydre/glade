@@ -18,7 +18,7 @@ import system.mod.cytron as cy
 import system.mod.ColorPrint as cprint
 from time import time
 
-version = "0.3.3b"
+version = "0.3.3c"
 
 class psys:
     def timer(debut):
@@ -209,6 +209,7 @@ class teyes:
             if typ == "string":
                 teyes.add_to_include("std")
                 teyes.add_to_include("print")
+            if settings.debug_print: psys.dev(f"création de variable automatique: '{var}' de type '{typ}'")
             return([var,typ])
 
         for iv in range(len(VAR)):
@@ -302,22 +303,28 @@ class teyes:
             AFON = "/" + cont.split("(")[0]
 
         elif l.startswith("for "):
-            cont = l.split("for ")[1]
-            cont = del_end(cont,"):")
-            var_name = cont.split(" in range(")[0]
-            arg = cont.split(" in range(")[1].split(",")
-            pas , min , max = "1", "0", "0"
-            if len(arg) == 1:
-                max = arg[0]
-            elif len(arg) >= 2:
-                min = arg[0]
-                max = arg[1]
-            elif len(arg) == 3:
-                pas = arg[2]
+            if "in range" in l:
+                cont = l.split("for ")[1]
+                cont = del_end(cont,"):")
+                var_name = cont.split(" in range(")[0]
+                arg = cont.split(" in range(")[1].split(",")
+                pas , min , max = "1", "0", "0"
+                if len(arg) == 1:
+                    max = arg[0]
+                elif len(arg) >= 2:
+                    min = arg[0]
+                    max = arg[1]
+                elif len(arg) == 3:
+                    pas = arg[2]
 
-            EYES.append([ATOC,TAB[nb],"for",[var_name,min,max,pas]])
-            EYES.append([ATOC,TAB[nb],"{"])
-            ATOC += "/for"
+                EYES.append([ATOC,TAB[nb],"for",[var_name,min,max,pas]])
+                EYES.append([ATOC,TAB[nb],"{"])
+                ATOC += "/for"
+                
+            else:
+                psys.war(f"les boucle de liste ne sont pas implémenter ici -> {l}")
+                EYES.append([ATOC,TAB[nb],"comm",l])
+                EYES.append([ATOC,TAB[nb],"{"])
 
         elif l.startswith("print("):
             cont = l.split("print(")[1]

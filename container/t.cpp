@@ -3,12 +3,7 @@
 using namespace std;
 int main()
 {
-    try
-    {
-        cout << "bj" << endl;
-    }
-    catch(...)
-    {
-        cout << "cc" << endl;
-    }
+    long int a;  // auto var
+    a = 1;
+    cout << a << endl;
 }

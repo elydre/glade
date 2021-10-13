@@ -1,4 +1,2 @@
-try:
-    print("bj")
-except:
-    print("cc")
+a = 1
+print(a)
