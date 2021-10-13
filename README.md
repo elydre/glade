@@ -19,14 +19,14 @@ if (i%2 != 0)
 le texte avant de cette marque ne serra par interprété et apparaîtra pas dans le fichier sortie
 ```py
 max = int(i ** 0.5 + 1) #2!
-->
+-GLADE->
 
 ```
 #### *`#3!`* ligne brute:
 le texte après cette marque ne serra par interprété et serra laissé brut jusqu'a la fin de la ligne
 ```py
 #3! int myints[] = {16,2,77,29};
-->
+-GLADE->
 int myints[] = {16,2,77,29};
 ```
 ## Limitation
