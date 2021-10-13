@@ -11,7 +11,7 @@
  - codé en : UTF-8
  - langage : python 3
  - GitHub  : github.com/pf4-DEV/glade
- - v       : 0.3.1
+ - v       : 0.3.2
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -31,10 +31,6 @@ class psys:
 
     def dev(msg):
         cprint.colorprint("|dev| ",color=cprint.Colors.vert,end=False)
-        cprint.colorprint(msg,color=cprint.Colors.blanc)
-
-    def app(msg):
-        cprint.colorprint("|app| ",color=cprint.Colors.jaune,end=False)
         cprint.colorprint(msg,color=cprint.Colors.blanc)
 
     def gen_err(msg):
@@ -132,10 +128,8 @@ class inter:
         for element in ls_liste:
             ext = element.split(".")[len(element.split("."))-1]
             cprint.colorprint(" ",color=cprint.Colors.none,end=False)
-            if ext == "py": cprint.colorprint(element,color=cprint.Colors.bleu)
-            elif ext == "txt": cprint.colorprint(element,color=cprint.Colors.jaune)
-            elif ext == "gld": cprint.colorprint(element,color=cprint.Colors.vert)
-            elif ext == "cpp": cprint.colorprint(element,color=cprint.Colors.magenta)
+            if ext == "py": cprint.colorprint(element,color=cprint.Colors.jaune)
+            elif ext == "cpp": cprint.colorprint(element,color=cprint.Colors.vert)
             else: cprint.colorprint(element,color=cprint.Colors.blanc)
         print()
         if defaut == None or defaut == "":
@@ -165,6 +159,7 @@ class teyes:
         for ei in range(len(EYES)):
             e = EYES[ei]
             if e[1] == 0 and not(e[2] in liste):
+                if settings.debug_print: psys.dev("création de la fonction main automatique")
                 EYES.insert(ei,['', 0, 'def', 'main()'])
                 EYES.insert(ei+1,['', 0, '{'])
                 for ei2 in range(ei+2,len(EYES)):
@@ -180,9 +175,10 @@ class teyes:
     def auto_include():
         for ti in to_include:
             if ti == "print":
-                psys.app("importation de print automatique")
+                if settings.debug_print: psys.dev("importation de print automatique")
                 EYES.insert(1,['',0, "include", "<iostream>"])
             elif ti == "std":
+                if settings.debug_print: psys.dev("namespace std automatique")
                 EYES.insert(1,['',0, "using", "namespace std;"])
             else:
                 psys.gen_err(f"element a auto importer inconnu, ici -> {ti}")
@@ -390,8 +386,6 @@ class teyes:
         log = ""
         for e in EYES:
             log += str(e) + "\n"
-            if settings.debug_print:
-                psys.dev(str(e))
             if e[2] == "unknown":
                 psys.war(f"ligne inconnu laissé brut ici -> {e[3]}")
         if settings.make_log:
