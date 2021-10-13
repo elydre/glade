@@ -12,7 +12,7 @@ fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](http
 le texte après cette marque ne serra pas interprété comme un commentaire par python mais normalement par glade
 ```py
 #1! if i%2 != 0:
-->
+-GLADE->
 if (i%2 != 0)
 ```
 #### *`#2!`* ligne noire:
