@@ -231,14 +231,8 @@ class teyes:
             cont , to_del = str(cont) , str(to_del)
             return(cont.split(to_del)[len(cont.split(to_del))-2])
 
-        def contient(var,cont):
-            cont, var = str(cont), str(var)
-            return(len(var.split(cont))-1)
-
         def iic(liste, e, p):
-            atr = []
-            for v in liste: atr.append(v[p])
-            return(True if e in atr else False)
+            return(True if e in [v[p] for v in liste] else False)
 
         l = str(l)
         TAB.append(tab_c(l))
@@ -251,8 +245,7 @@ class teyes:
                 for a in range(len(ATOC.split("/"))-1):
                     if a != 0: temp += "/" + ATOC.split("/")[a]
                 ATOC = temp
-                if not(ATOC.startswith(AFON)):
-                    AFON = ""
+                if not(ATOC.startswith(AFON)): AFON = ""
                 EYES.append([ATOC,TAB[nb-1]-1*loop,"}"])
 
         if nb == 0:
@@ -357,7 +350,7 @@ class teyes:
             else:
                 EYES.append([ATOC,TAB[nb],"comm",lb])
 
-        elif contient(l,"=") == 1:
+        elif "=" in l:
             nom = l.split("=")[0].strip()
             cont = l.split("=")[1].strip()
             if "input(" in cont:
