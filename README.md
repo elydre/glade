@@ -48,7 +48,7 @@ le texte après cette marque ne serra par interprété et serra laissé brut jus
 int myints[] = {16,2,77,29};
 ```
 
-# Paramètres
+## Paramètres
 Les paramètres sont éditables depuis le fichier ***system/settings.txt***\
 les valeurs entre parenthèse à la fin de chaque description correspond au valeur par défaut.
 
@@ -61,6 +61,11 @@ les valeurs entre parenthèse à la fin de chaque description correspond au vale
 - **init var**: *True* pour l'initialisation des variables *False* pour désactiver. (*True*)
 - **auto include**: *True* pour les include automatiques *False* pour désactiver. (*True*)
 - **int var type**: Type de variable pour les entier. *int* (8bit) pour un programme légé vers *long long int* (64bit) pour des variables gigantesques. [en savoir plus](https://fr.wikipedia.org/wiki/Types_de_donnée_du_langage_C)
+
+## Commandes
+
+Les commandes sont accessible dans la console de glade en tapent !{*commande*}. Les commandes disponibles sont les suivantes:
+- **r**: recharge les paramètres
 
 # Avancement du compilateur
 ## Éléments pris en charge
@@ -78,10 +83,10 @@ les valeurs entre parenthèse à la fin de chaque description correspond au vale
 - input avec type de variable auto
 - traitement des variables: *`True`* -> *`true`*
 - str
+- try
 
 ## Éléments en développement
 
-- try
 - liste
 - traitement des operation: *`**`* -> *`pow()`*
 

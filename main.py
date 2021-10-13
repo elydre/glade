@@ -11,7 +11,7 @@
  - codé en : UTF-8
  - langage : python 3
  - GitHub  : github.com/pf4-DEV/glade
- - v       : 0.3.2
+ - v       : 0.3.3
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -143,11 +143,19 @@ class inter:
              
 
     def main():
+        global settings
         no_done = True
         while no_done:
-            settings.todo = inter.lsprog(settings.todo)
-            if cy.rfil_rela("/container",settings.todo) != None: no_done = False
             else: psys.gen_err("fichier non existent oui illisible")
+            inp = inter.lsprog(settings.todo)
+            if not(inp.startswith("!")):
+                settings.todo = inp
+                if cy.rfil_rela("/container",settings.todo) != None: no_done = False
+                else: psys.gen_err("fichier non existent ou illisible")
+            else:
+                if inp == "!r":
+                    settings = init()
+                    psys.info("paramètres rechargé")
 
 class teyes:
     
@@ -325,6 +333,17 @@ class teyes:
             cont = del_end(cont,")")
             EYES.append([ATOC,TAB[nb],"return",cont])
 
+        elif l.startswith("try:"):
+            EYES.append([ATOC,TAB[nb],"try"])
+            EYES.append([ATOC,TAB[nb],"{"])
+
+        elif l.startswith("except"):
+            EYES.append([ATOC,TAB[nb],"except"])
+            EYES.append([ATOC,TAB[nb],"{"])
+        
+        elif l.startswith("pass"):
+            EYES.append([ATOC,TAB[nb],"pass"])
+
         elif l.startswith("#"):
             lb = l.replace("#", "")
             if lb.startswith("include "):
@@ -337,6 +356,8 @@ class teyes:
             nom = l.split("=")[0].strip()
             cont = l.split("=")[1].strip()
             if "input(" in cont:
+                teyes.add_to_include("std")
+                teyes.add_to_include("print")
                 txt = cont.split("input(")[1].split(")")[0]
                 if txt.strip() != "":
                     EYES.append([ATOC,TAB[nb],"print end",txt])
@@ -440,6 +461,15 @@ class compiler:
 
         elif de == "using":
             EXIT.append(add_tab(tab) + "using " + arg)
+
+        elif de == "try":
+            EXIT.append(add_tab(tab) + "try")
+
+        elif de == "pass":
+            EXIT.append(add_tab(tab) + ";")
+
+        elif de == "except":
+            EXIT.append(add_tab(tab) + "catch(...)")
 
         elif de == "lnb":
             EXIT.append(add_tab(tab) + arg)

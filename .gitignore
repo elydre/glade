@@ -2,3 +2,4 @@ system/mod/__pycache__/cytron.cpython-39.pyc
 system/mod/__pycache__/ColorPrint.cpython-39.pyc
 *.out
 .vscode/settings.json
+system/latest.log
