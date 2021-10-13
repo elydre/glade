@@ -8,7 +8,6 @@ int main()
     cout << "runing" << endl;
     for (long int i = 0; i < 4000; i = i + 1)
     {
-        // max = int(i ** 0.5 + 1)
         max = pow(i,0.5) + 1;
         if (i%2 != 0)
         {

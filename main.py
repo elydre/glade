@@ -11,14 +11,20 @@
  - codé en : UTF-8
  - langage : python 3
  - GitHub  : github.com/pf4-DEV/glade
- - v       : 0.3.0
+ - v       : 0.3.1
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
 import system.mod.cytron as cy
 import system.mod.ColorPrint as cprint
+from time import time
+
 
 class psys:
+
+    def timer(debut):
+        return(round((time() - debut)*1000,1))
+
     def info(msg):
         cprint.colorprint("|sys| ",color=cprint.Colors.cyan,end=False)
         cprint.colorprint(msg,color=cprint.Colors.blanc)
@@ -249,7 +255,17 @@ class teyes:
         if nb == 0:
             EYES.append([ATOC,TAB[nb],"comm","interpreted and compiled by GLADE"])
 
-        if l.startswith("if "):
+        while l.startswith("#1!"):
+            l = l.split("#1!")[1].strip()
+
+        if l.endswith("#2!"):
+            pass #ligne non interprétée
+
+        elif l.startswith("#3!"):
+            cont = l.split("#3!")[1].strip()
+            EYES.append([ATOC,TAB[nb],"lnb",cont])
+
+        elif l.startswith("if "):
             cont = l.split("if ")[1]
             cont = del_end(cont,":")
             EYES.append([ATOC,TAB[nb],"if",cont])
@@ -318,9 +334,6 @@ class teyes:
             if lb.startswith("include "):
                 cont = lb.split("include ")[1]
                 EYES.append([ATOC,TAB[nb],"include",cont])
-            elif lb.startswith("!"):
-                cont = lb.split("!")[1].strip()
-                EYES.append([ATOC,TAB[nb],"lnb",cont])
             else:
                 EYES.append([ATOC,TAB[nb],"comm",lb])
 
@@ -475,11 +488,13 @@ settings = init()
 inter.main()
 
 while True:
-    psys.info("token eyes")
+    debut = time()
     teyes.main()
-    psys.info("compilation")
+    psys.info(f"fin du token eyes ({psys.timer(debut)}ms)")
+    debut = time()
     compiler.main()
-    psys.info("écriture")
+    psys.info(f"fin de la compilation ({psys.timer(debut)}ms)")
+    debut = time()
     maker.main()
-    psys.info("la compilation c'est deroulée avec succès")
+    psys.info(f"fin de l'écriture ({psys.timer(debut)}ms)")
     if not settings.loop_compil: inter.main()
