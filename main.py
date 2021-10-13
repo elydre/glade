@@ -11,7 +11,6 @@
  - codé en : UTF-8
  - langage : python 3
  - GitHub  : github.com/pf4-DEV/glade
- - v       : 0.3.3
 --|~|--|~|--|~|--|~|--|~|--|~|--
 '''
 
@@ -19,9 +18,9 @@ import system.mod.cytron as cy
 import system.mod.ColorPrint as cprint
 from time import time
 
+version = "0.3.3b"
 
 class psys:
-
     def timer(debut):
         return(round((time() - debut)*1000,1))
 
@@ -128,10 +127,10 @@ class inter:
         for element in ls_liste:
             ext = element.split(".")[len(element.split("."))-1]
             cprint.colorprint(" ",color=cprint.Colors.none,end=False)
-            if ext == "py": cprint.colorprint(element,color=cprint.Colors.jaune)
-            elif ext == "cpp": cprint.colorprint(element,color=cprint.Colors.vert)
-            else: cprint.colorprint(element,color=cprint.Colors.blanc)
-        print()
+            if ext == "py": cprint.colorprint(element,color=cprint.Colors.jaune,end=False)
+            elif ext == "cpp": cprint.colorprint(element,color=cprint.Colors.vert,end=False)
+            else: cprint.colorprint(element,color=cprint.Colors.blanc,end=False)
+        print("\n")
         if defaut == None or defaut == "":
             return(input("~} "))
         else:
@@ -506,6 +505,8 @@ class maker:
         name = str(settings.todo.split(".")[len(settings.todo.split("."))-2]) + ".cpp"
         cy.mkfil("/container",name,"".join((l+"\n") for l in EXIT))
 
+cy.clear()
+print(f"GLADE cli v{version}\nCopyright (C) pf4. Tous droits réservés.\n")
 psys.info("initialisation")
 settings = init()
 inter.main()

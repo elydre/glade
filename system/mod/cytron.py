@@ -8,7 +8,7 @@
 ██             ██       █████████
 ██             ██             ██
                ██
-.avec    : Lolo11
+.avec    : loris_redstone
 .codé en : UTF-8
 .langage : python 3
 .github  : https://github.com/pf4-DEV/cytron
@@ -23,7 +23,7 @@ from _thread import start_new_thread
 ### definition des variables
 global path_v, version, console_o
 
-version_id = "cytron 13"
+version_id = "cytron 13b"
 
 console_o = False
 path_v = os.path.dirname(sys.argv[0])
@@ -39,6 +39,9 @@ def check_internet(site="https://google.com"):
 def console():
     if console_o == False:
         start_new_thread(console_to_thread,())
+
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def ls(chem):
     return(os.listdir(path_v + chem))
@@ -101,7 +104,7 @@ def console_to_thread():
     while True:
         ipt = input('~} ').split(" ")
         retour = run(ipt)
-        if retour == None: os.system('cls' if os.name == 'nt' else 'clear')
+        if retour == None: clear()
         elif retour == "exit": console_o = False ; break
         else: print(retour)
 
