@@ -146,7 +146,6 @@ class inter:
         global settings
         no_done = True
         while no_done:
-            else: psys.gen_err("fichier non existent oui illisible")
             inp = inter.lsprog(settings.todo)
             if not(inp.startswith("!")):
                 settings.todo = inp
