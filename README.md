@@ -20,7 +20,7 @@ le texte avant de cette marque ne serra par interprété et apparaîtra pas dans
 ```py
 max = int(i ** 0.5 + 1) #2!
 -GLADE->
-
+    
 ```
 #### *`#3!`* ligne brute:
 le texte après cette marque ne serra par interprété et serra laissé brut jusqu'a la fin de la ligne
