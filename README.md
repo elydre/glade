@@ -82,8 +82,9 @@ Les commandes sont accessible dans la console de glade en tapent !{*commande*}. 
 - auto main
 - input avec type de variable auto
 - traitement des variables: *`True`* -> *`true`*
-- str
-- try
+- gestion des str
+- try / except
+- pass
 
 ## Éléments en développement
 
