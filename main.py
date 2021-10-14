@@ -18,7 +18,7 @@ import system.mod.cytron as cy
 import system.mod.ColorPrint as cprint
 from time import time
 
-version = "0.3.3c"
+version = "0.3.3d"
 
 class psys:
     def timer(debut):
@@ -122,13 +122,13 @@ class init:
 
 class inter:
     def lsprog(defaut):
-        cprint.colorprint("\nQuel programme voulez vous compiler: ",color=cprint.Colors.blanc)
+        cprint.colorprint("\nprogramme dans le dossier '/container'",color=cprint.Colors.blanc)
         ls_liste = cy.ls("/container")
         for element in ls_liste:
-            ext = element.split(".")[len(element.split("."))-1]
+            ext = element.split(".")[-1]
             cprint.colorprint(" ",color=cprint.Colors.none,end=False)
-            if ext == "py": cprint.colorprint(element,color=cprint.Colors.jaune,end=False)
-            elif ext == "cpp": cprint.colorprint(element,color=cprint.Colors.vert,end=False)
+            if ext == "py": cprint.colorprint(element,color=cprint.Colors.jaune,end=False,ligne=True)
+            elif ext == "cpp": cprint.colorprint(element,color=cprint.Colors.magenta,ligne=True,end=False)
             else: cprint.colorprint(element,color=cprint.Colors.blanc,end=False)
         print("\n")
         if defaut == None or defaut == "":
@@ -154,6 +154,11 @@ class inter:
                 if inp == "!r":
                     settings = init()
                     psys.info("paramètres rechargé")
+
+                elif inp == "!c":
+                    cy.clear()
+
+                else: psys.gen_err("commande existente")
 
 class teyes:
     
