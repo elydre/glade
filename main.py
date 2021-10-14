@@ -18,7 +18,7 @@ import system.mod.cytron as cy
 import system.mod.ColorPrint as cprint
 from time import time
 
-version = "0.3.4"
+version = "0.3.5"
 
 class psys:
     def timer(debut):
@@ -309,10 +309,10 @@ class teyes:
                 pas , min , max = "1", "0", "0"
                 if len(arg) == 1:
                     max = arg[0]
-                elif len(arg) >= 2:
+                if len(arg) >= 2:
                     min = arg[0]
                     max = arg[1]
-                elif len(arg) == 3:
+                if len(arg) == 3:
                     pas = arg[2]
 
                 EYES.append([ATOC,TAB[nb],"for",[var_name,min,max,pas]])

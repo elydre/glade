@@ -1,4 +1,4 @@
 a = "cc"
-for x in range(0,10):
+for x in range(4,10):
     print(a)
     print(x)

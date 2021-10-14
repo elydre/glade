@@ -74,7 +74,7 @@ Les commandes sont accessible dans la console de glade en tapent !{*commande*}. 
 - *`print()`*
 - fonction
 - *`return()`*
-- boucle *`while`* / *`for`*
+- boucle *`while`* / *`for`* + break
 - *`if`* / *`elif`* / *`else`*
 - commentaires *(de # à //)*
 - code brut
