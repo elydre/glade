@@ -3,7 +3,11 @@
 using namespace std;
 int main()
 {
-    long int a;  // auto var
-    a = 1;
-    cout << a << endl;
+    string a;  // auto var
+    a = "cc";
+    for (long int x = 0; x < 10; x = x + 1)
+    {
+        cout << a << endl;
+        cout << x << endl;
+    }
 }

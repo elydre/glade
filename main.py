@@ -18,7 +18,7 @@ import system.mod.cytron as cy
 import system.mod.ColorPrint as cprint
 from time import time
 
-version = "0.3.3d"
+version = "0.3.4"
 
 class psys:
     def timer(debut):
@@ -347,6 +347,9 @@ class teyes:
         elif l.startswith("pass"):
             EYES.append([ATOC,TAB[nb],"pass"])
 
+        elif l.startswith("break"):
+            EYES.append([ATOC,TAB[nb],"break"])
+
         elif l.startswith("#"):
             lb = l.replace("#", "")
             if lb.startswith("include "):
@@ -470,6 +473,9 @@ class compiler:
 
         elif de == "pass":
             EXIT.append(add_tab(tab) + ";")
+
+        elif de == "break":
+            EXIT.append(add_tab(tab) + "break;")
 
         elif de == "except":
             EXIT.append(add_tab(tab) + "catch(...)")
