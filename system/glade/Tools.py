@@ -159,6 +159,12 @@ def log(EYES, settings):
     if settings.make_log:
         cy.cy_mkfil("/system","latest.log",log)
 
+# maker
+
+def maker(settings,EXIT):
+    name = str(settings.todo.split(".")[len(settings.todo.split("."))-2]) + ".cpp"
+    cy.mkfil("/container",name,"".join((l+"\n") for l in EXIT))
+
 # édition de ligne
 
 def del_end(cont,to_del):
