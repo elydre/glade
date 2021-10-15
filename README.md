@@ -95,7 +95,7 @@ Les commandes sont accessible dans la console de glade en tapent !{*commande*}. 
 ## Éléments a venir
 
 - lambda
-- interpretation une ligne:<br>
+- interpretation une ligne:\
     *`print('non' if test = False else "oui")`*
 - module
 - classe & programmation acces objet
