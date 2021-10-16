@@ -27,21 +27,21 @@ import math    # mauvais
 
 ## Syntaxe particulière
 #### *`#1!`* ligne blanche:
-le texte après cette marque serra interprété comme un commentaire par python mais normalement par glade
+Le texte après cette marque serra interprété comme un commentaire par python mais normalement par glade
 ```py
 #1! if i%2 != 0:
 -GLADE->
 if (i%2 != 0)
 ```
 #### *`#2!`* ligne noire:
-le texte avant de cette marque ne serra par interprété et n'apparaîtra pas dans le fichier sortie
+Le texte avant de cette marque ne serra par interprété et n'apparaîtra pas dans le fichier sortie
 ```py
 max = int(i ** 0.5 + 1) #2!
 -GLADE->
 
 ```
 #### *`#3!`* ligne brute:
-le texte après cette marque ne serra par interprété et serra laissé brut jusqu'a la fin de la ligne
+Le texte après cette marque ne serra par interprété et serra laissé brut
 ```py
 #3! int myints[] = {16,2,77,29};
 -GLADE->
