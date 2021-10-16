@@ -1,3 +1,3 @@
-a = "cc"
-for x in range(4,10):
-    print(a, x)
+print("coucou")
+print(4,89,'bj')
+print("slt",end=".")

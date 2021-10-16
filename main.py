@@ -18,7 +18,7 @@ import system.mod.Cytron as cy
 import system.glade.Tools as gt
 import system.glade.Compiler as gc
 
-version = "0.4.1"
+version = "0.4.2"
 
 def add_to_include(element):
         if not(element in to_include):
@@ -158,9 +158,16 @@ def edit_l(l,nb,len_tot):
             EYES.append([ATOC,TAB[nb],"{"])
 
     elif l.startswith("print("):
-        cont = l.split("print(")[1]
-        cont = gt.del_end(cont,")").replace(","," <<")
-        EYES.append([ATOC,TAB[nb],"print",cont])
+        cont = ""
+        end = "endl"
+        for e in gt.del_end(l.split("print(")[1],")").split(","):
+            e = e.strip()
+            if e.startswith("end=") or e.startswith("end ="):
+                end = e.split("=")[1].strip()
+            else:
+                cont += e + " << "
+
+        EYES.append([ATOC,TAB[nb],"print",[cont,end]])
         add_to_include("std")
         add_to_include("print")
 
@@ -199,7 +206,7 @@ def edit_l(l,nb,len_tot):
             add_to_include("print")
             txt = cont.split("input(")[1].split(")")[0]
             if txt.strip() != "":
-                EYES.append([ATOC,TAB[nb],"print end",txt])
+                EYES.append([ATOC,TAB[nb],"print",[txt,""]])
             EYES.append([ATOC,TAB[nb],"input",nom])
             EYES.append([ATOC,TAB[nb],"ignore input"])
             if cont.startswith("int("): cont = "#int"

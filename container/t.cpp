@@ -3,10 +3,7 @@
 using namespace std;
 int main()
 {
-    string a;  // auto var
-    a = "cc";
-    for (long int x = 4; x < 10; x = x + 1)
-    {
-        cout << a << x << endl;
-    }
+    cout << "coucou" << endl;
+    cout << 4 << 89 << 'bj' << endl;
+    cout << "slt" << ".";
 }

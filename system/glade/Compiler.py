@@ -34,11 +34,8 @@ def compiler(EYES,settings):
         elif de == "return":
             EXIT.append(add_tab(tab) + "return " + arg + ";")
 
-        elif de == "print end":
-            EXIT.append(add_tab(tab) + "cout << " + arg + ";" )
-
         elif de == "print":
-            EXIT.append(add_tab(tab) + "cout << " + arg + " << endl;" )
+            EXIT.append(add_tab(tab) + "cout << " + arg[0] + arg[1] + ";")
 
         elif de == "input":
             EXIT.append(add_tab(tab) + "cin >> " + arg + ";" )
