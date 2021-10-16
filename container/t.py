@@ -1,3 +1,3 @@
-print("coucou")
-print(4,89,'bj')
-print("slt",end=".")
+a = 1
+if a == 1:
+    print("1==1")

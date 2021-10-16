@@ -18,7 +18,7 @@ import system.mod.Cytron as cy
 import system.glade.Tools as gt
 import system.glade.Compiler as gc
 
-version = "0.4.2"
+version = "0.4.2b"
 
 def add_to_include(element):
         if not(element in to_include):
@@ -135,22 +135,25 @@ def edit_l(l,nb,len_tot):
 
     elif l.startswith("for "):
         if "in range" in l:
-            cont = l.split("for ")[1]
-            cont = gt.del_end(cont,"):")
-            var_name = cont.split(" in range(")[0]
-            arg = cont.split(" in range(")[1].split(",")
-            pas , min , max = "1", "0", "0"
-            if len(arg) == 1:
-                max = arg[0]
-            if len(arg) >= 2:
-                min = arg[0]
-                max = arg[1]
-            if len(arg) == 3:
-                pas = arg[2]
+            try:
+                cont = l.split("for ")[1]
+                cont = gt.del_end(cont,"):")
+                var_name = cont.split(" in range(")[0]
+                arg = cont.split(" in range(")[1].split(",")
+                pas , min , max = "1", "0", "0"
+                if len(arg) == 1:
+                    max = arg[0]
+                if len(arg) >= 2:
+                    min = arg[0]
+                    max = arg[1]
+                if len(arg) == 3:
+                    pas = arg[2]
 
-            EYES.append([ATOC,TAB[nb],"for",[var_name,min,max,pas]])
-            EYES.append([ATOC,TAB[nb],"{"])
-            ATOC += "/for"
+                EYES.append([ATOC,TAB[nb],"for",[var_name,min,max,pas]])
+                EYES.append([ATOC,TAB[nb],"{"])
+                ATOC += "/for"
+            except:
+                gt.gen_err(f"boucle for non valide ici -> {l}")
             
         else:
             gt.war(f"les boucle de liste ne sont pas implémenter ici -> {l}")
@@ -223,6 +226,8 @@ def edit_l(l,nb,len_tot):
 def main():
     fichier = cy.rfil_rela("/container",settings.todo)
     ligues = fichier.split("\n")
+    while "" in ligues:
+        ligues.remove("")
     ligues.append("")
     global EYES, TAB, VAR, ATOC, AFON, to_include
     EYES = [] # liste de code token eyes

@@ -3,7 +3,10 @@
 using namespace std;
 int main()
 {
-    cout << "coucou" << endl;
-    cout << 4 << 89 << 'bj' << endl;
-    cout << "slt" << ".";
+    long int a;  // auto var
+    a = 1;
+    if (a == 1)
+    {
+        cout << "1==1" << endl;
+    }
 }
