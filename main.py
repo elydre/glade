@@ -18,7 +18,7 @@ import system.mod.Cytron as cy
 import system.glade.Tools as gt
 import system.glade.Compiler as gc
 
-version = "0.4.0b"
+version = "0.4.1"
 
 def add_to_include(element):
         if not(element in to_include):
@@ -72,7 +72,6 @@ def init_var():
 def edit_l(l,nb,len_tot):
     global ATOC, AFON
     
-
     l = str(l)
     TAB.append(gt.tab_c(settings.space_in_tabs,l))
     l = l.strip()
@@ -160,7 +159,7 @@ def edit_l(l,nb,len_tot):
 
     elif l.startswith("print("):
         cont = l.split("print(")[1]
-        cont = gt.del_end(cont,")")
+        cont = gt.del_end(cont,")").replace(","," <<")
         EYES.append([ATOC,TAB[nb],"print",cont])
         add_to_include("std")
         add_to_include("print")

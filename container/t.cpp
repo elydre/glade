@@ -7,7 +7,6 @@ int main()
     a = "cc";
     for (long int x = 4; x < 10; x = x + 1)
     {
-        cout << a << endl;
-        cout << x << endl;
+        cout << a << x << endl;
     }
 }

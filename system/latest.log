@@ -7,7 +7,6 @@
 ['/main', 1, 'vare', ['a', '"cc"']]
 ['/main', 1, 'for', ['x', '4', '10', '1']]
 ['/main', 1, '{']
-['/main/for', 2, 'print', 'a']
-['/main/for', 2, 'print', 'x']
+['/main/for', 2, 'print', 'a << x']
 ['/main', 1, '}']
 ['', 0, '}']
