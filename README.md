@@ -64,7 +64,7 @@ les valeurs entre parenthèse à la fin de chaque description correspond au vale
 
 ## Commandes
 
-Les commandes sont accessible dans la console de glade en tapent !{*commande*}. Les commandes disponibles sont les suivantes:
+Les commandes sont accessibles dans la console de glade en tapent !{*commande*}. Les commandes disponibles sont les suivantes:
 - **r**: recharge les paramètres
 - **c**: clear la console
 
