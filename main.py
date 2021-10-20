@@ -19,7 +19,7 @@ import system.glade.Tools as gt
 import system.glade.TEyes as te
 import system.glade.Compiler as gc
 
-version = "0.4.4"
+version = "0.4.5"
 
 cy.clear()
 print(f"GLADE cli v{version}\nCopyright (C) pf4. Tous droits réservés.\n")
@@ -28,7 +28,8 @@ settings = gt.request(gt.init())
 
 while True:
     debut = gt.tm()
-    EYES = te.main(fichier = cy.rfil_rela("/container",settings.todo),settings=settings)
+    EYES, MSG = te.main(fichier = cy.rfil_rela("/container",settings.todo),settings=settings)
+    gt.printlog(MSG)
     if settings.sys_print: gt.info(f"fin du token eyes ({gt.timer(debut)}ms)")
     debut = gt.tm()
     gt.maker(settings,gc.compiler(EYES,settings))

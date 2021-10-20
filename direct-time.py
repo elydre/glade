@@ -25,9 +25,11 @@ def py_actu():
     while "	" in temp: temp = temp.replace("	","    ")
     if temp != cont:
         cont = temp
+        sortie, msg = te.main(fichier = temp,settings=settings)
+        gt.printlog(msg)
         cpp.configure(state='normal')
         cpp.delete ("0.0", "end")
-        cpp.insert(0.0,"".join((l+"\n") for l in gc.compiler(te.main(fichier = temp,settings=settings),settings)))
+        cpp.insert(0.0,"".join((l+"\n") for l in gc.compiler(sortie,settings)))
         cpp.configure(state='disabled')
     py.after(250,py_actu)
 

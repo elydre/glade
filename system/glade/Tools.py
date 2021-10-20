@@ -147,13 +147,27 @@ def timer(debut):
 
 def log(EYES, settings):
     log = ""
+    sortie = []
     for e in EYES:
         log += str(e) + "\n"
         if e[2] == "unknown":
-            war(f"ligne inconnu laissé brut ici -> {e[3]}")
+            sortie.append(["war",f"ligne inconnu laissé brut ici -> {e[3]}"])
     if settings.make_log:
         cy.cy_mkfil("/system","latest.log",log)
+    return(sortie)
 
+def printlog(MSG):
+    for e in MSG:
+        if e[0] == "info":
+            info(e[1])
+        elif e[0] == "dev":
+            dev(e[1])
+        elif e[0] == "gen_err":
+            gen_err(e[1])
+        elif e[0] == "war":
+            war(e[1])
+        else:
+            war(f"printlog inconnu -> {e}")
 # maker
 
 def maker(settings,EXIT):
@@ -176,6 +190,7 @@ def tab_c(space_in_tabs,l):
 # analyser
 
 def varitype(var,cont,settings):
+    war = None
     if cont.startswith("#"):
         if cont == "#int": typ = settings.int_var_type
         elif cont == "#bool": typ = "bool"
@@ -190,7 +205,7 @@ def varitype(var,cont,settings):
                 try: float(cont) ; typ = "float"
                 except:
                     typ = settings.int_var_type
-                    war(f"type inconnu ici -> {cont}")
+                    war = ["war", f"type inconnu ici -> {cont}"]
     
     if settings.debug_print: dev(f"création de variable automatique: '{var}' de type '{typ}'")
-    return([var,typ])
+    return(war,[var,typ])

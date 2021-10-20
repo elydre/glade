@@ -8,7 +8,7 @@ def auto_main(settings,liste):
     for ei in range(len(EYES)):
         e = EYES[ei]
         if e[1] == 0 and not(e[2] in liste):
-            if settings.debug_print: gt.dev("création de la fonction main automatique")
+            if settings.debug_print: MSG.append(["dev","création de la fonction main automatique"])
             EYES.insert(ei,['', 0, 'def', 'main()'])
             EYES.insert(ei+1,['', 0, '{'])
             for ei2 in range(ei+2,len(EYES)):
@@ -24,17 +24,18 @@ def auto_main(settings,liste):
 def auto_include(settings):
     for ti in to_include:
         if ti == "print":
-            if settings.debug_print: gt.dev("importation de print automatique")
+            if settings.debug_print: MSG.append(["dev","importation de print automatique"])
             EYES.insert(1,['',0, "include", "<iostream>"])
         elif ti == "std":
-            if settings.debug_print: gt.dev("namespace std automatique")
+            if settings.debug_print: MSG.append(["dev","namespace std automatique"])
             EYES.insert(1,['',0, "using", "namespace std;"])
         else:
-            gt.gen_err(f"element a auto importer inconnu, ici -> {ti}")
+            MSG.append(["gen_err",f"element a auto importer inconnu, ici -> {ti}"])
 
 def init_var(settings):
     def varitype(var,cont):
-        vt = gt.varitype(var,cont,settings)
+        war, vt = gt.varitype(var,cont,settings)
+        if war != None: MSG.append(war)
         var, typ = vt[0], vt[1]
         if typ == "string":
             add_to_include("std")
@@ -133,10 +134,10 @@ def edit_l(settings,l,nb,len_tot):
                 EYES.append([ATOC,TAB[nb],"{"])
                 ATOC += "/for"
             except:
-                gt.gen_err(f"boucle for non valide ici -> {l}")
+                MSG.append(["gen_err",f"boucle for non valide ici -> {l}"])
             
         else:
-            gt.war(f"les boucle de liste ne sont pas implémenter ici -> {l}")
+            MSG.append(["war",f"les boucle de liste ne sont pas implémenter ici -> {l}"])
             EYES.append([ATOC,TAB[nb],"comm",l])
             EYES.append([ATOC,TAB[nb],"{"])
 
@@ -208,10 +209,11 @@ def main(settings,fichier):
     while "" in ligues:
         ligues.remove("")
     ligues.append("")
-    global EYES, TAB, VAR, ATOC, AFON, to_include
+    global EYES, TAB, VAR, ATOC, AFON, MSG, to_include
     EYES = [] # liste de code token eyes
     VAR = []  # liste des variables
     TAB = []  # liste des TAB
+    MSG = []  # msg a print
     ATOC = ""
     AFON = ""
     to_include = []
@@ -229,6 +231,6 @@ def main(settings,fichier):
     if settings.auto_include: auto_include(settings)
 
     # print & log
-    gt.log(EYES, settings)
+    MSG += gt.log(EYES, settings)
 
-    return(EYES)
+    return(EYES, MSG)
