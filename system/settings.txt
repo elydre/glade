@@ -3,6 +3,7 @@ space in tabs = 4
 int var type  = long int
 loop compil   = True
 
+sys print     = True
 debug print   = False
 auto main     = True
 init var      = True

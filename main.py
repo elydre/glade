@@ -18,7 +18,7 @@ import system.mod.Cytron as cy
 import system.glade.Tools as gt
 import system.glade.Compiler as gc
 
-version = "0.4.2b"
+version = "0.4.3"
 
 def add_to_include(element):
         if not(element in to_include):
@@ -262,8 +262,8 @@ settings = gt.request(gt.init())
 while True:
     debut = gt.tm()
     main()
-    gt.info(f"fin du token eyes ({gt.timer(debut)}ms)")
+    if settings.sys_print: gt.info(f"fin du token eyes ({gt.timer(debut)}ms)")
     debut = gt.tm()
     gt.maker(settings,gc.compiler(EYES,settings))
-    gt.info(f"fin de la compilation ({gt.timer(debut)}ms)")
+    if settings.sys_print: gt.info(f"fin de la compilation ({gt.timer(debut)}ms)")
     if not settings.loop_compil: settings = gt.request(settings)

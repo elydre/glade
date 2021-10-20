@@ -9,6 +9,7 @@ class init:
         # valleur par defaut
         todo = None
         debug_print = True
+        sys_print = True
         auto_main = True
         init_var = True
         auto_include = True
@@ -38,6 +39,11 @@ class init:
                         if atr == "False" or atr == "false": debug_print = False
                         elif atr == "True" or atr == "true": debug_print = True
                         else: war("valleur non bool pour debug print (False par defaut)\n      ici -> " + str(atr))
+
+                    elif var == "sys print":
+                        if atr == "False" or atr == "false": sys_print = False
+                        elif atr == "True" or atr == "true": sys_print = True
+                        else: war("valleur non bool pour debug print (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "make log":
                         if atr == "False" or atr == "false": make_log = False
@@ -83,6 +89,7 @@ class init:
         self.int_var_type = int_var_type
         self.make_log = make_log
         self.loop_compil = loop_compil
+        self.sys_print = sys_print
 
 # request
 
