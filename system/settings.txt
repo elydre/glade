@@ -1,11 +1,11 @@
-todo          = DirectTime.py
+todo          = t.py
 space in tabs = 4
 int var type  = long int
-loop compil   = True
+loop compil   = False
 
 sys print     = True
 debug print   = False
 auto main     = True
 init var      = True
 auto include  = True
-make log      = False
+make log      = True

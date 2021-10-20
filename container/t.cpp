@@ -7,6 +7,6 @@ int main()
     a = 1;
     if (a == 1)
     {
-        cout << "1==1" << endl;
+        cout << "cc" << endl;
     }
 }

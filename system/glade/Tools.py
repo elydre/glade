@@ -5,23 +5,11 @@ from time import time as tm
 # init
 
 class init:
-    def __init__(self):
-        # valleur par defaut
-        todo = None
-        debug_print = True
-        sys_print = True
-        auto_main = True
-        init_var = True
-        auto_include = True
-        make_log = True
-        loop_compil = True
-        space_in_tabs = 4
-        int_var_type = "long int"
-
+    def __init__(self, edit=True, todo = None, debug_print = True, sys_print = True, auto_main = True, init_var = True, auto_include = True, make_log = True, loop_compil = False, space_in_tabs = 4, int_var_type = "long int"):
         para_edit = 0
         #lecture du fichier de paramètres
         if cy.rfil_rela("/system","settings.txt") == None: war("fichier de paramètres non trouvé")
-        else:
+        elif edit:
             for p in cy.rfil_rela("/system","settings.txt").split("\n"):
                 if not(p.startswith("#")) and len(p.split("=")) > 1:
                     para_edit += 1
