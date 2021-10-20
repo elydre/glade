@@ -18,7 +18,26 @@ def dl(path,n,a):
 
 def done():
     mkdir(path,["/container","/system","/system/glade","/system/mod"])
-    dl(path,["/main.py","/system/glade/Compiler.py","/system/glade/Tools.py","/system/mod/Cytron.py","/system/mod/ColorPrint.py","/system/settings.txt","/container/t.py"],["https://raw.githubusercontent.com/pf4-DEV/glade/main/main.py","https://raw.githubusercontent.com/pf4-DEV/glade/main/system/glade/Compiler.py","https://raw.githubusercontent.com/pf4-DEV/glade/main/system/glade/Tools.py","https://raw.githubusercontent.com/pf4-DEV/cytron/main/cytron.py","https://raw.githubusercontent.com/pf4-DEV/Color-Printer/main/ColorPrint.py","https://raw.githubusercontent.com/pf4-DEV/glade/main/system/settings.txt","https://raw.githubusercontent.com/pf4-DEV/glade/main/container/t.py"])
+    dl(path,["/main.py",
+            "/system/glade/Compiler.py",
+            "/system/glade/Tools.py",
+            "/system/mod/Cytron.py",
+            "/system/mod/ColorPrint.py",
+            "/system/settings.txt",
+            "/container/t.py",
+            "/direct time.py",
+            "system/glade/TEyes.py"
+            ],[
+            "https://raw.githubusercontent.com/pf4-DEV/glade/main/main.py",
+            "https://raw.githubusercontent.com/pf4-DEV/glade/main/system/glade/Compiler.py",
+            "https://raw.githubusercontent.com/pf4-DEV/glade/main/system/glade/Tools.py",
+            "https://raw.githubusercontent.com/pf4-DEV/cytron/main/cytron.py",
+            "https://raw.githubusercontent.com/pf4-DEV/Color-Printer/main/ColorPrint.py",
+            "https://raw.githubusercontent.com/pf4-DEV/glade/main/system/settings.txt",
+            "https://raw.githubusercontent.com/pf4-DEV/glade/main/container/t.py",
+            "https://raw.githubusercontent.com/pf4-DEV/glade/main/direct%20time.py"
+            "https://raw.githubusercontent.com/pf4-DEV/glade/main/system/glade/TEyes.py"
+            ])
 
 try:
     urlopen("https://google.com")
