@@ -163,9 +163,9 @@ def printlog(MSG):
         elif e[0] == "dev":
             dev(e[1])
         elif e[0] == "gen_err":
-            gen_err(e[1])
+            gen_err(f"l.{e[2]}: {e[1]}")
         elif e[0] == "war":
-            war(e[1])
+            war(f"l.{e[2]}: {e[1]}")
         else:
             war(f"printlog inconnu -> {e}")
 # maker
@@ -190,7 +190,7 @@ def tab_c(space_in_tabs,l):
 # analyser
 
 def varitype(var,cont,settings):
-    war = None
+    m = [None,None]
     if cont.startswith("#"):
         if cont == "#int": typ = settings.int_var_type
         elif cont == "#bool": typ = "bool"
@@ -205,7 +205,7 @@ def varitype(var,cont,settings):
                 try: float(cont) ; typ = "float"
                 except:
                     typ = settings.int_var_type
-                    war = ["war", f"type inconnu ici -> {cont}"]
+                    m[0] = ["war", f"type inconnu ici -> {cont}"]
     
-    if settings.debug_print: dev(f"création de variable automatique: '{var}' de type '{typ}'")
-    return(war,[var,typ])
+    if settings.debug_print: m[1] = ["dev", f"création de variable automatique: '{var}' de type '{typ}'"]
+    return(m,[var,typ])

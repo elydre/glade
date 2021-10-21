@@ -33,9 +33,10 @@ def auto_include(settings):
             MSG.append(["gen_err",f"element a auto importer inconnu, ici -> {ti}"])
 
 def init_var(settings):
-    def varitype(var,cont):
-        war, vt = gt.varitype(var,cont,settings)
-        if war != None: MSG.append(war)
+    def varitype(var,cont,nb):
+        m, vt = gt.varitype(var,cont,settings)
+        if m[0] != None: MSG.append(m[0]+[nb])
+        if m[1] != None: MSG.append(m[1])
         var, typ = vt[0], vt[1]
         if typ == "string":
             add_to_include("std")
@@ -47,7 +48,7 @@ def init_var(settings):
         for ie in range(len(EYES)):
             e = EYES[ie]
             if e[0] == v[0]:
-                EYES.insert(ie+iv,[str(e[0]),1, "vari", varitype(v[1],v[2])])
+                EYES.insert(ie+iv,[str(e[0]),1, "vari", varitype(v[1],v[2],v[3])])
                 break
 
 def edit_l(settings,l,nb,len_tot):
@@ -134,10 +135,10 @@ def edit_l(settings,l,nb,len_tot):
                 EYES.append([ATOC,TAB[nb],"{"])
                 ATOC += "/for"
             except:
-                MSG.append(["gen_err",f"boucle for non valide ici -> {l}"])
+                MSG.append(["gen_err",f"boucle for non valide ici -> {l}",nb])
             
         else:
-            MSG.append(["war",f"les boucle de liste ne sont pas implémenter ici -> {l}"])
+            MSG.append(["war",f"les boucle de liste ne sont pas implémenter ici -> {l}",nb])
             EYES.append([ATOC,TAB[nb],"comm",l])
             EYES.append([ATOC,TAB[nb],"{"])
 
@@ -199,7 +200,7 @@ def edit_l(settings,l,nb,len_tot):
             else: cont = "#str"
         else:
             EYES.append([ATOC,TAB[nb],"vare",[nom,cont]])
-        if not(gt.iic(VAR, nom, 1)): VAR.append([AFON,nom,cont])
+        if not(gt.iic(VAR, nom, 1)): VAR.append([AFON,nom,cont,nb])
 
     elif l.strip() != "":
         EYES.append([ATOC,TAB[nb],"unknown",l])

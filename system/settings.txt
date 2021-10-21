@@ -4,7 +4,7 @@ int var type  = long int
 loop compil   = False
 
 sys print     = True
-debug print   = True
+debug print   = False
 auto main     = True
 init var      = True
 auto include  = True

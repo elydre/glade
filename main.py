@@ -19,7 +19,7 @@ import system.glade.Tools as gt
 import system.glade.TEyes as te
 import system.glade.Compiler as gc
 
-version = "0.4.5"
+version = "0.4.6"
 
 cy.clear()
 print(f"GLADE cli v{version}\nCopyright (C) pf4. Tous droits réservés.\n")
