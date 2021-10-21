@@ -1,4 +1,7 @@
 import system.glade.Tools as gt
+
+version = "0.2"
+
 def compiler(EYES,settings):
     EXIT = []
 

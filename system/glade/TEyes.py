@@ -1,5 +1,7 @@
 import system.glade.Tools as gt
 
+version = "0.4.7"
+
 def add_to_include(element):
         if not(element in to_include):
             to_include.append(element)
@@ -138,7 +140,7 @@ def edit_l(settings,l,nb,len_tot):
                 MSG.append(["gen_err",f"boucle for non valide ici -> {l}",nb])
             
         else:
-            MSG.append(["war",f"les boucle de liste ne sont pas implémenter ici -> {l}",nb])
+            MSG.append(["c_war",f"les boucle de liste ne sont pas implémenter ici -> {l}",nb])
             EYES.append([ATOC,TAB[nb],"comm",l])
             EYES.append([ATOC,TAB[nb],"{"])
 
@@ -203,7 +205,7 @@ def edit_l(settings,l,nb,len_tot):
         if not(gt.iic(VAR, nom, 1)): VAR.append([AFON,nom,cont,nb])
 
     elif l.strip() != "":
-        EYES.append([ATOC,TAB[nb],"unknown",l])
+        EYES.append([ATOC,TAB[nb],"unknown",l,nb])
 
 def main(settings,fichier):
     ligues = str(fichier).split("\n")

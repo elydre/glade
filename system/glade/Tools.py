@@ -1,6 +1,10 @@
 import system.mod.ColorPrint as cprint
 import system.mod.Cytron as cy
+from system.glade.TEyes import version as TEversion
+from system.glade.Compiler import version as GCversion
 from time import time as tm
+
+version = "0.8"
 
 # init
 
@@ -114,6 +118,12 @@ def request(settings):
             elif inp == "!c":
                 cy.clear()
 
+            elif inp == "!v":
+                print(f"version de Cytron:            {cy.version()}")
+                print(f"version de la boite à outils: {version}")
+                print(f"version du TokenEyes:         {TEversion}")
+                print(f"version du compilateur:       {GCversion}")
+
             else: gen_err("commande existente")
     return(settings)
 
@@ -151,7 +161,7 @@ def log(EYES, settings):
     for e in EYES:
         log += str(e) + "\n"
         if e[2] == "unknown":
-            sortie.append(["war",f"ligne inconnu laissé brut ici -> {e[3]}"])
+            sortie.append(["c_war",f"ligne inconnu laissé brut ici -> {e[3]}",e[4]])
     if settings.make_log:
         cy.cy_mkfil("/system","latest.log",log)
     return(sortie)
@@ -164,7 +174,7 @@ def printlog(MSG):
             dev(e[1])
         elif e[0] == "gen_err":
             gen_err(f"l.{e[2]}: {e[1]}")
-        elif e[0] == "war":
+        elif e[0] == "war" or e[0] == "c_war":
             war(f"l.{e[2]}: {e[1]}")
         else:
             war(f"printlog inconnu -> {e}")
@@ -205,7 +215,7 @@ def varitype(var,cont,settings):
                 try: float(cont) ; typ = "float"
                 except:
                     typ = settings.int_var_type
-                    m[0] = ["war", f"type inconnu ici -> {cont}"]
+                    m[0] = ["c_war", f"type inconnu ici -> {cont}"]
     
     if settings.debug_print: m[1] = ["dev", f"création de variable automatique: '{var}' de type '{typ}'"]
     return(m,[var,typ])

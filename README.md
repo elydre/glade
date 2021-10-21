@@ -55,6 +55,7 @@ les valeurs entre parenthèse à la fin de chaque description correspond au vale
 - **todo**: fichier compilé par défaut *None* pour auqun ou nom du fichier. (*t.py*)
 - **space in tabs**: nombre d'espaces dans une tablature. (*4*)
 - **debug print**: *True* pour les print de debug *False* pour désactiver. (*False*)
+- **sys print**: *True* pour les print systeme *False* pour désactiver. (*True*)
 - **make log**: *True* pour les logs automatiques *False* pour désactiver. (*True*)
 - **loop compil**: *True* pour compiler en boucle *False* pour désactiver. (*False*)
 - **auto main**: *True* pour la création de la fonction main automatique *False* pour désactiver. (*True*)
@@ -67,6 +68,7 @@ les valeurs entre parenthèse à la fin de chaque description correspond au vale
 Les commandes sont accessibles dans la console de glade en tapent !{*commande*}. Les commandes disponibles sont les suivantes:
 - **r**: recharge les paramètres
 - **c**: clear la console
+- **v**: affiche les versions des modules
 
 # Avancement du compilateur
 ## Éléments pris en charge
@@ -100,6 +102,13 @@ Les commandes sont accessibles dans la console de glade en tapent !{*commande*}.
 - module
 - classe & programmation acces objet
 - typage dynamique
+
+## historique des versions
+
+|TEyes|Tools|Compiler|
+|-|-|-|
+|0.4.7|0.8|0.2|
+|0.4.6|0.6|0.2|
 
 # auteurs
 
