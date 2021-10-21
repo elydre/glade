@@ -35,7 +35,7 @@ def py_actu():
         for e in msg:
             if e[0] == "c_war":
                 py.tag_add("war", f"{e[2]+1}.0", f"{e[2]+1}.100")
-                py.tag_config("war", foreground="pink")
+                py.tag_config("war", foreground="#CDDC39")
             elif e[0] == "gen_err":
                 py.tag_add("err", f"{e[2]+1}.0", f"{e[2]+1}.100")
                 py.tag_config("err", foreground="red")
