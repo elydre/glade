@@ -33,7 +33,6 @@ def py_actu():
         py.tag_delete("war", "1.0", "end")
 
         for e in msg:
-            print(e)
             if e[0] == "c_war":
                 py.tag_add("war", f"{e[2]+1}.0", f"{e[2]+1}.100")
                 py.tag_config("war", foreground="pink")
