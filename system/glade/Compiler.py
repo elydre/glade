@@ -1,6 +1,6 @@
 import system.glade.Tools as gt
 
-version = "0.2"
+version = "0.3"
 
 def compiler(EYES,settings):
     EXIT = []
@@ -71,7 +71,7 @@ def compiler(EYES,settings):
             EXIT.append(add_tab(tab) + "// " + arg)
 
         elif de == "vare":
-            EXIT.append(add_tab(tab) + arg[0] + " = " + arg[1] + ";")
+            EXIT.append(add_tab(tab) + arg[0] + arg[2] + arg[1] + ";")
 
         elif de == "vari":
             EXIT.append(add_tab(tab) + arg[1] + " " + arg[0] + ";  // auto var")

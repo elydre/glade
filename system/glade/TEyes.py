@@ -1,6 +1,6 @@
 import system.glade.Tools as gt
 
-version = "0.4.7"
+version = "0.4.8"
 
 def add_to_include(element):
         if not(element in to_include):
@@ -158,9 +158,10 @@ def edit_l(settings,l,nb,len_tot):
         add_to_include("std")
         add_to_include("print")
 
-    elif l.startswith("return("):
-        cont = l.split("return(")[1]
-        cont = gt.del_end(cont,")")
+    elif l.startswith("return"):
+        cont = l.split("return")[1].strip()
+        if cont.startswith("(") and cont.endswith(")"):
+            cont = cont[1:-1]
         EYES.append([ATOC,TAB[nb],"return",cont])
 
     elif l.startswith("try:"):
@@ -186,8 +187,16 @@ def edit_l(settings,l,nb,len_tot):
             EYES.append([ATOC,TAB[nb],"comm",lb])
 
     elif "=" in l:
+        typ = " = "
         nom = l.split("=")[0].strip()
         cont = l.split("=")[1].strip()
+        if nom.endswith("-"):
+            typ = " -= "
+            nom = gt.del_end(nom,"-").strip()
+        elif nom.endswith("+"):
+            typ = " += "
+            nom = gt.del_end(nom,"+").strip()
+
         if "input(" in cont:
             add_to_include("std")
             add_to_include("print")
@@ -201,7 +210,7 @@ def edit_l(settings,l,nb,len_tot):
             elif cont.startswith("bool("): cont = "#bool"
             else: cont = "#str"
         else:
-            EYES.append([ATOC,TAB[nb],"vare",[nom,cont]])
+            EYES.append([ATOC,TAB[nb],"vare",[nom,cont,typ]])
         if not(gt.iic(VAR, nom, 1)): VAR.append([AFON,nom,cont,nb])
 
     elif l.strip() != "":
