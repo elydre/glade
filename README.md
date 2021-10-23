@@ -105,11 +105,12 @@ Les commandes sont accessibles dans la console de glade en tapent !{*commande*}.
 
 ## historique des versions
 
-|TEyes|Tools|Compiler|
-|-|-|-|
-|0.4.8|0.9|0.3|
-|0.4.7|0.8|0.2|
-|0.4.6|0.6|0.2|
+|**TEyes** |Tools|Compiler|
+|----------|-----|--------|
+|**0.4.8b**|0.9  |0.3     |
+|**0.4.8** |0.9  |0.3     |
+|**0.4.7** |0.8  |0.2     |
+|**0.4.6** |0.6  |0.2     |
 
 # auteurs
 

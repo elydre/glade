@@ -1,6 +1,6 @@
 import system.glade.Tools as gt
 
-version = "0.4.8"
+version = "0.4.8b"
 
 def add_to_include(element):
         if not(element in to_include):
@@ -218,8 +218,7 @@ def edit_l(settings,l,nb,len_tot):
 
 def main(settings,fichier):
     ligues = str(fichier).split("\n")
-    while "" in ligues:
-        ligues.remove("")
+    while len(ligues) > 0 and ligues[-1] == "": ligues.pop(-1)
     ligues.append("")
     global EYES, TAB, VAR, ATOC, AFON, MSG, to_include
     EYES = [] # liste de code token eyes
