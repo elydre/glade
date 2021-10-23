@@ -2,6 +2,3 @@
 system/latest.log
 *.out
 *.pyc
-container/DirectTime.cpp
-container/DirectTime.py
-system/latest.log
