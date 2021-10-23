@@ -23,7 +23,7 @@ from _thread import start_new_thread
 ### definition des variables
 global path_v, version, console_o
 
-version_id = "cytron 13b"
+version_id = "cytron 13c"
 
 console_o = False
 path_v = os.path.dirname(sys.argv[0])
@@ -68,8 +68,8 @@ def wget(chem, nom, addr):
 
 def mkfil(chem, nom, text):
     temp = path_v + chem + "/" + nom
-    fil = open(temp, "w")
-    fil.write(str(text))
+    with open(temp, "w") as fil:
+        fil.write(str(text))
     fil.close()
     return("DONE")
 
@@ -104,18 +104,19 @@ def console_to_thread():
     while True:
         ipt = input('~} ').split(" ")
         retour = run(ipt)
-        if retour == None: clear()
+        if retour is None: clear()
         elif retour == "exit": console_o = False ; break
         else: print(retour)
 
 ### commandes
 def run(ipt):
-    if ipt[0] == "": pass                                   # commande vide
-    elif ipt[0] == "version": return(version())             # version
+    if ipt[0] == "":
+        return
+    if ipt[0] == "version": return(version())             # version
     elif ipt[0] == "path": return(path())                   # path
     elif ipt[0] == "mkdir":                                 # mkdir
         try: return(mkdir(ipt[1], ipt[2]))
-        except: return("erreur: 'chem rela + nom'") 
+        except: return("erreur: 'chem rela + nom'")
     elif ipt[0] == "wget":                                  # wget
         try: return(wget(ipt[1], ipt[2], ipt[3]))
         except: return("erreur: 'chem rela + nom + addr'")
@@ -130,6 +131,6 @@ def run(ipt):
         except: return("erreur: 'nom'")
     elif ipt[0] == "exit":                                  # exit
         return("exit")
-    elif ipt[0] == "aide" or ipt[0] == "help":              # aide
+    elif ipt[0] in ["aide", "help"]:              # aide
         return("version > affiche la version\npath    > affiche le chemain\nmkdir   > crée un dossier\nls      > affiche le contenue d'un dossier\nwget    > crée un fichier depuis le web\nmkfil   > créé un fichier\nrfil    > affiche le contenue d'un fichier\nhelp    > affiche l'aide")
     else: return("commande inconnu")                        # autres commandes
