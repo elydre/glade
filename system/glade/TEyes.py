@@ -3,25 +3,25 @@ import system.glade.Tools as gt
 version = "0.4.9"
 
 def add_to_include(element):
-        if not(element in to_include):
+        if element not in to_include:
             to_include.append(element)
 
 def auto_main(settings,liste):
     for ei in range(len(EYES)):
-        e = EYES[ei]
-        if e[1] == 0 and not(e[2] in liste):
-            if settings.debug_print: MSG.append(["dev","création de la fonction main automatique"])
-            EYES.insert(ei,['', 0, 'def', 'main()'])
-            EYES.insert(ei+1,['', 0, '{'])
-            for ei2 in range(ei+2,len(EYES)):
-                e2 = EYES[ei2]
-                e2[0] = "/main" + e2[0]
-                e2[1] += 1
-            EYES.append(['', 0, '}'])
-            for v in VAR:
-                if v[0] == "":
-                    v[0] = "/main"
-            break
+            e = EYES[ei]
+            if e[1] == 0 and e[2] not in liste:
+                    if settings.debug_print: MSG.append(["dev","création de la fonction main automatique"])
+                    EYES.insert(ei,['', 0, 'def', 'main()'])
+                    EYES.insert(ei+1,['', 0, '{'])
+                    for ei2 in range(ei+2,len(EYES)):
+                        e2 = EYES[ei2]
+                        e2[0] = "/main" + e2[0]
+                        e2[1] += 1
+                    EYES.append(['', 0, '}'])
+                    for v in VAR:
+                        if v[0] == "":
+                            v[0] = "/main"
+                    break
 
 def auto_include(settings):
     for ti in to_include:
@@ -55,9 +55,9 @@ def init_var(settings):
                 VAR[iv][4] = vtype[1]
                 break
 
-def edit_l(settings,l,nb,len_tot):
+def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
     global ATOC, AFON
-    
+
     l = str(l)
     TAB.append(gt.tab_c(settings.space_in_tabs,l))
     l = l.strip()
@@ -65,12 +65,12 @@ def edit_l(settings,l,nb,len_tot):
 
     if l != "" or nb == len_tot-1:
         for loop in range(1,TAB[nb-1]-TAB[nb]+1):
-            temp = ""
-            for a in range(len(ATOC.split("/"))-1):
-                if a != 0: temp += "/" + ATOC.split("/")[a]
-            ATOC = temp
-            if not(ATOC.startswith(AFON)): AFON = ""
-            EYES.append([ATOC,TAB[nb-1]-1*loop,"}"])
+                temp = "".join(
+                    "/" + ATOC.split("/")[a]
+                    for a in range(len(ATOC.split("/")) - 1) if a != 0)
+                ATOC = temp
+                if not(ATOC.startswith(AFON)): AFON = ""
+                EYES.append([ATOC,TAB[nb-1]-1*loop,"}"])
 
     if nb == 0:
         EYES.append([ATOC,TAB[nb],"comm","interpreted and compiled by GLADE"])
@@ -140,7 +140,7 @@ def edit_l(settings,l,nb,len_tot):
                 ATOC += "/for"
             except:
                 MSG.append(["gen_err",f"boucle for non valide ici -> {l}",nb])
-            
+
         else:
             MSG.append(["c_war",f"les boucle de liste ne sont pas implémenter ici -> {l}",nb])
             EYES.append([ATOC,TAB[nb],"comm",l])
@@ -173,7 +173,7 @@ def edit_l(settings,l,nb,len_tot):
     elif l.startswith("except"):
         EYES.append([ATOC,TAB[nb],"except"])
         EYES.append([ATOC,TAB[nb],"{"])
-    
+
     elif l.startswith("pass"):
         EYES.append([ATOC,TAB[nb],"pass"])
 
