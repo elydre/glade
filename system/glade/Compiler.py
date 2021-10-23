@@ -2,13 +2,13 @@ import system.glade.Tools as gt
 
 version = "0.3"
 
-def compiler(EYES,settings):
+def compiler(EYES,settings):  # sourcery no-metrics
     EXIT = []
 
     for e in EYES:
 
         def add_tab(tab): return(" "*tab*settings.space_in_tabs)
-        
+
         de = e[2]       #element detecte
         tab = e[1]      #nb de tab
         try: arg = e[3] #arg
