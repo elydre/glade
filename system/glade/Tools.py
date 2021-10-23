@@ -200,12 +200,6 @@ def tab_c(space_in_tabs,l):
 # analyser
 
 def varitype(var,cont,settings,allvar):
-    """
-    ce code à été fait complètement a la rache et marche relativement bien
-    avec des type brut (t = "str", t = 4, t = 8.3, t = true) mais pas avec
-    le typage selon une autre variable (a = 4, t = a) et init tout les type
-    inconnu en long int ^^
-    """
     m = [None,None]
     typ = None
     for v in allvar:
