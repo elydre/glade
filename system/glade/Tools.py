@@ -4,7 +4,7 @@ from system.glade.TEyes import version as TEversion
 from system.glade.Compiler import version as GCversion
 from time import time as tm
 
-version = "0.9"
+version = "0.9b"
 
 # init
 
@@ -187,7 +187,7 @@ def maker(settings,EXIT):
 # édition de ligne
 
 def del_end(cont,to_del):
-    return(cont[0:-len(to_del)])
+    return(cont[0:-len(to_del)]if to_del in cont else cont)
 
 def iic(liste, e, p):
     return(True if e in [v[p] for v in liste] else False)
