@@ -161,7 +161,7 @@ def log(EYES, settings):
     for e in EYES:
         log += str(e) + "\n"
         if e[2] == "unknown":
-            sortie.append(["c_war",f"ligne inconnu laissé brut ici -> {e[3]}",e[4]])
+            sortie.append(["c_war",f"ligne inconnu laissée brute ici -> {e[3]}",e[4]])
     if settings.make_log:
         cy.cy_mkfil("/system","latest.log",log)
     return(sortie)
