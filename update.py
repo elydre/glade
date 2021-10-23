@@ -24,7 +24,7 @@ dl(path,["/main.py",
         "/system/mod/ColorPrint.py",
         "/system/settings.txt",
         "/container/t.py",
-        "/direct-time.py",
+        "/direct-time.pyw",
         "/system/glade/TEyes.py"
         ],[
         "https://raw.githubusercontent.com/pf4-DEV/glade/main/main.py",
@@ -34,6 +34,6 @@ dl(path,["/main.py",
         "https://raw.githubusercontent.com/pf4-DEV/Color-Printer/main/ColorPrint.py",
         "https://raw.githubusercontent.com/pf4-DEV/glade/main/system/settings.txt",
         "https://raw.githubusercontent.com/pf4-DEV/glade/main/container/t.py",
-        "https://raw.githubusercontent.com/pf4-DEV/glade/main/direct-time.py",
+        "https://raw.githubusercontent.com/pf4-DEV/glade/main/direct-time.pyw",
         "https://raw.githubusercontent.com/pf4-DEV/glade/main/system/glade/TEyes.py"
         ])
