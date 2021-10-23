@@ -1,6 +1,6 @@
 import system.glade.Tools as gt
 
-version = "0.4.8b"
+version = "0.4.9"
 
 def add_to_include(element):
         if not(element in to_include):
@@ -36,7 +36,7 @@ def auto_include(settings):
 
 def init_var(settings):
     def varitype(var,cont,nb):
-        m, vt = gt.varitype(var,cont,settings)
+        m, vt = gt.varitype(var,cont,settings,VAR)
         if m[0] != None: MSG.append(m[0]+[nb])
         if m[1] != None: MSG.append(m[1])
         var, typ = vt[0], vt[1]
@@ -50,7 +50,9 @@ def init_var(settings):
         for ie in range(len(EYES)):
             e = EYES[ie]
             if e[0] == v[0]:
-                EYES.insert(ie+iv,[str(e[0]),1, "vari", varitype(v[1],v[2],v[3])])
+                vtype = varitype(v[1],v[2],v[3])
+                EYES.insert(ie+iv,[str(e[0]),1, "vari", vtype])
+                VAR[iv][4] = vtype[1]
                 break
 
 def edit_l(settings,l,nb,len_tot):
@@ -211,7 +213,7 @@ def edit_l(settings,l,nb,len_tot):
             else: cont = "#str"
         else:
             EYES.append([ATOC,TAB[nb],"vare",[nom,cont,typ]])
-        if not(gt.iic(VAR, nom, 1)): VAR.append([AFON,nom,cont,nb])
+        if not(gt.iic(VAR, nom, 1)): VAR.append([AFON,nom,cont,nb,None])
 
     elif l.strip() != "":
         EYES.append([ATOC,TAB[nb],"unknown",l,nb])

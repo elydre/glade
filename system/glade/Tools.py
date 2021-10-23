@@ -4,7 +4,7 @@ from system.glade.TEyes import version as TEversion
 from system.glade.Compiler import version as GCversion
 from time import time as tm
 
-version = "0.9b"
+version = "0.10"
 
 # init
 
@@ -199,7 +199,7 @@ def tab_c(space_in_tabs,l):
 
 # analyser
 
-def varitype(var,cont,settings):
+def varitype(var,cont,settings,allvar):
     """
     ce code à été fait complètement a la rache et marche relativement bien
     avec des type brut (t = "str", t = 4, t = 8.3, t = true) mais pas avec
@@ -207,12 +207,16 @@ def varitype(var,cont,settings):
     inconnu en long int ^^
     """
     m = [None,None]
-    if cont.startswith("#"):
+    typ = None
+    for v in allvar:
+        if cont == v[1]:
+            typ = v[4]
+    if typ == None and cont.startswith("#"):
         if cont == "#int": typ = settings.int_var_type
         elif cont == "#bool": typ = "bool"
         elif cont == "#float": typ = "float"
         else: typ = "string"
-    else:
+    elif typ == None:
         if len(cont.split('"')) > 1 or len(cont.split("'")) > 1: typ = "string"
         elif cont == "true" or cont == "false": typ = "bool"
         else:
