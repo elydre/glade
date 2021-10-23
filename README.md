@@ -107,6 +107,7 @@ Les commandes sont accessibles dans la console de glade en tapent !{*commande*}.
 
 |**TEyes** |Tools|Compiler|
 |----------|-----|--------|
+|**0.4.9b**|0.10b|0.4     |
 |**0.4.9** |0.10 |0.3     |
 |**0.4.8b**|0.9  |0.3     |
 |**0.4.8** |0.9  |0.3     |

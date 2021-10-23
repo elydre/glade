@@ -4,7 +4,7 @@ from system.glade.TEyes import version as TEversion
 from system.glade.Compiler import version as GCversion
 from time import time as tm
 
-version = "0.10"
+version = "0.10b"
 
 # init
 
@@ -96,8 +96,7 @@ def request(settings):
             elif ext == "cpp": cprint.colorprint(element,color=cprint.Colors.magenta,ligne=True,end=False)
             else: cprint.colorprint(element,color=cprint.Colors.blanc,end=False)
         print("\n")
-        if settings.todo is None or settings.todo == "":
-            inp = input("~} ")
+        if settings.todo is None or settings.todo == "": inp = input("~} ")
         else:
             cprint.colorprint("(",color=cprint.Colors.blanc, end=False)
             cprint.colorprint(settings.todo,color=cprint.Colors.cyan, end=False)
@@ -166,16 +165,11 @@ def log(EYES, settings):
 
 def printlog(MSG):
     for e in MSG:
-        if e[0] == "info":
-            info(e[1])
-        elif e[0] == "dev":
-            dev(e[1])
-        elif e[0] == "gen_err":
-            gen_err(f"l.{e[2]}: {e[1]}")
-        elif e[0] in ["war", "c_war"]:
-            war(f"l.{e[2]}: {e[1]}")
-        else:
-            war(f"printlog inconnu -> {e}")
+        if e[0] == "info": info(e[1])
+        elif e[0] == "dev": dev(e[1])
+        elif e[0] == "gen_err": gen_err(f"l.{e[2]}: {e[1]}")
+        elif e[0] in ["war", "c_war"]: war(f"l.{e[2]}: {e[1]}")
+        else: war(f"printlog inconnu -> {e}")
 # maker
 
 def maker(settings,EXIT):

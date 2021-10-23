@@ -1,6 +1,22 @@
+'''
+--|~|--|~|--|~|--|~|--|~|--|~|--
+
+██  ████        ██████        ██
+████    ██     ██           ████
+██      ██   ████████     ██  ██
+████████       ██       ██    ██
+██             ██       █████████
+██             ██             ██
+██
+ - codé en : UTF-8
+ - langage : python 3
+ - GitHub  : github.com/pf4-DEV/glade
+--|~|--|~|--|~|--|~|--|~|--|~|--
+'''         
+
 import system.glade.Tools as gt
 
-version = "0.4.9"
+version = "0.4.9b"
 
 def add_to_include(element):
         if element not in to_include:
@@ -55,6 +71,9 @@ def init_var(settings):
                 VAR[iv][4] = vtype[1]
                 break
 
+def kc(l,start,end=":"):  # keep center
+    return(gt.del_end(l.split(start)[1],end))
+
 def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
     global ATOC, AFON
 
@@ -86,15 +105,13 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
         EYES.append([ATOC,TAB[nb],"lnb",cont])
 
     elif l.startswith("if "):
-        cont = l.split("if ")[1]
-        cont = gt.del_end(cont,":")
+        cont = kc(l, "if ")
         EYES.append([ATOC,TAB[nb],"if",cont])
         EYES.append([ATOC,TAB[nb],"{"])
         ATOC += "/if"
 
     elif l.startswith("elif "):
-        cont = l.split("elif ")[1]
-        cont = gt.del_end(cont,":")
+        cont = kc(l, "elif ")
         EYES.append([ATOC,TAB[nb],"elif",cont])
         EYES.append([ATOC,TAB[nb],"{"])
         ATOC += "/elif"
@@ -105,15 +122,13 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
         ATOC += "/else"
 
     elif l.startswith("while "):
-        cont = l.split("while ")[1]
-        cont = gt.del_end(cont,":")
+        cont = kc(l, "while ")
         EYES.append([ATOC,TAB[nb],"while",cont])
         EYES.append([ATOC,TAB[nb],"{"])
         ATOC += "/while"
 
     elif l.startswith("def "):
-        cont = l.split("def ")[1]
-        cont = gt.del_end(cont,":")
+        cont = kc(l, "def ")
         EYES.append([ATOC,TAB[nb],"def",cont])
         EYES.append([ATOC,TAB[nb],"{"])
         ATOC += "/" + cont.split("(")[0]
@@ -122,18 +137,12 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
     elif l.startswith("for "):
         if "in range" in l:
             try:
-                cont = l.split("for ")[1]
-                cont = gt.del_end(cont,"):")
-                var_name = cont.split(" in range(")[0]
-                arg = cont.split(" in range(")[1].split(",")
+                cont = kc(l, "for ", "):")
+                var_name, arg = cont.split(" in range(")[0], cont.split(" in range(")[1].split(",")
                 pas , min , max = "1", "0", "0"
-                if len(arg) == 1:
-                    max = arg[0]
-                if len(arg) >= 2:
-                    min = arg[0]
-                    max = arg[1]
-                if len(arg) == 3:
-                    pas = arg[2]
+                if len(arg) == 1: max = arg[0]
+                if len(arg) >= 2: min, max = arg[0], arg[1]
+                if len(arg) == 3: pas = arg[2]
 
                 EYES.append([ATOC,TAB[nb],"for",[var_name,min,max,pas]])
                 EYES.append([ATOC,TAB[nb],"{"])
@@ -147,14 +156,11 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
             EYES.append([ATOC,TAB[nb],"{"])
 
     elif l.startswith("print("):
-        cont = ""
-        end = "endl"
+        cont, end = "", "endl"
         for e in gt.del_end(l.split("print(")[1],")").split(","):
             e = e.strip()
-            if e.startswith("end=") or e.startswith("end ="):
-                end = e.split("=")[1].strip()
-            else:
-                cont += e + " << "
+            if e.startswith("end=") or e.startswith("end ="): end = e.split("=")[1].strip()
+            else: cont += e + " << "
 
         EYES.append([ATOC,TAB[nb],"print",[cont,end]])
         add_to_include("std")
@@ -190,14 +196,9 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
 
     elif "=" in l:
         typ = " = "
-        nom = l.split("=")[0].strip()
-        cont = l.split("=")[1].strip()
-        if nom.endswith("-"):
-            typ = " -= "
-            nom = gt.del_end(nom,"-").strip()
-        elif nom.endswith("+"):
-            typ = " += "
-            nom = gt.del_end(nom,"+").strip()
+        nom, cont = l.split("=")[0].strip(), l.split("=")[1].strip()
+        if nom.endswith("-"): typ, nom = " -= ", gt.del_end(nom,"-").strip()
+        elif nom.endswith("+"): typ, nom = " += ", gt.del_end(nom,"+").strip()
 
         if "input(" in cont:
             add_to_include("std")
