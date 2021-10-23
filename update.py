@@ -17,7 +17,7 @@ def dl(path,n,a):
             img.write(urlopen(a[x]).read())
 
 mkdir(path,["/container","/system","/system/glade","/system/mod"])
-dl(path,["/main.py",
+dl(path,["/glade-cli.py",
         "/system/glade/Compiler.py",
         "/system/glade/Tools.py",
         "/system/mod/Cytron.py",
@@ -27,7 +27,7 @@ dl(path,["/main.py",
         "/direct-time.pyw",
         "/system/glade/TEyes.py"
         ],[
-        "https://raw.githubusercontent.com/pf4-DEV/glade/main/main.py",
+        "https://raw.githubusercontent.com/pf4-DEV/glade/main/glade-cli.py",
         "https://raw.githubusercontent.com/pf4-DEV/glade/main/system/glade/Compiler.py",
         "https://raw.githubusercontent.com/pf4-DEV/glade/main/system/glade/Tools.py",
         "https://raw.githubusercontent.com/pf4-DEV/cytron/main/cytron.py",
