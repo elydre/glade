@@ -1,11 +1,10 @@
-todo          = t.py
+todo = t.py
+debug print = f
 space in tabs = 4
-int var type  = long int
-loop compil   = False
-
-sys print     = True
-debug print   = False
-auto main     = True
-init var      = True
-auto include  = True
-make log      = True
+auto main = t
+init var = t
+auto include =t
+int var type = long int
+make log = t
+loop compil = f
+sys print = t

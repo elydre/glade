@@ -4,16 +4,16 @@ from system.glade.TEyes import version as TEversion
 from system.glade.Compiler import version as GCversion
 from time import time as tm
 
-version = "0.10b"
+version = "0.11"
 
 # init
 
 class init:
-    def __init__(self, edit=True, todo = None, debug_print = True, sys_print = True, auto_main = True, init_var = True, auto_include = True, make_log = True, loop_compil = False, space_in_tabs = 4, int_var_type = "long int"): # sourcery no-metrics
+    def __init__(self, edit = 1, todo = None, debug_print = True, sys_print = True, auto_main = True, init_var = True, auto_include = True, make_log = True, loop_compil = False, space_in_tabs = 4, int_var_type = "long int"): # sourcery no-metrics skip: de-morgan
         para_edit = 0
         #lecture du fichier de paramètres
         if cy.rfil_rela("/system", "settings.txt") is None: war("fichier de paramètres non trouvé")
-        elif edit:
+        elif edit == 1:
             for p in cy.rfil_rela("/system","settings.txt").split("\n"):
                 if not(p.startswith("#")) and len(p.split("=")) > 1:
                     para_edit += 1
@@ -27,38 +27,38 @@ class init:
                         int_var_type = atr
 
                     elif var == "debug print":
-                        if atr in ["False", "false"]: debug_print = False
-                        elif atr in ["True", "true"]: debug_print = True
+                        if atr in ["False", "false", "f"]: debug_print = False
+                        elif atr in ["True", "true", "t"]: debug_print = True
                         else: war("valleur non bool pour debug print (False par defaut)\n      ici -> " + str(atr))
 
                     elif var == "sys print":
-                        if atr in ["False", "false"]: sys_print = False
-                        elif atr in ["True", "true"]: sys_print = True
+                        if atr in ["False", "false", "f"]: sys_print = False
+                        elif atr in ["True", "true", "t"]: sys_print = True
                         else: war("valleur non bool pour debug print (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "make log":
-                        if atr in ["False", "false"]: make_log = False
-                        elif atr in ["True", "true"]: make_log = True
+                        if atr in ["False", "false", "f"]: make_log = False
+                        elif atr in ["True", "true", "t"]: make_log = True
                         else: war("valleur non bool pour make log (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "init var":
-                        if atr in ["False", "false"]: init_var = False
-                        elif atr in ["True", "true"]: init_var = True
+                        if atr in ["False", "false", "f"]: init_var = False
+                        elif atr in ["True", "true", "t"]: init_var = True
                         else: war("valleur non bool pour init var (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "auto main":
-                        if atr in ["False", "false"]: auto_main = False
-                        elif atr in ["True", "true"]: auto_main = True
+                        if atr in ["False", "false", "f"]: auto_main = False
+                        elif atr in ["True", "true", "t"]: auto_main = True
                         else: war("valleur non bool pour auto main (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "loop compil":
-                        if atr in ["False", "false"]: loop_compil = False
-                        elif atr in ["True", "true"]: loop_compil = True
+                        if atr in ["False", "false", "f"]: loop_compil = False
+                        elif atr in ["True", "true", "t"]: loop_compil = True
                         else: war("valleur non bool pour loop compil (False par defaut)\n      ici -> " + str(atr))
 
                     elif var == "auto include":
-                        if atr in ["False", "false"]: auto_include = False
-                        elif atr in ["True", "true"]: auto_include = True
+                        if atr in ["False", "false", "f"]: auto_include = False
+                        elif atr in ["True", "true", "t"]: auto_include = True
                         else: war("valleur non bool pour auto include (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "space in tabs":
@@ -70,6 +70,9 @@ class init:
                         gen_err("paramètres inconnu\n      ici -> " + str(p))
 
             info(str(para_edit)+" paramètres édités")
+
+        elif edit == 2:
+            cy.mkfil("/system","settings.txt",f"todo = {input('(t.py) todo -> ')}\ndebug print = {input('(f) debug print -> ')}\nspace in tabs = {input('(4) space in tabs -> ')}\nauto main = {input('(t) auto main -> ')}\ninit var = {input('(t) init var -> ')}\nauto include ={input('(t) auto include -> ')}\nint var type = {input('(long int) int var type -> ')}\nmake log = {input('(t) make log -> ')}\nloop compil = {input('(f) loop compil -> ')}\nsys print = {input('(t) sys print -> ')}")
 
         self.todo = todo
         self.debug_print = debug_print
@@ -112,6 +115,11 @@ def request(settings):
             settings = init()
             info("paramètres rechargé")
 
+        elif inp == "!e":
+            settings = init(edit = 2)
+            settings = init()
+
+
         elif inp == "!c":
             cy.clear()
 
@@ -121,7 +129,7 @@ def request(settings):
             print(f"version du TokenEyes:         {TEversion}")
             print(f"version du compilateur:       {GCversion}")
 
-        else: gen_err("commande existente")
+        else: gen_err("commande non existente")
     return(settings)
 
 # print
