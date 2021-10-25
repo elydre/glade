@@ -1,0 +1,14 @@
+mkd /container
+mkd /system
+mkd /system/glade
+mkd /system/mod
+
+wgt /glade-cli.py, https://raw.githubusercontent.com/pf4-DEV/glade/main/glade-cli.py
+wgt /system/glade/Compiler.py, https://raw.githubusercontent.com/pf4-DEV/glade/main/system/glade/Compiler.py
+wgt /system/glade/Tools.py, https://raw.githubusercontent.com/pf4-DEV/glade/main/system/glade/Tools.py
+wgt /system/mod/Cytron.py, https://raw.githubusercontent.com/pf4-DEV/cytron/main/cytron.py
+wgt /system/mod/ColorPrint.py, https://raw.githubusercontent.com/pf4-DEV/Color-Printer/main/ColorPrint.py
+wgt /system/settings.txt, https://raw.githubusercontent.com/pf4-DEV/glade/main/system/settings.txt
+wgt /container/t.py, https://raw.githubusercontent.com/pf4-DEV/glade/main/container/t.py
+wgt /direct-time.pyw, https://raw.githubusercontent.com/pf4-DEV/glade/main/direct-time.pyw
+wgt /system/glade/TEyes.py, https://raw.githubusercontent.com/pf4-DEV/glade/main/system/glade/TEyes.py
