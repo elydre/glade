@@ -54,14 +54,14 @@ les valeurs entre parenthèse à la fin de chaque description correspond au vale
 
 - **todo**: fichier compilé par défaut *None* pour auqun ou nom du fichier. (*t.py*)
 - **space in tabs**: nombre d'espaces dans une tablature. (*4*)
-- **debug print**: *True* pour les print de debug *False* pour désactiver. (*False*)
-- **sys print**: *True* pour les print systeme *False* pour désactiver. (*True*)
+- **debug print**: *True* pour les prints de debug *False* pour désactiver. (*False*)
+- **sys print**: *True* pour les prints systeme *False* pour désactiver. (*True*)
 - **make log**: *True* pour les logs automatiques *False* pour désactiver. (*True*)
 - **loop compil**: *True* pour compiler en boucle *False* pour désactiver. (*False*)
 - **auto main**: *True* pour la création de la fonction main automatique *False* pour désactiver. (*True*)
 - **init var**: *True* pour l'initialisation des variables *False* pour désactiver. (*True*)
-- **auto include**: *True* pour les include automatiques *False* pour désactiver. (*True*)
-- **int var type**: Type de variable pour les entier. *int* (8bit) pour un programme légé vers *long long int* (64bit) pour des variables gigantesques. [en savoir plus](https://fr.wikipedia.org/wiki/Types_de_donnée_du_langage_C)
+- **auto include**: *True* pour les includes automatiques *False* pour désactiver. (*True*)
+- **int var type**: Type de variable pour les entiers. *int* (8bit) pour un programme légé vers *long long int* (64bit) pour des variables gigantesques. [en savoir plus](https://fr.wikipedia.org/wiki/Types_de_donnée_du_langage_C)
 
 ## Commandes
 
