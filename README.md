@@ -92,7 +92,7 @@ Les commandes sont accessibles dans la console de glade en tapent !{*commande*}.
 ## Éléments en développement
 
 - liste
-- traitement des operation: *`**`* -> *`pow()`*
+- traitement des operations: *`**`* -> *`pow()`*
 
 ## Éléments a venir
 
