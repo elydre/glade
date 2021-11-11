@@ -91,31 +91,21 @@ Les commandes sont accessibles dans la console de glade en tapent !{*commande*}.
 
 ## Éléments en développement
 
-- liste
-- traitement des operations: *`**`* -> *`pow()`*
+Disponible sur [GitHub projet](https://github.com/users/pf4-DEV/projects/2)
 
-## Éléments a venir
-
-- lambda
-- interpretation une ligne:\
-    *`print('non' if test = False else "oui")`*
-- module
-- classe & programmation acces objet
-- typage dynamique
-
-## historique des versions
+## Historique des versions
 
 ### v0.5
 
 |**TEyes** |Tools|Compiler|Statut|
 |----------|-----|--------|------|
-|          |     |        |*dev* |
+|...       |...  |...     |...   |
 
 ### v0.4
 
 |**TEyes** |Tools|Compiler|Statut|
 |----------|-----|--------|------|
-|**0.4.9b**|0.10b|0.4     |stable|
+|**0.4.9b**|0.10b|0.4     |[*stable*](https://github.com/pf4-DEV/glade/releases/tag/0.4.9b)|
 |**0.4.9** |0.10 |0.3     |*dev* |
 |**0.4.8b**|0.9  |0.3     |*dev* |
 |**0.4.8** |0.9  |0.3     |*dev* |
