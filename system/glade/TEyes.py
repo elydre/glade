@@ -212,6 +212,7 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
             elif cont.startswith("float("): cont = "#float"
             elif cont.startswith("bool("): cont = "#bool"
             else: cont = "#str"
+
         else:
             EYES.append([ATOC,TAB[nb],"vare",[nom,cont,typ]])
         if not(gt.iic(VAR, nom, 1)): VAR.append([AFON,nom,cont,nb,None])
