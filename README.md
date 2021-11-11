@@ -69,6 +69,7 @@ Les commandes sont accessibles dans la console de glade en tapent !{*commande*}.
 - **r**: recharge les paramètres
 - **c**: clear la console
 - **v**: affiche les versions des modules
+- **e**: lance l'éditeur de paramètres
 
 # Avancement du compilateur
 ## Éléments pris en charge
