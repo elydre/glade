@@ -1,10 +1,11 @@
+from os import X_OK
 import system.mod.ColorPrint as cprint
 import system.mod.Cytron as cy
 from system.glade.TEyes import version as TEversion
 from system.glade.Compiler import version as GCversion
 from time import time as tm
 
-version = "0.11"
+version = "0.11b"
 
 # init
 
@@ -72,7 +73,26 @@ class init:
             info(str(para_edit)+" paramètres édités")
 
         elif edit == 2:
-            cy.mkfil("/system","settings.txt",f"todo = {input('(t.py) todo -> ')}\ndebug print = {input('(f) debug print -> ')}\nspace in tabs = {input('(4) space in tabs -> ')}\nauto main = {input('(t) auto main -> ')}\ninit var = {input('(t) init var -> ')}\nauto include ={input('(t) auto include -> ')}\nint var type = {input('(long int) int var type -> ')}\nmake log = {input('(t) make log -> ')}\nloop compil = {input('(f) loop compil -> ')}\nsys print = {input('(t) sys print -> ')}")
+            def send(defaut, texte):
+                cprint.colorprint("(", color=cprint.Colors.blanc, end=False)
+                cprint.colorprint(defaut, color=cprint.Colors.cyan, end=False)
+                cprint.colorprint(") ", color=cprint.Colors.blanc, end=False)
+                cprint.colorprint(texte, color=cprint.Colors.blanc, end=False)
+                user = cprint.colorinput(" -> ", color=cprint.Colors.blanc)
+                return defaut if user == "" else user
+
+            cont = f"todo = {send('t.py', 'todo')}\n"
+            cont += f"space in tabs = {send('4', 'space in tabs')}\n"
+            cont += f"int var type = {send('long int', 'int var type')}\n"
+            cont += f"loop compil = {send('False', 'loop compil')}\n\n"
+            cont += f"debug print = {send('False', 'debug print')}\n"
+            cont += f"sys print = {send('True', 'sys print')}\n"
+            cont += f"auto main = {send('True', 'auto main')}\n"
+            cont += f"init var = {send('True', 'init var')}\n"
+            cont += f"auto include = {send('True', 'auto include')}\n"
+            cont += f"make log = {send('True', 'make log')}"
+
+            cy.mkfil("/system","settings.txt",cont)
 
         self.todo = todo
         self.debug_print = debug_print
