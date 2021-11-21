@@ -1,8 +1,13 @@
 // interpreted and compiled by GLADE
+#include <iostream>
 using namespace std;
 #include <list>
 int main()
 {
-    long int pre_a[] = {1,2};
-    list<long int> a (pre_a, pre_a + sizeof(pre_a) / sizeof(long int));
+    string a;  // auto var
+    string d;  // auto var
+    a = "z";
+    string pre_b[] = {a};
+    list<string> b (pre_b, pre_b + sizeof(pre_b) / sizeof(string));
+    d = a;
 }

@@ -5,7 +5,7 @@ from system.glade.TEyes import version as TEversion
 from system.glade.Compiler import version as GCversion
 from time import time as tm
 
-version = "0.11b"
+version = "0.12"
 
 # init
 
@@ -195,7 +195,7 @@ def printlog(MSG):
     for e in MSG:
         if e[0] == "info": info(e[1])
         elif e[0] == "dev": dev(e[1])
-        elif e[0] == "gen_err": gen_err(f"l.{e[2]}: {e[1]}")
+        elif e[0] == "gen_err":gen_err(f"l.{e[2]}: {e[1]}")
         elif e[0] in ["war", "c_war"]: war(f"l.{e[2]}: {e[1]}")
         else: war(f"printlog inconnu -> {e}")
 # maker
@@ -220,11 +220,12 @@ def tab_c(space_in_tabs,l):
 # analyser
 
 def varitype(var,cont,settings,allvar):
+    print(allvar) # debug
     m = [None,None]
     typ = None
     for v in allvar:
         if cont == v[1]:
-            typ = v[4]
+            typ = varitype(v[1],v[2],settings,allvar)[1][1]
     if typ is None:
         if cont.startswith("#"):
             if cont == "#int": typ = settings.int_var_type
