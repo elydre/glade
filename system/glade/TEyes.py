@@ -16,7 +16,7 @@
 
 import system.glade.Tools as gt
 
-version = "0.5.0"
+version = "0.5.0b"
 
 def add_to_include(element):
         if element not in to_include:
@@ -205,11 +205,13 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
 
         if "[" in cont and "]" in cont:
             add_to_include("liste")
+            add_to_include("std")
             liste = cont.split("[")[1].split("]")[0].strip()
             m, type = gt.varitype(None,liste.split(",")[0],settings,[])
             if m[0] != None: MSG.append(m[0]+[nb])
             if m[1] != None: MSG.append(m[1])
             EYES.append([ATOC,TAB[nb],"prelist",[type[1],f"pre_{nom}",liste]])
+            EYES.append([ATOC,TAB[nb],"deflist",[type[1],nom]])
 
         else:
             if "input(" in cont:

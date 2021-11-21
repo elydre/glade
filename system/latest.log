@@ -1,6 +1,8 @@
 ['', 0, 'comm', 'interpreted and compiled by GLADE']
+['', 0, 'using', 'namespace std;']
 ['', 0, 'include', '<list>']
 ['', 0, 'def', 'main()']
 ['', 0, '{']
 ['/main', 1, 'prelist', ['long int', 'pre_a', '1,2']]
+['/main', 1, 'deflist', ['long int', 'a']]
 ['', 0, '}']
