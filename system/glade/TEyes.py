@@ -16,7 +16,7 @@
 
 import system.glade.Tools as gt
 
-version = "0.4.9b"
+version = "0.5.0"
 
 def add_to_include(element):
         if element not in to_include:

@@ -100,7 +100,7 @@ Disponible sur [GitHub projet](https://github.com/users/pf4-DEV/projects/2)
 
 |**TEyes** |Tools|Compiler|Statut|
 |----------|-----|--------|------|
-|...       |...  |...     |...   |
+|**0.5.0** |0.10b|0.5     |*dev* |
 
 ### v0.4
 

@@ -1,6 +1,6 @@
 import system.glade.Tools as gt
 
-version = "0.4"
+version = "0.5"
 
 def compiler(EYES,settings):  # sourcery no-metrics
     EXIT = []
