@@ -44,6 +44,9 @@ def auto_include(settings):
         if ti == "print":
             if settings.debug_print: MSG.append(["dev","importation de print automatique"])
             EYES.insert(1,['',0, "include", "<iostream>"])
+        if ti == "liste":
+            if settings.debug_print: MSG.append(["dev","importation de liste automatique"])
+            EYES.insert(1,['',0, "include", "<list>"])
         elif ti == "std":
             if settings.debug_print: MSG.append(["dev","namespace std automatique"])
             EYES.insert(1,['',0, "using", "namespace std;"])
@@ -196,26 +199,36 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
 
     elif "=" in l:
         typ = " = "
-        nom, cont = l.split("=")[0].strip(), l.split("=")[1].strip()
+        nom, cont = l.split("=")[0].strip(), "".join(l.split("=")[1:]).strip()
         if nom.endswith("-"): typ, nom = " -= ", gt.del_end(nom,"-").strip()
         elif nom.endswith("+"): typ, nom = " += ", gt.del_end(nom,"+").strip()
 
-        if "input(" in cont:
-            add_to_include("std")
-            add_to_include("print")
-            txt = cont.split("input(")[1].split(")")[0]
-            if txt.strip() != "":
-                EYES.append([ATOC,TAB[nb],"print",[txt,""]])
-            EYES.append([ATOC,TAB[nb],"input",nom])
-            EYES.append([ATOC,TAB[nb],"ignore input"])
-            if cont.startswith("int("): cont = "#int"
-            elif cont.startswith("float("): cont = "#float"
-            elif cont.startswith("bool("): cont = "#bool"
-            else: cont = "#str"
+        if "[" in cont and "]" in cont:
+            add_to_include("liste")
+            liste = cont.split("[")[1].split("]")[0].strip()
+            m, type = gt.varitype(None,liste.split(",")[0],settings,[])
+            if m[0] != None: MSG.append(m[0]+[nb])
+            if m[1] != None: MSG.append(m[1])
+            EYES.append([ATOC,TAB[nb],"prelist",[type[1],f"pre_{nom}",liste]])
 
         else:
-            EYES.append([ATOC,TAB[nb],"vare",[nom,cont,typ]])
-        if not(gt.iic(VAR, nom, 1)): VAR.append([AFON,nom,cont,nb,None])
+            if "input(" in cont:
+                add_to_include("std")
+                add_to_include("print")
+                txt = cont.split("input(")[1].split(")")[0]
+                if txt.strip() != "":
+                    EYES.append([ATOC,TAB[nb],"print",[txt,""]])
+                EYES.append([ATOC,TAB[nb],"input",nom])
+                EYES.append([ATOC,TAB[nb],"ignore input"])
+                if cont.startswith("int("): cont = "#int"
+                elif cont.startswith("float("): cont = "#float"
+                elif cont.startswith("bool("): cont = "#bool"
+                else: cont = "#str"
+            
+            else:
+                EYES.append([ATOC,TAB[nb],"vare",[nom,cont,typ]])
+
+            if not(gt.iic(VAR, nom, 1)): VAR.append([AFON,nom,cont,nb,None])
 
     elif l.strip() != "":
         EYES.append([ATOC,TAB[nb],"unknown",l,nb])

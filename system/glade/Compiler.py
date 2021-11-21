@@ -72,6 +72,9 @@ def compiler(EYES,settings):  # sourcery no-metrics
         elif de == "vari":
             EXIT.append(f"{add_tab(tab)}{arg[1]} {arg[0]};  // auto var")
 
+        elif de == "prelist":
+            EXIT.append(f"{add_tab(tab)}{arg[0]} {arg[1]}[] = " + "{" + arg[2] + "};")
+
         elif de == "unknown":
             EXIT.append(f"{add_tab(tab)}{arg};")
 

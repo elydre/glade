@@ -1,7 +1,6 @@
 // interpreted and compiled by GLADE
+#include <list>
 int main()
 {
-    long int a;  // auto var
-    a = 1;
-    a += 1;
+    long int pre_a[] = {1,2};
 }

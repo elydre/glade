@@ -238,8 +238,8 @@ def varitype(var,cont,settings,allvar):
             except:
                 try: float(cont) ; typ = "float"
                 except:
-                    typ = settings.int_var_type
+                    typ = "long int"
                     m[0] = ["c_war", f"type inconnu ici -> {cont}"]
 
-    if settings.debug_print: m[1] = ["dev", f"création de variable automatique: '{var}' de type '{typ}'"]
+    if settings.debug_print: m[1] = ["dev", f"'{cont}' est de type '{typ}'"]
     return(m,[var,typ])
