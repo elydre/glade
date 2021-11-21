@@ -1,11 +1,10 @@
-from os import X_OK
 import system.mod.ColorPrint as cprint
 import system.mod.Cytron as cy
 from system.glade.TEyes import version as TEversion
 from system.glade.Compiler import version as GCversion
 from time import time as tm
 
-version = "0.12"
+version = "0.12b"
 
 # init
 
@@ -220,7 +219,6 @@ def tab_c(space_in_tabs,l):
 # analyser
 
 def varitype(var,cont,settings,allvar):
-    print(allvar) # debug
     m = [None,None]
     typ = None
     for v in allvar:
