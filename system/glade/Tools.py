@@ -223,7 +223,7 @@ def varitype(var,cont,settings,allvar):
     typ = None
     for v in allvar:
         if cont == v[1]:
-            typ = varitype(v[1],v[2],settings,allvar)[1][1]
+            typ = v[4]
     if typ is None:
         if cont.startswith("#"):
             if cont == "#int": typ = settings.int_var_type

@@ -74,6 +74,7 @@ def init_var(settings):
 def kc(l,start,end=":"):  # keep center
     return(gt.del_end(l.split(start)[1],end))
 
+
 def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
     global ATOC, AFON
 
@@ -81,6 +82,8 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
     TAB.append(gt.tab_c(settings.space_in_tabs,l))
     l = l.strip()
     l = (l.replace("True", "true")).replace("False","false")
+
+    sl = lambda text: l.startswith(text) # start of line
 
     if l != "" or nb == len_tot-1:
         for loop in range(1,TAB[nb-1]-TAB[nb]+1):
@@ -94,47 +97,47 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
     if nb == 0:
         EYES.append([ATOC,TAB[nb],"comm","interpreted and compiled by GLADE"])
 
-    while l.startswith("#1!"):
+    while sl("#1!"):
         l = l.split("#1!")[1].strip()
 
     if l.endswith("#2!"):
         pass #ligne non interprétée
 
-    elif l.startswith("#3!"):
+    elif sl("#3!"):
         cont = l.split("#3!")[1].strip()
         EYES.append([ATOC,TAB[nb],"lnb",cont])
 
-    elif l.startswith("if "):
+    elif sl("if "):
         cont = kc(l, "if ")
         EYES.append([ATOC,TAB[nb],"if",cont])
         EYES.append([ATOC,TAB[nb],"{"])
         ATOC += "/if"
 
-    elif l.startswith("elif "):
+    elif sl("elif "):
         cont = kc(l, "elif ")
         EYES.append([ATOC,TAB[nb],"elif",cont])
         EYES.append([ATOC,TAB[nb],"{"])
         ATOC += "/elif"
 
-    elif l.startswith("else"):
+    elif sl("else"):
         EYES.append([ATOC,TAB[nb],"else"])
         EYES.append([ATOC,TAB[nb],"{"])
         ATOC += "/else"
 
-    elif l.startswith("while "):
+    elif sl("while "):
         cont = kc(l, "while ")
         EYES.append([ATOC,TAB[nb],"while",cont])
         EYES.append([ATOC,TAB[nb],"{"])
         ATOC += "/while"
 
-    elif l.startswith("def "):
+    elif sl("def "):
         cont = kc(l, "def ")
         EYES.append([ATOC,TAB[nb],"def",cont])
         EYES.append([ATOC,TAB[nb],"{"])
         ATOC += "/" + cont.split("(")[0]
         AFON = "/" + cont.split("(")[0]
 
-    elif l.startswith("for "):
+    elif sl("for "):
         if "in range" in l:
             try:
                 cont = kc(l, "for ", "):")
@@ -155,7 +158,7 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
             EYES.append([ATOC,TAB[nb],"comm",l])
             EYES.append([ATOC,TAB[nb],"{"])
 
-    elif l.startswith("print("):
+    elif sl("print("):
         cont, end = "", "endl"
         for e in gt.del_end(l.split("print(")[1],")").split(","):
             e = e.strip()
@@ -166,33 +169,32 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
         add_to_include("std")
         add_to_include("print")
 
-    elif l.startswith("return"):
+    elif sl("return"):
         cont = l.split("return")[1].strip()
         if cont.startswith("(") and cont.endswith(")"):
             cont = cont[1:-1]
         EYES.append([ATOC,TAB[nb],"return",cont])
 
-    elif l.startswith("try:"):
+    elif sl("try:"):
         EYES.append([ATOC,TAB[nb],"try"])
         EYES.append([ATOC,TAB[nb],"{"])
 
-    elif l.startswith("except"):
+    elif sl("except"):
         EYES.append([ATOC,TAB[nb],"except"])
         EYES.append([ATOC,TAB[nb],"{"])
 
-    elif l.startswith("pass"):
+    elif sl("pass"):
         EYES.append([ATOC,TAB[nb],"pass"])
 
-    elif l.startswith("break"):
+    elif sl("break"):
         EYES.append([ATOC,TAB[nb],"break"])
 
-    elif l.startswith("#"):
+    elif sl("#"):
         lb = l.replace("#", "")
-        if lb.startswith("include "):
-            cont = lb.split("include ")[1]
-            EYES.append([ATOC,TAB[nb],"include",cont])
-        else:
-            EYES.append([ATOC,TAB[nb],"comm",lb])
+        EYES.append(
+            [ATOC,TAB[nb],"include",lb.split("include ")[1:]]
+            if lb.startswith("include ") else
+            EYES.append([ATOC,TAB[nb],"comm",lb]))
 
     elif "=" in l:
         typ = " = "
