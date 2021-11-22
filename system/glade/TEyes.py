@@ -19,8 +19,8 @@ import system.glade.Tools as gt
 version = "0.5.2"
 
 def add_to_include(element):
-        if element not in to_include:
-            to_include.append(element)
+    if element not in to_include:
+        to_include.append(element)
 
 def auto_main(settings,liste):
     for ei in range(len(EYES)):
@@ -233,7 +233,7 @@ def main(settings,fichier):
     while len(ligues) > 0 and ligues[-1] == "": ligues.pop(-1)
     ligues.append("")
     global EYES, TAB, VAR, ATOC, AFON, MSG, to_include
-    EYES = [] # liste de code token eyes
+    EYES = [] # liste de code token eyes (tokenize)
     VAR = []  # liste des variables
     TAB = []  # liste des TAB
     MSG = []  # msg a print
@@ -249,7 +249,7 @@ def main(settings,fichier):
 
     # auto-création des variables
     if settings.init_var: init_var(settings)
-    
+
     # auto-importation des modules
     if settings.auto_include: auto_include(settings)
 
