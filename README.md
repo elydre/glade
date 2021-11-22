@@ -2,7 +2,7 @@
 
 ![](https://zupimages.net/up/21/39/i59m.png)
 
-![](https://img.shields.io/badge/dernière%20version%20stable-gray.svg?colorB=4F44D6&style=for-the-badge)
+[![](https://img.shields.io/badge/dernière%20version%20stable-gray.svg?colorB=4F44D6&style=for-the-badge)](https://github.com/pf4-DEV/glade/releases/latest)
 
 GLADE est un compilateur python vers c++ pour accéléré grandement la vitesse du python tout en gardant sa syntaxe.\
 fonctionne avec [cytron](https://github.com/pf4-DEV/cytron) et [colorprint](https://github.com/pf4-DEV/Color-Printer).
