@@ -1,6 +1,6 @@
 import system.glade.Tools as gt
 
-version = "0.6"
+version = "0.7"
 
 def compiler(EYES,settings):  # sourcery no-metrics
     EXIT = []
@@ -72,11 +72,8 @@ def compiler(EYES,settings):  # sourcery no-metrics
         elif de == "vari":
             EXIT.append(f"{add_tab(tab)}{arg[1]} {arg[0]};  // auto var")
 
-        elif de == "prelist":
+        elif de == "mklist":
             EXIT.append(f"{add_tab(tab)}{arg[0]} {arg[1]}[] = " + "{" + arg[2] + "};")
-
-        elif de == "deflist":
-            EXIT.append(f"{add_tab(tab)}list<{arg[0]}> {arg[1]} (pre_{arg[1]}, pre_{arg[1]} + sizeof(pre_{arg[1]}) / sizeof({arg[0]}));")
 
         elif de == "unknown":
             EXIT.append(f"{add_tab(tab)}{arg};")

@@ -16,7 +16,7 @@
 
 import system.glade.Tools as gt
 
-version = "0.5.1"
+version = "0.5.2"
 
 def add_to_include(element):
         if element not in to_include:
@@ -44,9 +44,6 @@ def auto_include(settings):
         if ti == "print":
             if settings.debug_print: MSG.append(["dev","importation de print automatique"])
             EYES.insert(1,['',0, "include", "<iostream>"])
-        elif ti == "liste":
-            if settings.debug_print: MSG.append(["dev","importation de liste automatique"])
-            EYES.insert(1,['',0, "include", "<list>"])
         elif ti == "std":
             if settings.debug_print: MSG.append(["dev","namespace std automatique"])
             EYES.insert(1,['',0, "using", "namespace std;"])
@@ -204,15 +201,11 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
         elif nom.endswith("+"): typ, nom = " += ", gt.del_end(nom,"+").strip()
 
         if "[" in cont and "]" in cont:
-            add_to_include("liste")
-            add_to_include("std")
             liste = cont.split("[")[1].split("]")[0].strip()
             m, type = gt.varitype(None,liste.split(",")[0].strip(),settings,VAR)
             if m[0] != None: MSG.append(m[0]+[nb])
             if m[1] != None: MSG.append(m[1])
-            EYES.append([ATOC,TAB[nb],"prelist",[type[1],f"pre_{nom}",liste]])
-            EYES.append([ATOC,TAB[nb],"deflist",[type[1],nom]])
-
+            EYES.append([ATOC,TAB[nb],"mklist",[type[1],nom,liste]])
         else:
             if "input(" in cont:
                 add_to_include("std")
