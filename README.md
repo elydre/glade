@@ -91,6 +91,7 @@ Les commandes sont accessibles dans la console de glade en tapent !{*commande*}.
 - gestion des str
 - try / except
 - pass
+- listes simples
 
 ## Éléments en développement
 
