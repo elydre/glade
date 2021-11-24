@@ -6,7 +6,7 @@ from time import time as tm
 
 version = "0.12b"
 
-# init
+# init -> settings
 
 class init:
     def __init__(self, edit = 1, todo = None, debug_print = True, sys_print = True, auto_main = True, init_var = True, auto_include = True, make_log = True, loop_compil = False, space_in_tabs = 4, int_var_type = "long int"): # sourcery no-metrics skip: de-morgan
