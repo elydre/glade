@@ -77,28 +77,28 @@ Les commandes sont accessibles dans la console de glade en tapent !{*commande*}.
 
 ```py
 GLADE-SYSTEME
-│
-│   direct-time.pyw         # ide temps direct
-│   glade-cli.py            # glade en ligne de commande
-│
-├───container               # conteneur de fichier a compiler
-│       np.cpp
-│       np.py
-│       t.cpp
-│       t.py
-│
-└───system
-    │   latest.log          # dernier log
-    │   settings.txt        # paramètres
-    │
-    ├───glade
-    │       compiler.py     # compilateur (instruction vers c++)
-    │       tEyes.py        # 'parseur' (py vers instructions)
-    │       tools.py        # outils divers pour le compilateur
-    │
-    └───mod
-            colorPrint.py   # module colorprint
-            cytron.py       # module cytron (gestion de fichier)
+  │
+  │   direct-time.pyw         # ide temps direct
+  │   glade-cli.py            # glade en ligne de commande
+  │
+  ├───container               # conteneur de fichier a compiler
+  │       np.cpp
+  │       np.py
+  │       t.cpp
+  │       t.py  
+  │
+  └───system
+      │   latest.log          # dernier log
+      │   settings.txt        # paramètres
+      │
+      ├───glade
+      │       compiler.py     # compilateur (instruction vers c++)
+      │       tEyes.py        # 'parseur' (py vers instructions)
+      │       tools.py        # outils divers pour le compilateur
+      │
+      └───mod
+              colorPrint.py   # module colorprint
+              cytron.py       # module cytron (gestion de fichier)
 ```
 
 # Avancement du compilateur
