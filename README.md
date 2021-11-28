@@ -90,13 +90,13 @@ Les commandes sont accessibles dans la console de glade en tapent !{*commande*}.
     │   settings.txt        # paramètres
     │
     ├───glade
-    │       Compiler.py     # compilateur (instruction vers c++)
-    │       TEyes.py        # 'parseur' (py vers instructions)
-    │       Tools.py        # outils divers pour le compilateur
+    │       compiler.py     # compilateur (instruction vers c++)
+    │       tEyes.py        # 'parseur' (py vers instructions)
+    │       tools.py        # outils divers pour le compilateur
     │
     └───mod
-            ColorPrint.py   # module colorprint
-            Cytron.py       # module cytron (gestion de fichier)
+            colorPrint.py   # module colorprint
+            cytron.py       # module cytron (gestion de fichier)
 ```
 
 # Avancement du compilateur
