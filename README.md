@@ -73,6 +73,32 @@ Les commandes sont accessibles dans la console de glade en tapent !{*commande*}.
 - **v**: affiche les versions des modules
 - **e**: lance l'éditeur de paramètres
 
+# Arbre des fichiers
+
+```py
+│   direct-time.pyw         # ide temps direct
+│   glade-cli.py            # glade en ligne de commande
+│
+├───container               # conteneur de fichier a compiler
+│       np.cpp
+│       np.py
+│       t.cpp
+│       t.py
+│
+└───system
+    │   latest.log          # dernier log
+    │   settings.txt        # paramètres
+    │
+    ├───glade
+    │       Compiler.py     # compilateur (instruction vers c++)
+    │       TEyes.py        # 'parseur' (py vers instructions)
+    │       Tools.py        # outils divers pour le compilateur
+    │
+    └───mod
+            ColorPrint.py   # module colorprint
+            Cytron.py       # module cytron (gestion de fichier)
+```
+
 # Avancement du compilateur
 ## Éléments pris en charge
 
