@@ -1,6 +1,7 @@
 // interpreted and compiled by GLADE
 int main()
 {
-    long int liste;
-    liste[] = {1,5};
+    long int a;  // auto var
+    a = 1;
+    long int liste[] = {a,5};
 }

@@ -206,7 +206,7 @@ def maker(settings,EXIT):
 # édition de ligne
 
 def del_end(cont,to_del):
-    return(cont[0:-len(to_del)]if to_del in cont else cont)
+    return cont[:-len(to_del)] if to_del in cont else cont
 
 def iic(liste, e, p):
     return e in [v[p] for v in liste]
