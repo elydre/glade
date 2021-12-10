@@ -16,7 +16,7 @@
 
 import system.glade.Tools as gt
 
-version = "0.5.2"
+version = "0.5.2b"
 
 def add_to_include(element):
     if element not in to_include:
@@ -29,10 +29,14 @@ def auto_main(settings,liste):
                     if settings.debug_print: MSG.append(["dev","création de la fonction main automatique"])
                     EYES.insert(ei,['', 0, 'def', 'main()'])
                     EYES.insert(ei+1,['', 0, '{'])
-                    for ei2 in range(ei+2,len(EYES)):
-                        e2 = EYES[ei2]
-                        e2[0] = "/main" + e2[0]
-                        e2[1] += 1
+                    try:
+                        for ei2 in range(ei+2,len(EYES)):
+                            e2 = EYES[ei2]
+                            e2[0] = "/main" + e2[0]
+                            e2[1] += 1
+                    except:
+                        MSG.append(["gen_err","42"])
+
                     EYES.append(['', 0, '}'])
                     for v in VAR:
                         if v[0] == "":
