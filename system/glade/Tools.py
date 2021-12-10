@@ -29,17 +29,17 @@ class init:
                     elif var == "debug print":
                         if atr in ["False", "false", "f"]: debug_print = False
                         elif atr in ["True", "true", "t"]: debug_print = True
-                        else: war("valleur non bool pour debug print (False par defaut)\n      ici -> " + str(atr))
+                        else: war("valeur non bool pour debug print (False par defaut)\n      ici -> " + str(atr))
 
                     elif var == "sys print":
                         if atr in ["False", "false", "f"]: sys_print = False
                         elif atr in ["True", "true", "t"]: sys_print = True
-                        else: war("valleur non bool pour debug print (True par defaut)\n      ici -> " + str(atr))
+                        else: war("valeur non bool pour debug print (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "make log":
                         if atr in ["False", "false", "f"]: make_log = False
                         elif atr in ["True", "true", "t"]: make_log = True
-                        else: war("valleur non bool pour make log (True par defaut)\n      ici -> " + str(atr))
+                        else: war("valeur non bool pour make log (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "init var":
                         if atr in ["False", "false", "f"]: init_var = False
@@ -49,21 +49,21 @@ class init:
                     elif var == "auto main":
                         if atr in ["False", "false", "f"]: auto_main = False
                         elif atr in ["True", "true", "t"]: auto_main = True
-                        else: war("valleur non bool pour auto main (True par defaut)\n      ici -> " + str(atr))
+                        else: war("valeur non bool pour auto main (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "loop compil":
                         if atr in ["False", "false", "f"]: loop_compil = False
                         elif atr in ["True", "true", "t"]: loop_compil = True
-                        else: war("valleur non bool pour loop compil (False par defaut)\n      ici -> " + str(atr))
+                        else: war("valeur non bool pour loop compil (False par defaut)\n      ici -> " + str(atr))
 
                     elif var == "auto include":
                         if atr in ["False", "false", "f"]: auto_include = False
                         elif atr in ["True", "true", "t"]: auto_include = True
-                        else: war("valleur non bool pour auto include (True par defaut)\n      ici -> " + str(atr))
+                        else: war("valeur non bool pour auto include (True par defaut)\n      ici -> " + str(atr))
 
                     elif var == "space in tabs":
                         try: space_in_tabs = int(atr)
-                        except: war("valleur non int pour space in tabs (4 par defaut)\n      ici -> " + str(atr))
+                        except: war("valeur non int pour space in tabs (4 par defaut)\n      ici -> " + str(atr))
 
                     else:
                         para_edit -= 1
