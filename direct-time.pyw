@@ -40,12 +40,14 @@ def py_actu():
     while "	" in temp: temp = temp.replace("	","    ")
     
     err.configure(state='normal')
+    err.delete("0.0","1.20")
     
     if temp != cont:
         cont = temp
         sortie, msg = te.main(fichier = temp,settings=settings)
         cpp.configure(state='normal')
         cpp.delete ("0.0", "end")
+        err.delete ("0.0", "end")
 
         py.tag_delete("err", "1.0", "end")
         py.tag_delete("war", "1.0", "end")
@@ -58,10 +60,10 @@ def py_actu():
             elif e[0] == "gen_err":
                 py.tag_add("err", f"{e[2]+1}.0", f"{e[2]+1}.100")
                 py.tag_config("err", foreground="red")
+        err.insert(0.0,"\n")
         cpp.insert(0.0,"".join((l+"\n") for l in gc.compiler(sortie,settings)))
         cpp.configure(state='disabled')
 
-    err.delete ("0.0", "end")
     while len(reac_time) < 5:
         reac_time += "0"
         
