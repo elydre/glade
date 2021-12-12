@@ -52,7 +52,7 @@ int myints[] = {16,2,77,29};
 
 ## Paramètres
 Les paramètres sont éditables depuis le fichier ***system/settings.txt***\
-les valeurs entre parenthèses à la fin de chaque description correspond au valeur par défaut.
+les valeurs entre parenthèses à la fin de chaques descriptions correspondent au valeurs par défaut.
 
 - **todo**: fichier compilé par défaut *None* pour auqun ou nom du fichier. (*t.py*)
 - **space in tabs**: nombre d'espaces dans une tablature. (*4*)
