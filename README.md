@@ -67,7 +67,7 @@ les valeurs entre parenthèses à la fin de chaques descriptions correspondent a
 
 ## Commandes
 
-Les commandes sont accessibles dans la console de glade en tapent !{*commande*}. Les commandes disponibles sont les suivantes:
+Les commandes sont accessibles dans la console de glade en tapant !{*commande*}. Les commandes disponibles sont les suivantes:
 - **r**: recharge les paramètres
 - **c**: clear la console
 - **v**: affiche les versions des modules
