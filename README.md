@@ -45,9 +45,9 @@ max = int(i ** 0.5 + 1) #2!
 #### *`#3!`* ligne brute:
 Le texte après cette marque ne serra par interprété et serra laissé brut
 ```py
-#3! int myints[] = {16,2,77,29};
+#3! int myints[] = {16,2,87,29};
 -GLADE->
-int myints[] = {16,2,77,29};
+int myints[] = {16,2,87,29};
 ```
 
 ## Paramètres
