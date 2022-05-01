@@ -1,29 +1,27 @@
-'''
---|~|--|~|--|~|--|~|--|~|--|~|--
+'''    _             _
+  ___ | | _   _   __| | _ __   ___
+ / _ \| || | | | / _` || '__| / _ |
+|  __/| || |_| || (_| || |   |  __/
+ \___||_| \__, | \__,_||_|    \___|
+          |___/
+___________________________________
 
-██  ████        ██████        ██
-████    ██     ██           ████
-██      ██   ████████     ██  ██
-████████       ██       ██    ██
-██             ██       █████████
-██             ██             ██
-               ██
-.codé en : UTF-8
-.langage : python 3
-.note    :
---|~|--|~|--|~|--|~|--|~|--|~|--
+ - codé en : UTF-8
+ - langage : python3
+ - GitHub  : github.com/elydre
+ - Licence : GNU GPL v3
 '''
 
 def colorprint(text,color="",background="",gras=False,ligne=False,end=True):
     style = ""
     if gras and ligne:
-        print(f"{color}\033[01m\033[04m{background}"+text+f"\033[0m",end="")
+        print(f"{color}\x1b[01m\x1b[04m{background}{text}" + f"\033[0m", end="")
     else:
         if not gras and ligne:
             style = "\033[01m"
-        elif gras and not ligne:
+        elif gras:
             style = "\033[04m"
-        print(f"{color}{style}{background}"+text+f"\033[0m",end="")
+        print(f"{color}{style}{background}{text}" + f"\033[0m", end="")
     if end:
         print("")
 
@@ -31,13 +29,13 @@ def colorprint(text,color="",background="",gras=False,ligne=False,end=True):
 def colorinput(text,color="",background="",gras=False,ligne=False):
     style = ""
     if gras and ligne:
-        temp = input(f"{color}\033[01m\033[04m{background}"+text+f"\033[0m")
+        temp = input(f"{color}\x1b[01m\x1b[04m{background}{text}" + f"\033[0m")
     else:
         if not gras and ligne:
             style = "\033[01m"
-        elif gras and not ligne:
+        elif gras:
             style = "\033[04m"
-        temp = input(f"{color}{style}{background}"+text+f"\033[0m")
+        temp = input(f"{color}{style}{background}{text}" + f"\033[0m")
         return(temp)
 
 class Colors:

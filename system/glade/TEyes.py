@@ -1,18 +1,16 @@
-'''
---|~|--|~|--|~|--|~|--|~|--|~|--
+'''    _             _
+  ___ | | _   _   __| | _ __   ___
+ / _ \| || | | | / _` || '__| / _ |
+|  __/| || |_| || (_| || |   |  __/
+ \___||_| \__, | \__,_||_|    \___|
+          |___/
+___________________________________
 
-██  ████        ██████        ██
-████    ██     ██           ████
-██      ██   ████████     ██  ██
-████████       ██       ██    ██
-██             ██       █████████
-██             ██             ██
-██
  - codé en : UTF-8
- - langage : python 3
- - GitHub  : github.com/pf4-DEV/glade
---|~|--|~|--|~|--|~|--|~|--|~|--
-'''         
+ - langage : python3
+ - GitHub  : github.com/elydre
+ - Licence : GNU GPL v3
+'''       
 
 import system.glade.Tools as gt
 
@@ -24,24 +22,24 @@ def add_to_include(element):
 
 def auto_main(settings,liste):
     for ei in range(len(EYES)):
-            e = EYES[ei]
-            if e[1] == 0 and e[2] not in liste:
-                    if settings.debug_print: MSG.append(["dev","création de la fonction main automatique"])
-                    EYES.insert(ei,['', 0, 'def', 'main()'])
-                    EYES.insert(ei+1,['', 0, '{'])
-                    try:
-                        for ei2 in range(ei+2,len(EYES)):
-                            e2 = EYES[ei2]
-                            e2[0] = "/main" + e2[0]
-                            e2[1] += 1
-                    except:
-                        MSG.append(["gen_err","42"])
+        e = EYES[ei]
+        if e[1] == 0 and e[2] not in liste:
+            if settings.debug_print: MSG.append(["dev","création de la fonction main automatique"])
+            EYES.insert(ei,['', 0, 'def', 'main()'])
+            EYES.insert(ei+1,['', 0, '{'])
+            try:
+                for ei2 in range(ei+2,len(EYES)):
+                    e2 = EYES[ei2]
+                    e2[0] = f"/main{e2[0]}"
+                    e2[1] += 1
+            except Exception:
+                MSG.append(["gen_err","42"])
 
-                    EYES.append(['', 0, '}'])
-                    for v in VAR:
-                        if v[0] == "":
-                            v[0] = "/main"
-                    break
+            EYES.append(['', 0, '}'])
+            for v in VAR:
+                if v[0] == "":
+                    v[0] = "/main"
+            break
 
 def auto_include(settings):
     for ti in to_include:
@@ -236,7 +234,7 @@ def edit_l(settings,l,nb,len_tot):  # sourcery no-metrics
 
 def main(settings,fichier):
     ligues = str(fichier).split("\n")
-    while len(ligues) > 0 and ligues[-1] == "": ligues.pop(-1)
+    while ligues and ligues[-1] == "": ligues.pop(-1)
     ligues.append("")
     global EYES, TAB, VAR, ATOC, AFON, MSG, to_include
     EYES = [] # liste de code token eyes (tokenize)
